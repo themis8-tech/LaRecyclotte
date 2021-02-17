@@ -1,43 +1,57 @@
 <header>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container">
 
-		<div
-			class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div
+				class="container-fluid">
+				{# logo #}
+				<a class="navbar-brand " href="{{path('main_home')}}">
+					<img src="{{asset('build/logo.png')}}" width="230" alt="logo de la recyclotte">
+				</a>
 
-			{# logo #}
-			<a class="navbar-brand" href="{{path('main_home')}}">
-				<img src="{{asset('build/logo.png')}}" alt="logo de la recyclotte">
-			</a>
+				{# toggle #}
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			{# toggle #}
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				{# menu #}
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Liste des objets</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Donner un objet</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Le Concept</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Contact</a>
+						</li>
+					</ul>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Liste des objets</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Donner un objet</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Le concept</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
-					</li>
-				</ul>
+					{# login user #}
+					<div class="d-flex">
+						<button type="button" class="btn btn-outline-success mx-2">Inscription</button>
+						<button type="button" class="btn btn-success mx-2">Connexion</button>
+					</div>
+
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
 
 	{# formulaire de recherche #}
-	<form class="d-flex">
-		<input class="form-control me-2" type="search" placeholder="ex : Fauteuil" aria-label="Search">
-		<button class="btn btn-outline-success" type="submit">Je cherche cet objet</button>
-	</form>
+	<div class="d-flex justify-content-center">
+		<div class="col-6">
+			<form class="input-group mb-3">
+				<input class="form-control" type="search" placeholder="ex : Fauteuil" aria-label="Search">
+				<button class="btn btn-warning text-white" type="submit">Je cherche cet objet</button>
+			</form>
+		</div>
+	</div>
+
 
 </header>
