@@ -128,7 +128,7 @@ body {
    color: var(--darkGrey);
 }
 
-.active {
+.navbar-nav a:hover {
    color: var(--orange);
 }
 
@@ -138,6 +138,7 @@ body {
 
 .form-bg{
    background: linear-gradient(90deg, rgba(60,200,153,1) 0%, rgba(34,175,157,1) 100%);
+   box-shadow: inset 0px 5px 10px #989898  ;
 }
 
 .btn-nav{
