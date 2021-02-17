@@ -36,7 +36,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('page_home', './assets/js/pages/homepage.js')
     .addEntry('page_product', './assets/js/pages/product.js')
-    .addEntry('page_home', './assets/js/pages/product.js')
+    
    
 
   
