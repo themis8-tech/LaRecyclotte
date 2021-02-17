@@ -1,120 +1,120 @@
 :root {
-   --blue: #22af9d !important;
-   --blueGreen: #3cc899 !important;
-   --orange: #ff9600 !important;
-   --darkGrey: #4d4d4d !important;
-   --grey: #989898 !important;
-   --lightGrey: #f1f1f1 !important;
+    --blue: #22af9d !important;
+    --blueGreen: #3cc899 !important;
+    --orange: #ff9600 !important;
+    --darkGrey: #4d4d4d !important;
+    --grey: #989898 !important;
+    --lightGrey: #f1f1f1 !important;
 }
 
 
 /* RESET */
 ul {
-   list-style: none;
-   padding-inline-start: 0;
+    list-style: none;
+    padding-inline-start: 0;
 
 }
 
 a, a:hover {
-   text-decoration: none;
+    text-decoration: none;
 }
 
 /* FONT STYLE */
 @font-face {
-   font-family: "LT Emphasis Bold";
-   src: url('../font/LT-Emphasis-Bold.ttf') format('truetype');
+    font-family: "LT Emphasis Bold";
+    src: url('../font/LT-Emphasis-Bold.ttf') format('truetype');
 }
 
 @font-face {
-   font-family: "Sansation Bold";
-   src: url('../font/Sansation_Bold.ttf') format('truetype');
+    font-family: "Sansation Bold";
+    src: url('../font/Sansation_Bold.ttf') format('truetype');
 }
 
 @font-face {
-   font-family: "Sansation Regular";
-   src: url('../font/Sansation_Regular.ttf') format('truetype');
+    font-family: "Sansation Regular";
+    src: url('../font/Sansation_Regular.ttf') format('truetype');
 }
 
 /* TEXT STYLE */
 .uppercase {
-   text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 a {
-   color: var(--orange);
+    color: var(--orange);
 }
 
 a:hover {
-   color: var(--orange);
+    color: var(--orange);
 }
 
 .link, .link:hover {
-   text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* TITLE STYLE */
 h1 {
-   font-family: "LT Emphasis Bold", sans-serif;
-   color: var(--blue);
-   font-size: 4em;
+    font-family: "LT Emphasis Bold", sans-serif;
+    color: var(--blue);
+    font-size: 4em;
 }
 
 h2 {
-   font-family: "Sansation Regular", sans-serif;
-   color: var(--darkGrey);
-   font-size: 1.4em;
+    font-family: "Sansation Regular", sans-serif;
+    color: var(--darkGrey);
+    font-size: 1.4em;
 }
 
 h3 {
-   font-family: "Sansation Regular", sans-serif;
-   color: var(--darkGrey);
-   font-size: 18px;
+    font-family: "Sansation Regular", sans-serif;
+    color: var(--darkGrey);
+    font-size: 18px;
 }
 
 /* BUTTON STYLE */
 .btn {
-   font-family: "Sansation Bold", sans-serif;
-   border-radius: 8px;
-   padding: 0.4em 1.2em;
+    font-family: "Sansation Bold", sans-serif;
+    border-radius: 8px;
+    padding: 0.4em 1.2em;
 }
 
 .btn-primary {
-   font-size: 25px;
-   color: #fff;
-   background-color: var(--blue);
-   border: 3px solid var(--blue);
+    font-size: 25px;
+    color: #fff;
+    background-color: var(--blue);
+    border: 3px solid var(--blue);
 }
 
 .btn-primary:hover {
-   color: var(--blueGreen);
-   background-color: #fff;
-   border: 3px solid var(--blueGreen);
+    color: var(--blueGreen);
+    background-color: transparent;
+    border: 3px solid var(--blueGreen);
 }
 
 .btn-secondary {
-   font-size: 18px;
-   color: var(--blue);
-   background-color: #fff;
-   border: 3px solid var(--blue);
+    font-size: 18px;
+    color: var(--blue);
+    background-color: #fff;
+    border: 3px solid var(--blue);
 }
 
 .btn-secondary:hover {
-   color: #fff;
-   border: 3px solid var(--blueGreen);
-   background-color: var(--blueGreen);
+    color: #fff;
+    border: 3px solid var(--blueGreen);
+    background-color: var(--blueGreen);
 }
 
 .btn-action {
-   font-size: 25px;
-   color: #fff;
-   background-color: var(--orange);
-   border: 3px solid var(--orange);
+    font-size: 25px;
+    color: #fff;
+    background-color: var(--orange);
+    border: 3px solid var(--orange);
 }
 
 .btn-action:hover {
-   color: var(--orange);
-   background-color: transparent;
-   border: 3px solid var(--orange);
+    color: var(--orange);
+    background-color: transparent;
+    border: 3px solid var(--orange);
 }
 
 
@@ -151,4 +151,7 @@ body {
 .btn-nav{
    padding: 0em 1.2em;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1d07abd3f51f26d100cac4f24266c8e18e4731b
