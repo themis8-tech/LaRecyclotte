@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le concept - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    	{{ encore_entry_link_tags('page_concept') }}
+{% endblock %}
+
+{% block body %}
+    <h2>La Recyclotte, pour une autre vision du troc.</h2>
+    <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
+    De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
+    </p>
+
+    <br>
+
+    <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
+    Nous avons tous dans notre garage, à la cave ou dans un fond de placarddes objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
+    </p>
+
+    <br>
+        
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_concept') }}
+{% endblock %}
+ 
