@@ -34,12 +34,8 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-<<<<<<< HEAD
     .addEntry('page_product', './assets/js/pages/product.js')
 
-=======
-    .addEntry('page_home', './assets/js/pages/homepage.js')
->>>>>>> f1d07abd3f51f26d100cac4f24266c8e18e4731b
   
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
