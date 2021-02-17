@@ -2,10 +2,75 @@
 
 {% block title %}Homepage - {{parent()}} {% endblock %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('page_home') }}
+{% endblock %}
 
 {% block body %}
 
-    <h1>Hello La Recyclotte !</h1>
+    <h1>La Recyclotte, donnez une seconde vie à vos objets</h1>
+
+    <section class="banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 text-center align-v">
+                    <h2>N'abandonnez pas, <span class="uppercase">donnez</span></h2>
+                    <h3>Meubles, vaisselle, électro-ménager, décoration, jouets...</h3>
+                    <a href="#" class="btn btn-action">Je donne un objet</a><br>
+                    <span class="text-bigger">Dans la <strong>métropole lilloise</strong></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="concept">
+        <div class="container py-5 text-center">
+            <div class="title">
+                <h2>Comment ça marche ?</h2>
+                <h3>Donner/récupérer un objet en quelques clics dans la <strong>métropole lilloise</strong> !</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4 px-5 py-4">
+                    <div class="picto">
+                        <img src="{{asset('build/images/register-concept.png')}}" alt="Création de compte">
+                        <div class="process">1</div>
+                    </div>
+                    <h4 class="pb-3 pt-5">Créez votre compte</h4>
+                    <p class="grey">Créez votre compte en ligne sur <a href="#" class="link" title="Site internet La Recyclotte">la-recyclotte.fr</a></p>
+                </div>
+                <div class="col-md-4 px-5 py-4">
+                    <div class="picto">
+                        <img src="{{asset('build/images/post-concept.png')}}" alt="Poster ou réserver un objet">
+                        <div class="process">2</div>
+                    </div>
+                    <h4 class="pb-3 pt-5">Annoncez/réservez votre objet</h4>
+                    <p class="grey">Choisissez votre objet en fonction de vos besoins.</p>
+                </div>
+                <div class="col-md-4 px-5 py-4">
+                    <div class="picto">
+                        <img src="{{asset('build/images/give-concept.png')}}" alt="Donner ou récupérer un objet">
+                        <div class="process">3</div>
+                    </div>
+                    <h4 class="pb-3 pt-5">Donnez/récupérez votre objet</h4>
+                    <p class="grey">Faites plaisir en donnant une seconde vie à l’objet.</p>
+                </div>
+            </div>
+            <hr>
+            <p class="pb-5">Ensemble, recyclons intelligent.</p>
+            <a href="#" class="btn btn-primary mb-4">Je découvre le concept</a>
+        </div>
+    </section>
+    
+    <section class="products">
+        <div class="container py-5 text-center">
+            <div class="title">
+                <h2>Derniers objets ajoutés</h2>
+                <h3>Donnez-leur une seconde vie !</h3>
+            </div>
+            <hr>
+            <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
+            <a href="#" class="btn btn-primary mb-4">Voir tous les objets</a>
+        </div>
+    </section>
 
 {% endblock %}
