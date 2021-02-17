@@ -44,7 +44,7 @@ a {
 }
 
 a:hover {
-   color: var(--orange);
+   color: var(--orange) ;
 }
 
 .link, .link:hover {
@@ -124,14 +124,16 @@ body {
 }
 
 /* HEADER STYLE */
+
 .navbar-nav a {
    font-size: 18px;
-   color: var(--darkGrey);
+   color: var(--darkGrey)!important;
 }
 
 .navbar-nav a:hover {
-   color: var(--orange);
+   color: var(--orange) !important;
 }
+
 
 .text-btn-nav{
    font-size: 18px;
@@ -139,9 +141,16 @@ body {
 
 .form-bg{
    background: linear-gradient(90deg, rgba(60,200,153,1) 0%, rgba(34,175,157,1) 100%);
-   box-shadow: inset 0px 5px 10px #989898  ;
+   box-shadow: inset 0px 2px 7px #4d4d4d  ;
 }
 
 .btn-nav{
    padding: 0em 1.2em;
 }
+
+.fa-map-marker-alt{
+    font-size: 28px;
+    color: var(--orange);
+    padding: 0px 10px 20px 40px;;
+}
+
