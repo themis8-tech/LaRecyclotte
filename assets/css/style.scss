@@ -7,6 +7,7 @@
    --lightGrey: #f1f1f1 !important;
 }
 
+
 /* RESET */
 ul {
    list-style: none;
@@ -116,11 +117,21 @@ h3 {
    border: 3px solid var(--orange);
 }
 
+
+
 /* GLOBAL STYLE */
 body {
    font-family: "Sansation Regular", sans-serif;
    color: var(--darkGrey);
+<<<<<<< HEAD
+
+=======
+>>>>>>> 01b5b0a6b781ba6504f4b5f5a6e231f4f1b1d39b
 }
+
+
+
+
 
 /* HEADER STYLE */
 .navbar-nav a {
@@ -144,3 +155,4 @@ body {
 .btn-nav{
    padding: 0em 1.2em;
 }
+
