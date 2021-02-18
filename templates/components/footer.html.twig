@@ -1,0 +1,67 @@
+<footer>
+	<div class="container media-footer ">
+		<div class="d-flex justify-content-around media-footer ">
+			{# bloc gauche logo et adresse #}
+			<div class="px-5">
+				<div class="my-4">
+					<img src="{{asset('build/images/logo.png')}}" width="230" alt="logo de la recyclotte">
+				</div>
+
+				<div class="mb-3">
+					<p class="mb-1">10, Boulevard de la liberté</p>
+					<p>59000 LILLE</p>
+					<a href="mailto:nullepart@mozilla.org">contact@la-recyclotte.fr</a>
+				</div>
+			</div>
+
+			{# bloc droite titre et liste link #}
+			<div>
+				{#  titre #}
+				<h4 class="mt-4 px-5 h4-footer">Le site</h4>
+
+				{# liste link footer #}
+				<div class="d-flex media-footer">
+					<ul class="mb-4 px-5">
+						<li>
+							<a class="footer-link" href="#">Liste des objets</a>
+						</li>
+						<li>
+							<a class="footer-link" href="#">Donner un objet</a>
+						</li>
+						<li>
+							<a class="footer-link" href="#">Le Concept</a>
+						</li>
+						<li>
+							<a class="footer-link" href="#">Contact</a>
+						</li>
+					</ul>
+					
+					<ul class="px-1 ">
+						<li>
+							<a class="footer-link" href="#">FAQ</a>
+						</li>
+						<li>
+							<a class="footer-link" href="#">Mentions légales</a>
+						</li>
+						<li>
+							<a class="footer-link" href="#">CGU</a>
+						</li>
+						<li>
+							<a class="footer-link" href="#">Plan du site</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<hr class="footer-hr">
+		{# copyright #}
+		<div class="text-center cop-footer">
+			La Recyclotte -
+			{{ 'now'|date('Y') }}
+			- Tous droits réservés
+		</div>
+	</div>
+
+
+</footer>

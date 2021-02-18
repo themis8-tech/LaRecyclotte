@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticlesRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticlesRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Articles
+class Product
 {
     /**
      * @ORM\Id
@@ -43,12 +43,12 @@ class Articles
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="Product")
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Product")
      */
     private $user;
 
