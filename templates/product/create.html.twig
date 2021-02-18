@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dépot annonce - {{ parent() }}{% endblock %}
+
+ 
+{% block stylesheets %}
+    	{{ encore_entry_link_tags('page_product') }}
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid col-lg-6 col-md-8 justify-content-center mt-3">
+    <h1>Déposer une annonce</h1>
+        
+
+            {{ form_start (form, {
+                'attr': {'novalidate':'validate'},
+                'method':'POST',
+            })
+            }}
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.name ) }}        
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.category ) }}        
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.etat ) }}        
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.picture ) }}        
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class = "col-12">
+                        {{ form_row( form.description ) }}        
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn-secondary mt-3 col mb-5">Enrgistrer</button>
+                </div>
+            {{ form_end (form) }}
+        
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_product') }}
+{% endblock %}
