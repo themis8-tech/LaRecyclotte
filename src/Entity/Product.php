@@ -6,7 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticlesRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
 {
@@ -43,12 +43,12 @@ class Product
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="Product")
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Product")
      */
     private $user;
 

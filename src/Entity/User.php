@@ -75,18 +75,23 @@ class User
     private $reputation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
      */
-    private $articles;
+    private Product;
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="user")
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Token;
+
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->Product = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -228,29 +233,29 @@ class User
     }
 
     /**
-     * @return Collection|Articles[]
+     * @return Collection|Product[]
      */
-    public function getArticles(): Collection
+    public function getProduct(): Collection
     {
-        return $this->articles;
+        return $this->product;
     }
 
-    public function addArticle(Articles $article): self
+    public function addProduct(Product $product): self
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->setUser($this);
+        if (!$this->Product->contains($product)) {
+            $this->product[] = $product;
+            $product->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeArticle(Articles $article): self
+    public function removeProduct(Product $product): self
     {
-        if ($this->articles->removeElement($article)) {
+        if ($this->product->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($article->getUser() === $this) {
-                $article->setUser(null);
+            if ($product->getUser() === $this) {
+                $product->setUser(null);
             }
         }
 
@@ -283,6 +288,18 @@ class User
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->Token;
+    }
+
+    public function setToken(?string $Token): self
+    {
+        $this->Token = $Token;
 
         return $this;
     }
