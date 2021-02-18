@@ -77,7 +77,7 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
      */
-    private Product;
+    private $product;
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="user")
@@ -91,7 +91,7 @@ class User
 
     public function __construct()
     {
-        $this->Product = new ArrayCollection();
+        $this->product = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -242,7 +242,7 @@ class User
 
     public function addProduct(Product $product): self
     {
-        if (!$this->Product->contains($product)) {
+        if (!$this->product->contains($product)) {
             $this->product[] = $product;
             $product->setUser($this);
         }
