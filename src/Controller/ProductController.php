@@ -26,10 +26,14 @@ class ProductController extends AbstractController
     /**
     * @Route("/display", name="display")
     */
-    public function display(): Response
+    public function display(Request $request, ProductRepository $productRepository): Response
     {
-        return $this->render('product/display.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
+        //$form->handleRequest($request);
+
+        return $this->render('product/display.html.twig', array(
+            'form' => $form -> createView(),
+        ));
     }
 }
