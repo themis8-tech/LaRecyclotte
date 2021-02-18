@@ -30,13 +30,13 @@ class Category
     private $icon;
 
     /**
-     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
      */
-    private $articles;
+    private $products;
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,29 +69,29 @@ class Category
     }
 
     /**
-     * @return Collection|Articles[]
+     * @return Collection|Product[]
      */
     public function getArticles(): Collection
     {
-        return $this->articles;
+        return $this->products;
     }
 
-    public function addArticle(Articles $article): self
+    public function addArticle(Product $article): self
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
+        if (!$this->products->contains($article)) {
+            $this->products[] = $article;
             $article->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeArticle(Articles $article): self
+    public function removeArticle(Product $product): self
     {
-        if ($this->articles->removeElement($article)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($article->getCategory() === $this) {
-                $article->setCategory(null);
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
             }
         }
 
