@@ -67,6 +67,49 @@
                 <h2>Derniers objets ajoutés</h2>
                 <h3>Donnez-leur une seconde vie !</h3>
             </div>
+            <div class="slide_products">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+
+                            <div class="row">
+                                <div class="col d-flex justify-content-center my-5">
+                                    <div class="card product-card" style="width: 20rem;">
+                                        <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                        <div class="d-flex justify-content-around border-bottom">
+                                            <div class="card-body">
+                                                <h5 class="card-title bold">Tasse à café</h5>
+                                                <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                                <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class=" blue bold">Bon état</p>   
+                                            </div>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <button class="btn-secondary">Voir l'objet en détail</button>   
+                                        </div>     
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"  data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"  data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
             <hr>
             <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
             <a href="#" class="btn btn-primary mb-4">Voir tous les objets</a>
