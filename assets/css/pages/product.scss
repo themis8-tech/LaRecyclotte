@@ -1,4 +1,5 @@
-.product-list{
+/* page list */
+.background{
     background-color:var(--lightGrey) ;
 }
 
@@ -8,6 +9,12 @@
 .product-img{
     border-radius: 15px 15px 0 0;
 }
+
+/* page display product */
+.display-product {
+   width: 50%; 
+}
+
 
 /* couleurs */
 .blue{
