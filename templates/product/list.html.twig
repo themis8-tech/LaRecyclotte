@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product - {{ parent() }}{% endblock %}
+
+ 
+{% block stylesheets %}
+    	{{ encore_entry_link_tags('page_product') }}
+{% endblock %}
+
+{% block body %}
+<div class="list mx-5 my-3">
+    <span>Accueil > </span>
+    <span class="bold">Liste des Objets</span>
+</div>
+
+<div class="container-fluid background"> {# ouverture du container  #}
+
+    {# titre #}
+    <div class=' text-center pt-5 '>
+        <h1>Listes des Objets</h1>
+        <p>à récuperer sur <span class="bold"> Lille </span> et sa métropole</p>
+    </div>
+
+    {# filtres de recherche #}
+    <div class="row g-3 justify-content-center">
+        <div class="col-sm-12 col-md-3 col-lg-2">
+            <select id="inputState" class="form-select form-select-sm">
+                <option>Tri : Plus récents</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3">
+            <select id="inputState" class="form-select form-select-sm">
+                <option>Catégorie : Toutes les catégories</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-2">
+            <select id="inputState" class="form-select form-select-sm">
+                <option>Filtre : Tous les états</option>
+                <option>...</option>
+            </select>
+        </div>
+    <div>
+
+     {# infos resultat #}
+    <div class="row text-center ">
+        <div class="col-sm-12">
+            <p>Objets disponibles: <span class="blue"> 145</span>
+                - Objets par pages :<span class="blue"> 15</span>
+                - Nombre de pages :<span class="blue"> 10</span></p>
+        </div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-sm-6 col-md-4 justify-content-start">
+            <p>Page: <span class="blue">1</span>
+                - Objets: <span class="blue">15</span> sur 145
+        </div>
+    </div>
+           
+
+    {# Fiches Produit #}
+    <div class="row">
+        <div class="col d-flex justify-content-center my-5">
+            <div class="card product-card" style="width: 20rem;">
+                <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                <div class="d-flex justify-content-around border-bottom">
+                    <div class="card-body">
+                        <h5 class="card-title bold">Tasse à café</h5>
+                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <p class=" blue bold">Bon état</p>   
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <button class="btn-secondary">Voir l'objet en détail</button>   
+                </div>     
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center my-5">
+            <div class="card product-card" style="width: 20rem;">
+                <img src="{{ asset ('build/images/img2.webp') }}" class="card-img-top product-img" alt="...">
+                <div class="d-flex justify-content-around border-bottom">
+                    <div class="card-body">
+                        <h5 class="card-title bold">Tasse à café</h5>
+                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <p class=" blue bold">Bon état</p>   
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <button class="btn-secondary">Voir l'objet en détail</button>   
+                </div>     
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center my-5">
+            <div class="card product-card" style="width: 20rem;">
+                <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                <div class="d-flex justify-content-around border-bottom">
+                    <div class="card-body">
+                        <h5 class="card-title bold">Tasse à café</h5>
+                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <p class=" blue bold">Bon état</p>   
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <button class="btn-secondary">Voir l'objet en détail</button>   
+                </div>     
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center my-5">
+            <div class="card product-card" style="width: 20rem;">
+                <img src="{{ asset ('build/images/img2.webp') }}" class="card-img-top product-img" alt="...">
+                <div class="d-flex justify-content-around border-bottom">
+                    <div class="card-body">
+                        <h5 class="card-title bold">Tasse à café</h5>
+                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <p class=" blue bold">Bon état</p>   
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <button class="btn-secondary">Voir l'objet en détail</button>   
+                </div>     
+            </div>
+        </div>
+    </div>
+
+</div> {#  fin container #}
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_product') }}
+{% endblock %}

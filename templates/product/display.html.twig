@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les objets - {{ parent() }}{% endblock %}
+
+
+{% block stylesheets %}
+{{ encore_entry_link_tags('page_product') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid  d-flex justify-content-center background">
+    <section class="mt-5 display-product">
+        <div class="row">     
+            <div class="card mb-3">
+                <img src="{{asset('build/images/img1.webp')}}" class="card-img-top " alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                        content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div> 
+        </div>      
+    </section>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+{{ encore_entry_script_tags('page_product') }}
+{% endblock %}

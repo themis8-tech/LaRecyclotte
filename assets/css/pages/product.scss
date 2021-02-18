@@ -1,0 +1,43 @@
+/* page list */
+.background{
+    background-color:var(--lightGrey) ;
+}
+
+.product-card{
+    border-radius: 15px  ;
+}
+.product-img{
+    border-radius: 15px 15px 0 0;
+}
+
+/* page display product */
+.display-product {
+   width: 50%; 
+}
+
+
+/* couleurs */
+.blue{
+    color: var(--blue);
+ }
+ 
+ .bold{
+    font-weight: bold;
+ }
+ 
+ .orange{
+    color: var(--orange);
+ }
+ 
+ .grey{
+    color: var(--grey);
+ }
+ 
+ .lightGrey{
+    color: var(--lightGrey);
+ }
+ 
+ .darkGrey{
+    color: var(--darkGrey);
+ }
+ 
