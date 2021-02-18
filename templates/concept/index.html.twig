@@ -7,19 +7,66 @@
 {% endblock %}
 
 {% block body %}
-    <h2>La Recyclotte, pour une autre vision du troc.</h2>
-    <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
-    De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
-    </p>
 
-    <br>
+    <section class="banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 text-center align-v">
+                    <h2>La Recyclotte, pour une <strong>consommation responsable</strong>.</h2>
 
-    <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
-    Nous avons tous dans notre garage, à la cave ou dans un fond de placarddes objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
-    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <br>
-        
+    <div class="container-text py-5 text-center">
+        <h2>Notre concept</h2>
+        <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
+        De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
+        </p>
+
+        <br>
+
+        <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
+        Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
+        </p>
+    </div>
+
+    <br>    
+
+    <div class="container d-flex justify-content-around ">
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{asset('build/images/solidarité.jpg')}}" alt="solidarité">
+            <div class="card-body">
+                <h3>Solidarité </h3>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{asset('build/images/écologie.jpg')}}" alt="écologie">
+            <div class="card-body">
+                <h3>Ecologie</h3>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{asset('build/images/simplicité.jpeg')}}" alt="simplicité">
+            <div class="card-body">
+                <h3>Simplicité</h3>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+
+        <br>
+    </div>
+
+    <hr>
+
+
+
 {% endblock %}
 
 {% block javascripts %}
