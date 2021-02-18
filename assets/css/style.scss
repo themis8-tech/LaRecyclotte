@@ -157,3 +157,36 @@ body {
 }
 
 /*FOOTER STYLE*/
+
+.footer-link{
+    font-size: 18px;
+    color: var(--darkgrey);
+}
+
+.footer-hr{
+    width: 60em;
+    margin: 1em auto 1em auto;
+    color: var(--grey);
+    border: transparent;
+}
+
+.cop-footer {
+    font-size: 14px;
+    color: var(--grey);
+    margin-bottom: 1.5em;
+}
+
+.h4-footer{
+    font-size: 22px;
+    color: var(--blue);
+    margin-bottom: 0.8em;
+}
+
+@media all and (max-width: 425px){
+    /* FOOTER */
+     .media-footer {
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        }
+}

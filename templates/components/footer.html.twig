@@ -1,7 +1,6 @@
 <footer>
-	<div class="container">
-		<div
-			class="d-flex justify-content-around">
+	<div class="container media-footer ">
+		<div class="d-flex justify-content-around media-footer ">
 			{# bloc gauche logo et adresse #}
 			<div class="px-5">
 				<div class="my-4">
@@ -9,7 +8,7 @@
 				</div>
 
 				<div class="mb-3">
-					<p>10, Boulevard de la liberté</p>
+					<p class="mb-1">10, Boulevard de la liberté</p>
 					<p>59000 LILLE</p>
 					<a href="mailto:nullepart@mozilla.org">contact@la-recyclotte.fr</a>
 				</div>
@@ -18,46 +17,46 @@
 			{# bloc droite titre et liste link #}
 			<div>
 				{#  titre #}
-				<h4 class="mt-5 px-5">Le site</h4>
+				<h4 class="mt-4 px-5 h4-footer">Le site</h4>
 
 				{# liste link footer #}
-				<div class="d-flex">
+				<div class="d-flex media-footer">
 					<ul class="mb-4 px-5">
 						<li>
-							<a href="#">Liste des objets</a>
+							<a class="footer-link" href="#">Liste des objets</a>
 						</li>
 						<li>
-							<a href="#">Donner un objet</a>
+							<a class="footer-link" href="#">Donner un objet</a>
 						</li>
 						<li>
-							<a href="#">Le Concept</a>
+							<a class="footer-link" href="#">Le Concept</a>
 						</li>
 						<li>
-							<a href="#">Contact</a>
+							<a class="footer-link" href="#">Contact</a>
 						</li>
 					</ul>
-
-					<ul class="px-1">
+					
+					<ul class="px-1 ">
 						<li>
-							<a href="#">FAQ</a>
+							<a class="footer-link" href="#">FAQ</a>
 						</li>
 						<li>
-							<a href="#">Mentions légales</a>
+							<a class="footer-link" href="#">Mentions légales</a>
 						</li>
 						<li>
-							<a href="#">CGU</a>
+							<a class="footer-link" href="#">CGU</a>
 						</li>
 						<li>
-							<a href="#">Plan du site</a>
+							<a class="footer-link" href="#">Plan du site</a>
 						</li>
 					</ul>
 				</div>
 
 			</div>
 		</div>
-		<hr>
+		<hr class="footer-hr">
 		{# copyright #}
-		<div class="text-center .cop-footer">
+		<div class="text-center cop-footer">
 			La Recyclotte -
 			{{ 'now'|date('Y') }}
 			- Tous droits réservés
