@@ -18,7 +18,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mx-auto mb-2 mb-lg-0 color-link">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Liste des objets</a>
+							<a class="nav-link active" aria-current="page" href="{{path('product_list')}}">Liste des objets</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Donner un objet</a>
@@ -42,11 +42,11 @@
 		</nav>
 	</div>
 
-	{# formulaire de recherche #}
+	{# formulaire de recherche global#}
 	<div class="d-flex justify-content-center align-items-center pt-3 form-bg">
 		<div class="col-6">
-			<form class="input-group mb-3">
-				<input class="form-control" type="search" placeholder="ex : Fauteuil" aria-label="Search">
+			<form method="get" action="{{path('product_list')}}"class="input-group mb-3">
+				<input class="form-control" type="search" placeholder="ex : Fauteuil" aria-label="Search" value="{{ query ?? "" }}">
 				<button class="btn btn-action text-btn-nav" type="submit">Je cherche cet objet</button>
 			</form>
 		</div >
