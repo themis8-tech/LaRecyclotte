@@ -109,6 +109,13 @@ hr:not([size]) {
     background-color: var(--lightGrey);
 }
 
+.carousel-control-next, .carousel-control-prev {
+    position: static;
+    display: inline-block;
+    width: 4em;
+}
+
+
 /* ------------------------------------------ */
 
 @media (min-width: 1200px) {
