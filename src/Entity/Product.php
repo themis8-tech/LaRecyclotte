@@ -25,11 +25,6 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $etat;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $picture;
 
     /**
@@ -38,6 +33,14 @@ class Product
     private $createdAt;
 
     /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $city;
+
+
+
+    /**
+     *
      * @ORM\Column(type="text")
      */
     private $description;
@@ -51,6 +54,22 @@ class Product
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Product")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=zipcode::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $zipcode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=state::class)
+     */
+    private $state;
 
     public function getId(): ?int
     {
@@ -69,17 +88,6 @@ class Product
         return $this;
     }
 
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     public function getPicture(): ?string
     {
@@ -117,6 +125,20 @@ class Product
         return $this;
     }
 
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -137,6 +159,42 @@ class Product
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?zipcode
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(?zipcode $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    public function getState(): ?state
+    {
+        return $this->state;
+    }
+
+    public function setState(?state $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }

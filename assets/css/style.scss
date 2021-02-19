@@ -183,10 +183,19 @@ body {
 }
 
 @media all and (max-width: 425px){
-    /* FOOTER */
-     .media-footer {
+     .responsive{
         text-align:center;
         display:flex;
         flex-direction:column;
-        }
+     }
+     .fa-map-marker-alt {
+        padding-left: 0px;
+     }
+     .btn-search{
+         padding: 0.3em;
+     }
+     
+     .footer-hr{
+         width: 13em;
+     }
 }
