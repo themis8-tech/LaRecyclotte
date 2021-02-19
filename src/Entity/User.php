@@ -45,54 +45,39 @@ class User
     private $enabled;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=40)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=40)
      */
-    private $surname;
+    private $lastname;
+
+
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      */
-    private $city;
+    private $roles= ['ROLE_USER'];
 
-    /**
-     * @ORM\Column(type="string", length=5)
-     */
-    private $zipcode;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $role;
-
-    /**
-     * @ORM\Column(type="decimal", precision=2, scale=1, nullable=true)
-     */
-    private $reputation;
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
      */
-    private $product;
+    private $products;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="user")
-     */
-    private $comments;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Token;
+    private $token;
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->products = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -172,62 +157,28 @@ class User
         return $this;
     }
 
-    public function getSurname(): ?string
+    public function getLastname(): ?string
     {
-        return $this->surname;
+        return $this->lastname;
     }
 
-    public function setSurname(string $surname): self
+    public function setLastname(string $lastname): self
     {
-        $this->surname = $surname;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
-    public function getCity(): ?string
+
+
+    public function getRoles(): ?array
     {
-        return $this->city;
+        return $this->roles;
     }
 
-    public function setCity(string $city): self
+    public function setRoles(array $roles): self
     {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getZipcode(): ?string
-    {
-        return $this->zipcode;
-    }
-
-    public function setZipcode(string $zipcode): self
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    public function getReputation(): ?string
-    {
-        return $this->reputation;
-    }
-
-    public function setReputation(?string $reputation): self
-    {
-        $this->reputation = $reputation;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -235,15 +186,15 @@ class User
     /**
      * @return Collection|Product[]
      */
-    public function getProduct(): Collection
+    public function getProducts(): Collection
     {
-        return $this->product;
+        return $this->products;
     }
 
     public function addProduct(Product $product): self
     {
-        if (!$this->product->contains($product)) {
-            $this->product[] = $product;
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
             $product->setUser($this);
         }
 
@@ -252,7 +203,7 @@ class User
 
     public function removeProduct(Product $product): self
     {
-        if ($this->product->removeElement($product)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
             if ($product->getUser() === $this) {
                 $product->setUser(null);
@@ -262,45 +213,18 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection|Comments[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comments $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comments $comment): self
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getUser() === $this) {
-                $comment->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getToken(): ?string
     {
-        return $this->Token;
+        return $this->token;
     }
 
-    public function setToken(?string $Token): self
+    public function setToken(?string $token): self
     {
-        $this->Token = $Token;
+        $this->token = $token;
 
         return $this;
     }
+
+
+
 }
