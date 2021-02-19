@@ -4,7 +4,8 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('page_home') }}
-{% endblock %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    {% endblock %}
 
 {% block body %}
 
@@ -216,6 +217,16 @@
                         </div>
                         <!-- End Slide 2-->
 
+                        <div class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide">Slide 01</li>
+                                    <li class="splide__slide">Slide 02</li>
+                                    <li class="splide__slide">Slide 03</li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Début Nav-->
@@ -237,4 +248,8 @@
         </div>
     </section>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 {% endblock %}
