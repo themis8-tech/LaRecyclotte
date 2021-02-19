@@ -1,4 +1,4 @@
-/* TITLE STYLE */
+/* ------------ TITLE STYLE ------------ */
 h1 {
     position: absolute;
     top: -500px;
@@ -22,7 +22,7 @@ h4 {
     font-size: 18px;
 }
 
-/* TEXT STYLE */
+/* ------------ TEXT STYLE ------------ */
 .grey {
     color: var(--grey);
 }
@@ -31,7 +31,7 @@ h4 {
     max-width: 1140px;
 }
 
-/* BANNER */
+/* ------------ BANNER ------------ */
 .banner {
     background-image: url("../../images/la-recyclotte-banner.jpg");
     height: calc(100vh - 160px);
@@ -65,7 +65,7 @@ h4 {
     font-size: 22px;
 }
 
-/* CONCEPT */
+/* ------------ CONCEPT ------------ */
 .concept .container {
     padding: 3em 0;
 }
@@ -104,19 +104,48 @@ hr:not([size]) {
     left: -30px;
 }
 
-/* PRODUCTS */
+/* ------------ PRODUCTS ------------ */
 .products {
     background-color: var(--lightGrey);
 }
 
-.carousel-control-next, .carousel-control-prev {
-    position: static;
-    display: inline-block;
-    width: 4em;
+.margin-cards {
+    margin-right: 1em;
+    margin-left: 1em;
+    width: 20em;
 }
 
+.product-card{
+    border-radius: 15px  ;
+}
+.product-img{
+    border-radius: 15px 15px 0 0;
+}
 
-/* ------------------------------------------ */
+.products .fa-map-marker-alt {
+    font-size: 16px;
+    padding: 0 0.3em 0 0;
+}
+
+.blue {
+    color: var(--blue);
+}
+
+/* Slider */
+.splide__arrow--prev {
+    left: calc(50% - 32px) !important;
+}
+
+.splide__arrow--next {
+    right: calc(50% - 32px) !important;
+}
+
+.splide__arrow {
+    background: transparent !important;
+    top: calc(100% + 0.5em) !important;
+}
+
+/* ------------ RESPONSIVE ------------ */
 
 @media (min-width: 1200px) {
 
