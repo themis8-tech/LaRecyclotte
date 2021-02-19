@@ -217,16 +217,6 @@
                         </div>
                         <!-- End Slide 2-->
 
-                        <div class="splide">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    <li class="splide__slide">Slide 01</li>
-                                    <li class="splide__slide">Slide 02</li>
-                                    <li class="splide__slide">Slide 03</li>
-                                </ul>
-                            </div>
-                        </div>
-
                     </div>
 
                     <!-- Début Nav-->
@@ -242,6 +232,17 @@
 
                 </div>
             </div>
+
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">Slide 01</li>
+                        <li class="splide__slide">Slide 02</li>
+                        <li class="splide__slide">Slide 03</li>
+                    </ul>
+                </div>
+            </div>
+
             <hr>
             <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
             <a href="#" class="btn btn-primary mb-4">Voir tous les objets</a>
@@ -251,5 +252,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('page_home') }}
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 {% endblock %}
