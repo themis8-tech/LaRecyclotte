@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\ProductService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
@@ -12,6 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 */
 class ProductController extends AbstractController
 {
+    private $productService;
+    
+    public function __construct(ProductService $productService)
+    
+    {
+         $this->productService = $productService;
+
+    }
+
 
     /**
     * @Route("/list", name="list")
