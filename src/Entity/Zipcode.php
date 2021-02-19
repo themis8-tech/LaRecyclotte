@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\ZipcodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\Entity(repositoryClass=ZipcodeRepository::class)
  */
-class Category
+class Zipcode
 {
     /**
      * @ORM\Id
@@ -20,17 +20,12 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=5)
      */
-    private $name;
+    private $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $icon;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="zipcode")
      */
     private $products;
 
@@ -44,26 +39,14 @@ class Category
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getCode(): ?string
     {
-        return $this->name;
+        return $this->code;
     }
 
-    public function setName(string $name): self
+    public function setCode(string $code): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(string $icon): self
-    {
-        $this->icon = $icon;
+        $this->code = $code;
 
         return $this;
     }
@@ -71,27 +54,27 @@ class Category
     /**
      * @return Collection|Product[]
      */
-    public function getArticles(): Collection
+    public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    public function addArticle(Product $product): self
+    public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setCategory($this);
+            $product->setZipcode($this);
         }
 
         return $this;
     }
 
-    public function removeArticle(Product $product): self
+    public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getCategory() === $this) {
-                $product->setCategory(null);
+            if ($product->getZipcode() === $this) {
+                $product->setZipcode(null);
             }
         }
 
