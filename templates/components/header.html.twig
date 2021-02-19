@@ -33,7 +33,7 @@
 
 					{# login user #}
 					<div class="d-flex">
-						<button type="button" class="btn btn-secondary text-btn-nav btn-nav mx-2" href="{{ path('register') }}" >Inscription</button>
+						<button type="button" class="btn btn-secondary text-btn-nav btn-nav mx-2" href="{{ path('register') }}">Inscription</button>
 						<button type="button" class="btn btn-primary text-btn-nav btn-nav mx-2">Connexion</button>
 					</div>
 
@@ -43,18 +43,19 @@
 	</div>
 
 	{# formulaire de recherche global#}
-	<div class="d-flex justify-content-center align-items-center pt-3 form-bg">
-		<div class="col-6">
-			<form method="get" action="{{path('product_list')}}"class="input-group mb-3">
-				<input class="form-control" type="search" placeholder="ex : Fauteuil" aria-label="Search" value="{{ query ?? "" }}">
-				<button class="btn btn-action text-btn-nav" type="submit">Je cherche cet objet</button>
+	<div class="d-flex justify-content-center align-items-center pt-3 form-bg responsive">
+		<div class="col-sm-6 ">
+			<form method="get" action="{{path('product_list')}}" class="input-group mb-3">
+				<input class="form-control col-sm-6" type="search" placeholder="ex : Fauteuil" aria-label="Search" value="{{ query ?? "" }}">
+				<button class="btn btn-action text-btn-nav btn-search" type="submit">Rechercher</button>
 			</form>
-		</div >
+		</div>
+
+		<div class="d-flex justify-content-center align-items-center ">
 			<i class="fas fa-map-marker-alt"></i>
 			<p class="text-white">Métropole Lilloise</p>
-		<div>
-		
 		</div>
+
 	</div>
 
 </header>
