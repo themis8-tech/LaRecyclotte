@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class ProductType extends AbstractType
@@ -20,7 +21,7 @@ class ProductType extends AbstractType
                 'class'=> 'form-control',
                 )
             ))
-            ->add('etat', null, array(
+            ->add('etat', ChoiceType::class, array(
                 'label' => 'Etat',
                 'attr'=>array(
                 'class'=> 'form-control'
@@ -34,12 +35,12 @@ class ProductType extends AbstractType
                 ),
                 
             ))
-            ->add('category', null, array(
+            ->add('category', ChoiceType::class, array(
                 'label' => 'Catégorie',
                 'choice_label' => 'name',
                 'expanded' => 'true',
                 'attr' => array(
-                'class' => 'form'
+                'class' => 'form-control'
                 )
             ))
             

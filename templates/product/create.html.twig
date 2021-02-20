@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid col-lg-6 col-md-8 justify-content-center mt-3">
-    <h1>Déposer une annonce</h1>
+<div class="container col-sm-12 col-md-6 col-lg-4  mt-3">
+    <h1 class="text-center">Donner un objet</h1>
         
-
+    <section class= "d-flex flex-column align-items-center form-product" >
             {{ form_start (form, {
                 'attr': {'novalidate':'validate'},
                 'method':'POST',
@@ -38,15 +38,15 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class = "col-12">
+                    <div class = "col">
                         {{ form_row( form.description ) }}        
                     </div>
                 </div>
                 <div class="row">
-                    <button class="btn-secondary mt-3 col mb-5">Enrgistrer</button>
+                    <button class="col btn-secondary mb-3 mt-3">Enrgistrer</button>
                 </div>
             {{ form_end (form) }}
-        
+    </section>   
 </div>
 {% endblock %}
 
