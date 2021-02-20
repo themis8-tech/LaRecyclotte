@@ -24,13 +24,19 @@ class ProductRepository extends ServiceEntityRepository
     public function search ($query)
     { 
         $stmt = $this->createQueryBuilder('p');
-    
+        
+        //si query est vide : affichage de tous les produits sinon apllication des filtres
+        if(!empty($query)){
+        
+        $stmt->leftJoin('p.category', 'c');
+
         $stmt->where('p.name LIKE :query');
         $stmt->orwhere('c.name LIKE :query');
         $stmt->orwhere('p.city LIKE :query');
 
-        $stmt->setParameter('query', '%' . $query . '%');
-
+        $stmt->setParameter('query', '%' . $query . '%'); 
+        }
+    
         return $stmt->getQuery()->getResult();
     }
 
