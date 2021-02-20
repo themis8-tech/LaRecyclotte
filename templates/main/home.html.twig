@@ -12,9 +12,9 @@
     <h1>La Recyclotte, donnez une seconde vie à vos objets</h1>
 
     <section class="banner">
-        <div class="container-fluid">
+        <div class="container-xl">
             <div class="row">
-                <div class="col-xl-6 text-center align-v">
+                <div class="col-xl-6 col-xxl-12 text-center align-v">
                     <h2>N'abandonnez pas, <span class="uppercase">donnez</span></h2>
                     <h3>Meubles, vaisselle, électro-ménager, décoration, jouets...</h3>
                     <a href="#" class="btn btn-action">Je donne un objet</a><br>
@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
-                        <img src="{{asset('build/images/register-concept.png')}}" alt="Création de compte">
+                        <img src="{{asset('build/images/register-concept.png')}}" alt="Etape 1 sur 3 : Création de compte">
                         <div class="process">1</div>
                     </div>
                     <br>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
-                        <img src="{{asset('build/images/post-concept.png')}}" alt="Poster ou réserver un objet">
+                        <img src="{{asset('build/images/post-concept.png')}}" alt="Etape 2 sur 3 : Poster ou réserver un objet">
                         <div class="process">2</div>
                     </div>
                     <br>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
-                        <img src="{{asset('build/images/give-concept.png')}}" alt="Donner ou récupérer un objet">
+                        <img src="{{asset('build/images/give-concept.png')}}" alt="Etape 3 sur 3 : Donner ou récupérer un objet">
                         <div class="process">3</div>
                     </div>
                     <br>
@@ -61,7 +61,7 @@
             </div>
             <hr>
             <p class="pb-5">Ensemble, recyclons intelligent.</p>
-            <a href="#" class="btn btn-primary mb-4">Je découvre le concept</a>
+            <a href="{{path('concept')}}" class="btn btn-primary mb-4">Je découvre le concept</a>
         </div>
     </section>
     
@@ -93,7 +93,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-secondary">Voir l'objet en détail</button>   
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
                                     </div>     
                                 </div>
                             </div>
@@ -246,7 +246,7 @@
             <hr>
             <div class="text-center">
                 <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
-                <a href="#" class="btn btn-primary mb-4">Voir tous les objets</a>
+                <a href="{{path('product_list')}}" class="btn btn-primary mb-4">Voir tous les objets</a>
             </div>
         </div>
     </section>

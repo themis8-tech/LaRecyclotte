@@ -38,6 +38,7 @@ h4 {
     min-height: 450px;
     background-position: center 80%;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     position : relative;
     border-bottom-right-radius: 25%;
 }
@@ -116,10 +117,10 @@ hr:not([size]) {
 }
 
 .product-card{
-    border-radius: 15px  ;
+    border-radius: 15px;
 }
 .product-img{
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px 0;
 }
 
 .products .fa-map-marker-alt {
@@ -156,6 +157,32 @@ hr:not([size]) {
 
     .banner .align-v {
         padding: 0 5em;
+    }
+
+}
+
+@media (min-width: 1400px) {
+
+    /* BANNER */
+    .banner {
+        background-position: left 80%;
+    }
+
+    .banner .align-v {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+}
+
+@media (min-width: 1920px) {
+
+    /* BANNER */
+    .banner {
+        background-position: center 80%;
+        background-size: cover;
     }
 
 }
