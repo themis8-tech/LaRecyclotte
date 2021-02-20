@@ -4,16 +4,17 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('page_home') }}
-{% endblock %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    {% endblock %}
 
 {% block body %}
 
     <h1>La Recyclotte, donnez une seconde vie à vos objets</h1>
 
     <section class="banner">
-        <div class="container-fluid">
+        <div class="container-xl">
             <div class="row">
-                <div class="col-xl-6 text-center align-v">
+                <div class="col-xl-6 col-xxl-12 text-center align-v">
                     <h2>N'abandonnez pas, <span class="uppercase">donnez</span></h2>
                     <h3>Meubles, vaisselle, électro-ménager, décoration, jouets...</h3>
                     <a href="#" class="btn btn-action">Je donne un objet</a><br>
@@ -32,7 +33,7 @@
             <div class="row">
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
-                        <img src="{{asset('build/images/register-concept.png')}}" alt="Création de compte">
+                        <img src="{{asset('build/images/register-concept.png')}}" alt="Etape 1 sur 3 : Création de compte">
                         <div class="process">1</div>
                     </div>
                     <br>
@@ -41,7 +42,7 @@
                 </div>
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
-                        <img src="{{asset('build/images/post-concept.png')}}" alt="Poster ou réserver un objet">
+                        <img src="{{asset('build/images/post-concept.png')}}" alt="Etape 2 sur 3 : Poster ou réserver un objet">
                         <div class="process">2</div>
                     </div>
                     <br>
@@ -50,7 +51,7 @@
                 </div>
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
-                        <img src="{{asset('build/images/give-concept.png')}}" alt="Donner ou récupérer un objet">
+                        <img src="{{asset('build/images/give-concept.png')}}" alt="Etape 3 sur 3 : Donner ou récupérer un objet">
                         <div class="process">3</div>
                     </div>
                     <br>
@@ -60,20 +61,199 @@
             </div>
             <hr>
             <p class="pb-5">Ensemble, recyclons intelligent.</p>
-            <a href="#" class="btn btn-primary mb-4">Je découvre le concept</a>
+            <a href="{{path('concept')}}" class="btn btn-primary mb-4">Je découvre le concept</a>
         </div>
     </section>
     
     <section class="products">
-        <div class="container py-5 text-center">
-            <div class="title">
+        <div class="container py-5">
+            <div class="title  text-center">
                 <h2>Derniers objets ajoutés</h2>
                 <h3>Donnez-leur une seconde vie !</h3>
             </div>
+            
+            <!-- START SPLIDE SLIDER-->
+            <div class="splide pt-4 pb-5">
+                <div class="splide__track">
+                    <ul class="splide__list">
+
+                        <!-- START Slide 1 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">Bon état</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 1 -->
+
+                        <!-- START Slide 2 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">Etat moyen</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 2 -->
+
+                        <!-- START Slide 2 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">Pour pièces</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 2 -->
+
+                        <!-- START Slide 3 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img2.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">Bon état</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 3 -->
+
+                        <!-- START Slide 4 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">Bon état</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 4 -->
+
+                        <!-- START Slide 5 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">Bon état</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 5 -->
+
+                        <!-- START Slide 6 -->
+                        <li class="splide__slide">
+                            <div class="d-flex justify-content-center">
+                                <div class="card product-card margin-cards">
+                                    <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+                                    <div class="d-flex justify-content-around border-bottom">
+                                        <div class="card-body">
+                                            <h4 class="card-title bold">Tasse à café</h4>
+                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
+                                            <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="blue bold">"Bon état"</p>   
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                    </div>     
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END Slide 6 -->
+                        
+                    </ul>
+                </div>
+            </div>
+            <!-- END SPLIDE SLIDER-->
+
             <hr>
-            <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
-            <a href="#" class="btn btn-primary mb-4">Voir tous les objets</a>
+            <div class="text-center">
+                <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
+                <a href="{{path('product_list')}}" class="btn btn-primary mb-4">Voir tous les objets</a>
+            </div>
         </div>
     </section>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_home') }}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 {% endblock %}

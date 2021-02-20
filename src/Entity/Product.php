@@ -163,12 +163,12 @@ class Product
         return $this;
     }
 
-    public function getZipcode(): ?zipcode
+    public function getZipcode(): ?Zipcode
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(?zipcode $zipcode): self
+    public function setZipcode(?Zipcode $zipcode): self
     {
         $this->zipcode = $zipcode;
 
