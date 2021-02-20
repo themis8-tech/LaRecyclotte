@@ -30,7 +30,7 @@ class ProductController extends AbstractController
     /**
     * @Route("/display", name="display")
     */
-    public function display(Request $request, ProductRepository $productRepository): Response
+    public function display(): Response
     {
 
         return $this->render('product/display.html.twig');

@@ -33,7 +33,7 @@ class ProductType extends AbstractType
             ->add('visible')
             ->add('category')
             ->add('user')
-            ->add('zipcode')
+           // ->add('zipcode')
             ->add('state')
         ;
     }

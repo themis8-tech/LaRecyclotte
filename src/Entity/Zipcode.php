@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ZipcodeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ZipcodeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ZipcodeRepository::class)
@@ -25,7 +25,7 @@ class Zipcode
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="zipcode")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="Zipcode")
      */
     private $products;
 
