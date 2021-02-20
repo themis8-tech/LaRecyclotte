@@ -46,7 +46,7 @@
 	<div class="d-flex justify-content-center align-items-center pt-3 form-bg responsive">
 		<div class="col-sm-6 ">
 			<form method="get" action="{{path('product_list')}}" class="input-group mb-3">
-				<input class="form-control col-sm-6" type="search" placeholder="ex : Fauteuil" aria-label="Search" value="{{ query ?? "" }}">
+				<input class="form-control col-sm-6" name="q" type="search" placeholder="ex : Fauteuil" aria-label="Search" value="{{ query ?? "" }}">
 				<button class="btn btn-action text-btn-nav btn-search" type="submit">Rechercher</button>
 			</form>
 		</div>
