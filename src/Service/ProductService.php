@@ -14,7 +14,7 @@ class ProductService{
 
    public function buildResult($query)
     {
-        return $this->repository->search( $query);
+        return $this->repository->search($query);
     }
 
 }
