@@ -7,12 +7,12 @@ class ProductService{
 
    private $repository;
 
-   public function __construct (ProductRepository $repositrory)
+   public function __construct (ProductRepository $repository)
    {
       $this->repository = $repository;
    }
 
-   public function buildResult($query, $sort)
+   public function buildResult($query)
     {
         return $this->repository->search( $query);
     }

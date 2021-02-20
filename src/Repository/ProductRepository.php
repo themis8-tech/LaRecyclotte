@@ -20,7 +20,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // formulaire de recherche generale
+    // Requete de recherche form general
     public function search ($query)
     { 
         $stmt = $this->createQueryBuilder('p');
