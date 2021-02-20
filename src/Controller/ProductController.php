@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\ProductService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
@@ -12,15 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 */
 class ProductController extends AbstractController
 {
+    private $productService;
+    
+    public function __construct(ProductService $productService)
+
+    {
+         $this->productService = $productService;
+
+    }
 
     /**
     * @Route("/list", name="list")
     */
-    public function list(): Response
+    public function list(Request $request): Response
     {
-        return $this->render('product/list.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
+        $query = $request->query->get('q');
+
+        $products = $this->productService->buildResult($query);
+        
+        return $this->render('product/list.html.twig', array(
+            'products'=> $products,
+            'query'=> $query,
+        ));
     }
 
     /**
