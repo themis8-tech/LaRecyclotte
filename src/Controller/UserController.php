@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 
-class RegistrationController extends AbstractController
+class UserController extends AbstractController
 {
 
     /**
@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
     public function register(): Response
     {
 
-        return $this->render('registration/registration.html.twig');
+        return $this->render('user/register.html.twig');
     }
 
 }
