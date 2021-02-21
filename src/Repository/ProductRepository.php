@@ -30,7 +30,7 @@ class ProductRepository extends ServiceEntityRepository
         
         $stmt->leftJoin('p.category', 'c');
 
-        $stmt->where('p.name LIKE :query');
+        $stmt->where('p.title LIKE :query');
         $stmt->orwhere('c.name LIKE :query');
         $stmt->orwhere('p.city LIKE :query');
 

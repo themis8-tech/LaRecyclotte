@@ -23,7 +23,6 @@ class ProductController extends AbstractController
 
     {
          $this->productService = $productService;
-
     }
 
     /**

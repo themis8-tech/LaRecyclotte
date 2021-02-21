@@ -4,17 +4,17 @@ namespace App\Service;
 use App\Repository\ProductRepository;
 
 class ProductService{
+    private $repository;
 
-   private $repository;
-
-   public function __construct (ProductRepository $repository)
-   {
-      $this->repository = $repository;
-   }
-
-   public function buildResult($query)
+    public function __construct( ProductRepository $repository)
     {
-        return $this->repository->search($query);
+        $this->repository = $repository;
+        
     }
 
-}
+    public function buildResult($query)
+    {
+        return $this->repository->search( $query);
+    }
+    
+   }

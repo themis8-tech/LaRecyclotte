@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Zipcode;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product
 {
@@ -19,9 +21,9 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=60)
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -29,66 +31,70 @@ class Product
     private $picture;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(type="string", length=100)
      */
     private $city;
 
-
-
     /**
-     *
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="Product")
+     * @ORM\Column(type="datetime")
      */
-    private $category;
+    private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Product")
+     * @ORM\Column(type="datetime")
      */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=zipcode::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $zipcode;
+    private $endAt;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $visible;
+    private $enabled;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity=State::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $state;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Zipcode::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $zipcode;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
-
 
     public function getPicture(): ?string
     {
@@ -102,14 +108,14 @@ class Product
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCity(): ?string
     {
-        return $this->createdAt;
+        return $this->city;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCity(string $city): self
     {
-        $this->createdAt = $createdAt;
+        $this->city = $city;
 
         return $this;
     }
@@ -126,28 +132,38 @@ class Product
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->city;
+        return $this->createdAt;
     }
 
-
-
-    public function setCity(string $city): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->city = $city;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getEndAt(): ?\DateTimeInterface
     {
-        return $this->category;
+        return $this->endAt;
     }
 
-    public function setCategory(?Category $category): self
+    public function setEndAt(\DateTimeInterface $endAt): self
     {
-        $this->category = $category;
+        $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }
@@ -164,39 +180,46 @@ class Product
         return $this;
     }
 
-    public function getZipcode(): ?zipcode
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?Zipcode
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(?zipcode $zipcode): self
+    public function setZipcode(?Zipcode $zipcode): self
     {
         $this->zipcode = $zipcode;
 
         return $this;
     }
-
-    public function getVisible(): ?bool
+    /**
+     * @ORM\PrePersist
+     */
+    public function initCreatedAt()
     {
-        return $this->visible;
-    }
-
-    public function setVisible(bool $visible): self
-    {
-        $this->visible = $visible;
-
-        return $this;
-    }
-
-    public function getState(): ?state
-    {
-        return $this->state;
-    }
-
-    public function setState(?state $state): self
-    {
-        $this->state = $state;
-
-        return $this;
+        $this->setCreatedAt( new DateTime() );
     }
 }

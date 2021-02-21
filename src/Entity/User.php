@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class User
 {
@@ -20,12 +22,22 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=45)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=95)
      */
     private $email;
 
@@ -34,10 +46,17 @@ class User
      */
     private $password;
 
+    private $plainPassword;
+
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = ['ROLE_USER'];
 
     /**
      * @ORM\Column(type="boolean")
@@ -45,44 +64,42 @@ class User
     private $enabled;
 
     /**
-     * @ORM\Column(type="string", length=40)
-     */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=40)
-     */
-    private $lastname;
-
-
-
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $roles= ['ROLE_USER'];
-
-
-
-    /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
      */
     private $products;
 
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $token;
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
-
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
     }
 
     public function getUsername(): ?string
@@ -133,44 +150,6 @@ class User
         return $this;
     }
 
-    public function getEnabled(): ?bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): self
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-
-
     public function getRoles(): ?array
     {
         return $this->roles;
@@ -179,6 +158,18 @@ class User
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }
@@ -212,19 +203,11 @@ class User
 
         return $this;
     }
-
-    public function getToken(): ?string
+    /**
+     * @ORM\PrePersist
+     */
+    public function initCreatedAt()
     {
-        return $this->token;
+        $this->setCreatedAt( new DateTime() );
     }
-
-    public function setToken(?string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-
-
 }
