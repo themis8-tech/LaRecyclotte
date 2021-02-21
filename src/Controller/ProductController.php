@@ -16,26 +16,14 @@ class ProductController extends AbstractController
 {
     private $productService;
     
-    public function __construct(ProductService $productService)
 
-    {
-         $this->productService = $productService;
-
-    }
 
     /**
     * @Route("/list", name="list")
     */
-    public function list(Request $request): Response
+    public function list(): Response
     {
-        $query = $request->query->get('q');
 
-        $products = $this->productService->buildResult($query);
-        
-        return $this->render('product/list.html.twig', array(
-            'products'=> $products,
-            'query'=> $query,
-        ));
     }
 
     /**

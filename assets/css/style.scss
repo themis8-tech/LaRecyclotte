@@ -182,11 +182,35 @@ body {
     margin-bottom: 0.8em;
 }
 
+/*SHARE COMPONENT STYLE*/
+.bg-green {
+    background: linear-gradient(90deg, rgba(60,200,153,1) 0%, rgba(34,175,157,1) 100%);
+}
+
+.text-share{
+    color: var(--lightGrey);
+}
+
+.img-share{
+    width:30%;
+    margin: 30px auto 10px auto;
+}
+.text-grey{
+    color:var(--grey);
+    font-size:14px;
+    margin: 30px auto;
+}
+
+.widht-desk{
+width:20em;
+}
+
 @media all and (max-width: 425px){
      .responsive{
         text-align:center;
         display:flex;
         flex-direction:column;
+       
      }
      .fa-map-marker-alt {
         padding-left: 0px;
@@ -198,4 +222,11 @@ body {
      .footer-hr{
          width: 13em;
      }
+     .widht-card{
+         width: 14em;
+     }
+     .body-pad{
+        padding: 0.8rem!important;
+     }
 }
+
