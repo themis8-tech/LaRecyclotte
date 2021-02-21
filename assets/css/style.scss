@@ -182,6 +182,25 @@ body {
     margin-bottom: 0.8em;
 }
 
+/*SHARE COMPONENT STYLE*/
+.bg-green {
+    background: linear-gradient(90deg, rgba(60,200,153,1) 0%, rgba(34,175,157,1) 100%);
+}
+
+.text-share{
+    color: var(--lightGrey);
+}
+
+.img-share{
+    width:30%;
+    margin: 30px auto 10px auto;
+}
+.text-grey{
+    color:var(--grey);
+    font-size:14px;
+    margin: 30px auto;
+}
+
 @media all and (max-width: 425px){
      .responsive{
         text-align:center;
@@ -199,3 +218,4 @@ body {
          width: 13em;
      }
 }
+
