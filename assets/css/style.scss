@@ -201,11 +201,16 @@ body {
     margin: 30px auto;
 }
 
+.widht-desk{
+width:20em;
+}
+
 @media all and (max-width: 425px){
      .responsive{
         text-align:center;
         display:flex;
         flex-direction:column;
+       
      }
      .fa-map-marker-alt {
         padding-left: 0px;
@@ -216,6 +221,12 @@ body {
      
      .footer-hr{
          width: 13em;
+     }
+     .widht-card{
+         width: 14em;
+     }
+     .body-pad{
+        padding: 0.8rem!important;
      }
 }
 
