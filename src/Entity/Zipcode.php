@@ -25,7 +25,7 @@ class Zipcode
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="Zipcode")
+     * @ORM\OneToMany(targetEntity=product::class, mappedBy="zipcode")
      */
     private $products;
 

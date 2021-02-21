@@ -27,14 +27,41 @@ class ProductType extends AbstractType
                     )
                     ))
                     
-            ->add('createdAt')
-            ->add('city')
-            ->add('description')
+            ->add('createdAt', null, array(
+               'label' => "Date de création",
+               'attr' => array(
+                'class' => 'form-control'
+               )
+               ))
+
+            ->add('city', null, array(
+                'label' => "Ville",
+                'attr' => array(
+                 'class' => 'form-control'
+                )
+                ))
+
+            ->add('description', null, array(
+                'label' => "Déscription de l'objet",
+                'attr' => array(
+                 'class' => 'form-control'
+                )
+                ))
             ->add('visible')
             ->add('category')
             ->add('user')
-            ->add('zipcode')
-            ->add('state')
+            ->add('zipcode', null, array(
+                'label' => "Code Postale",
+                'attr' => array(
+                 'class' => 'form-control'
+                )
+                ))
+            ->add('state', null, array(
+                'label' => "Etat de l'objet",
+                'attr' => array(
+                 'class' => 'form'
+                )
+                ))
         ;
     }
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Zipcode;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -67,7 +68,7 @@ class Product
     private $visible;
 
     /**
-     * @ORM\ManyToOne(targetEntity=state::class)
+     * @ORM\ManyToOne(targetEntity=State::class)
      */
     private $state;
 
@@ -163,12 +164,12 @@ class Product
         return $this;
     }
 
-    public function getZipcode(): ?Zipcode
+    public function getZipcode(): ?zipcode
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(?Zipcode $zipcode): self
+    public function setZipcode(?zipcode $zipcode): self
     {
         $this->zipcode = $zipcode;
 

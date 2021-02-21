@@ -17,13 +17,16 @@
 
 /*form ajout produit */
 .form-product{
-   border: 5px solid var(--orange);
+   border: 2px solid var(-darkGrey);
    border-radius: 15px ;
-   box-shadow: 5px 5px 5px var(--orange);
+   border-style: outset;
+   box-shadow: 5px 5px 5px var(--grey);
    color: var(--blue);
 }
 
-
+.form-img{
+   max-width: 15%;
+}
 /* couleurs */
 .blue{
     color: var(--blue);
