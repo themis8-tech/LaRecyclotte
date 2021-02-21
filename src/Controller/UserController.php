@@ -8,17 +8,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 
-class RegistrationController extends AbstractController
+/**
+ * @Route("", name="user_")
+ */
+
+class UserController extends AbstractController
 {
 
     /**
-     * @Route("/registration", name="register")
+     *
+     * @Route("/inscription", name="register")
      * @return Response
      */
     public function register(): Response
     {
 
-        return $this->render('registration/register.html.twig');
+        return $this->render('user/register.html.twig');
+
     }
 
 }
