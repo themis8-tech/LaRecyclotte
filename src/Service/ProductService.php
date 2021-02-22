@@ -16,5 +16,10 @@ class ProductService{
     {
         return $this->repository->search( $query);
     }
+
+    public function getLast()
+    {
+        return $this->repository->findAll();
+    }
     
    }

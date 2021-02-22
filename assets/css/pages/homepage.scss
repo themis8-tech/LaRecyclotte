@@ -133,6 +133,16 @@ hr:not([size]) {
     color: var(--blue);
 }
 
+.card hr {
+    width: initial;
+    height: 1px;
+    margin: 1em auto;
+}
+
+.card hr:not([size]) {
+    height: 1px;
+}
+
 /* Slider */
 .splide__arrow--prev {
     left: calc(50% - 32px) !important;
