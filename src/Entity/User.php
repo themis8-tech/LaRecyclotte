@@ -7,12 +7,16 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -70,6 +74,9 @@ class User
 
     public function __construct()
     {
+
+        $this->createdAt = new \DateTime();
+        $this->enabled = false;
         $this->products = new ArrayCollection();
     }
 
@@ -174,6 +181,19 @@ class User
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Product[]
      */
@@ -203,6 +223,7 @@ class User
 
         return $this;
     }
+
     /**
      * @ORM\PrePersist
      */
@@ -210,4 +231,11 @@ class User
     {
         $this->setCreatedAt( new DateTime() );
     }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials(){}
 }
