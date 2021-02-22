@@ -1,6 +1,9 @@
+body{
+   background-color:var(--lightGrey) ;
+}
 /* page list */
-.background{
-    background-color:var(--lightGrey) ;
+.background-white{
+    background-color:white ;
 }
 
 .product-card{
@@ -17,10 +20,8 @@
 
 /*form ajout produit */
 .form-product{
-   border: 2px solid var(-darkGrey);
+   border: 1px solid var(-darkGrey);
    border-radius: 15px ;
-   border-style: outset;
-   box-shadow: 5px 5px 5px var(--grey);
    color: var(--blue);
 }
 

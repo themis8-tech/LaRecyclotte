@@ -8,10 +8,14 @@
 {% endblock %}
 
 {% block body %}
-<div class="container justify-content-center col-sm-3 col-md-8 col-lg-6  mt-3">
-    <div class ="  text-center">
+<div class="background-white px-5 py-3">
+    <span>Accueil > </span>
+    <span class="bold">Donner un objet</span>
+</div>
+<div class="container  justify-content-center col-sm-3 col-md-8 col-lg-6  mt-3">
+    <div class = " text-center pt-5" >
         <h1 >Donner un objet</h1>
-        {# <img class="form-img" src ="{{ asset('build/images/donObjet.png')}}"> #}
+        <h2>Dans la <span class="bold">métropole lilloise</span></h2> 
     </div>
     <section class= "d-flex flex-column align-items-center form-product mb-5" >
             {{ form_start (form, {
@@ -28,8 +32,6 @@
                     <div class = "col">
                         {{ form_row( form.category ) }}        
                     </div>
-                </div>
-                <div class="row mt-3">
                     <div class = "col">
                         {{ form_row( form.state ) }}        
                     </div>
@@ -68,9 +70,9 @@
                     <button class=" col-4 col-sm-6 col-xs-12 btn btn-secondary text-center">Enrgistrer</button>
                 </div>
             {{ form_end (form) }}
-    </section> 
-  <hr class= "hr-form">    
+    </section>    
 </div>
+
 
 {% endblock %}
 
