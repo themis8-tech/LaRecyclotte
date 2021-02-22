@@ -41,11 +41,14 @@
             </select>
         </div>
     <div>
+    <div class=" btn d-flex justify-content-center">
+        <button>Chercher</button>
+    </div>
 
      {# infos resultat #}
     <div class="row text-center ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> 145</span>
+            <p>Objets disponibles: <span class="blue"> {{ listProduct|length }}</span>
                 - Objets par pages :<span class="blue"> 15</span>
                 - Nombre de pages :<span class="blue"> 10</span></p>
         </div>
@@ -59,80 +62,30 @@
     </div>
            
 
-    {# Fiches Produit #}
+    {# liste des objets #}
     <div class="row">
+    {% for product in listProduct %}
         <div class="col d-flex justify-content-center my-5">
-            <div class="card product-card" style="width: 20rem;">
-                <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
+            <div class="card product-card margin-cards">
+                <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="...">
                 <div class="d-flex justify-content-around border-bottom">
                     <div class="card-body">
-                        <h5 class="card-title bold">Tasse à café</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
-                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
+                        <h5 class="card-title bold">{{ product.title}}</h5>
+                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> 
+                         {{product.city}} ({{ product.zipcode.code}})</p>
+                        <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                     </div>
                     <div class="card-body">
-                        <p class=" blue bold">Bon état</p>   
+                        <p class=" blue bold">{{ product.state.name }}</p>   
                     </div>
                 </div>
                 <div class="card-body text-center">
-                    <button class="btn-secondary">Voir l'objet en détail</button>   
+                    <a href= "{{ path('product_display', {id: product.id}) }}" 
+                     class="btn btn-secondary ">Voir l'objet en détail</a>   
                 </div>     
             </div>
         </div>
-        <div class="col d-flex justify-content-center my-5">
-            <div class="card product-card" style="width: 20rem;">
-                <img src="{{ asset ('build/images/img2.webp') }}" class="card-img-top product-img" alt="...">
-                <div class="d-flex justify-content-around border-bottom">
-                    <div class="card-body">
-                        <h5 class="card-title bold">Tasse à café</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
-                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
-                    </div>
-                    <div class="card-body">
-                        <p class=" blue bold">Bon état</p>   
-                    </div>
-                </div>
-                <div class="card-body text-center">
-                    <button class="btn-secondary">Voir l'objet en détail</button>   
-                </div>     
-            </div>
-        </div>
-        <div class="col d-flex justify-content-center my-5">
-            <div class="card product-card" style="width: 20rem;">
-                <img src="{{ asset ('build/images/img1.webp') }}" class="card-img-top product-img" alt="...">
-                <div class="d-flex justify-content-around border-bottom">
-                    <div class="card-body">
-                        <h5 class="card-title bold">Tasse à café</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
-                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
-                    </div>
-                    <div class="card-body">
-                        <p class=" blue bold">Bon état</p>   
-                    </div>
-                </div>
-                <div class="card-body text-center">
-                    <button class="btn-secondary">Voir l'objet en détail</button>   
-                </div>     
-            </div>
-        </div>
-        <div class="col d-flex justify-content-center my-5">
-            <div class="card product-card" style="width: 20rem;">
-                <img src="{{ asset ('build/images/img2.webp') }}" class="card-img-top product-img" alt="...">
-                <div class="d-flex justify-content-around border-bottom">
-                    <div class="card-body">
-                        <h5 class="card-title bold">Tasse à café</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> Lille (59000)</p>
-                        <p class="card-text grey bold">Posté il y a 22 minutes</p>
-                    </div>
-                    <div class="card-body">
-                        <p class=" blue bold">Bon état</p>   
-                    </div>
-                </div>
-                <div class="card-body text-center">
-                    <button class="btn-secondary">Voir l'objet en détail</button>   
-                </div>     
-            </div>
-        </div>
+    {% endfor %}
     </div>
 
 </div> {#  fin container #}

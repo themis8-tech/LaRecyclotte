@@ -32,15 +32,15 @@ class ProductController extends AbstractController
     /**
     * @Route("/list", name="list")
     */
-    public function list(Request $request): Response
+    public function list(Request $request, ProductRepository $repo): Response
     {
         //$query = $request->query->get('q');
-
        // $products = $this->productService->buildResult($query);
-        
+        $listProduct = $this->productService->getAll();
         return $this->render('product/list.html.twig', array(
             //'products'=> $products,
             //'query'=> $query,
+            'listProduct' => $listProduct,
         ));
     }
 
@@ -49,7 +49,7 @@ class ProductController extends AbstractController
     */
     public function display(): Response
     {
-        
+
         return $this->render('product/display.html.twig');
     }
 

@@ -12,6 +12,11 @@ class ProductService{
         
     }
 
+    public function getAll()
+    {
+        return $this->repository->findAll();
+    }
+
     public function buildResult($query)
     {
         return $this->repository->search( $query);
