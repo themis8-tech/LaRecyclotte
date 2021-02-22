@@ -72,44 +72,54 @@
                 <h3>Donnez-leur une seconde vie !</h3>
             </div>
             
-            <!-- START SPLIDE SLIDER-->
-            <div class="splide pt-4 pb-5">
-                <div class="splide__track">
-                    <ul class="splide__list">
+            {% if products is not empty %}
 
-                        <!-- START Slide 1 -->
-                        {% for product in products %}
-                            <li class="splide__slide">
-                                <div class="d-flex justify-content-center">
-                                    <div class="card product-card margin-cards">
-                                        <img src="{{ asset ('build/images/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between">
-                                                <h4 class="card-title bold">{{ product.title }}</h4>
-                                                <p class="blue bold">{{ product.state.name }}</p>   
-                                            </div>
-                                            <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>{{ product.city }} ({{ product.zipcode.code }})</p>
-                                            <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
-                                            <hr>
-                                            <div class="text-center">
-                                                <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                <!-- START SPLIDE SLIDER-->
+                <div class="splide pt-4 pb-5">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+
+                            <!-- START Slide -->
+                            {% for product in products %}
+                                <li class="splide__slide">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card product-card margin-cards">
+                                            <img src="{{ asset ('build/images/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <h4 class="card-title bold">{{ product.title }}</h4>
+                                                    <p class="blue bold">{{ product.state.name }}</p>   
+                                                </div>
+                                                <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>{{ product.city }} ({{ product.zipcode.code }})</p>
+                                                <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
+                                                <hr>
+                                                <div class="text-center">
+                                                    <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-                        <!-- END Slide 1 -->
+                                </li>
+                            {% endfor %}
+                             <!-- END Slide -->
                         
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             <!-- END SPLIDE SLIDER-->
+
+            {% else %}
+                <p class="text-center">Pas de nouveaux dons.<br>Ajouter le votre !</p>
+            {% endif %}
 
             <hr>
             <div class="text-center">
                 <p class="pb-5">Si vous n'en n'avez plus l'usage, pensez au partage.</p>
-                <a href="{{path('product_list')}}" class="btn btn-primary mb-4">Voir tous les objets</a>
+                {% if products is not empty %}
+                    <a href="{{path('product_list')}}" class="btn btn-primary mb-4">Voir tous les objets</a>
+                {% else %}
+                    <a href="#" class="btn btn-action mb-4">Donner un objet</a>
+                {% endif %}
             </div>
         </div>
     </section>
