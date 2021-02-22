@@ -1,19 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title%} Inscription {% endblock %}
+{% block title%}
+	Inscription
+{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig'%}
 
 {% block body %}
-    <div class="row">
-        <div class="column large-12 tab-12">
-            {% for message in app.flashes('success') %}
-                <div class="flash-notice">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {{ form_start(form) }}
-            {{ form_row(form) }}
-            <button type="submit">Envoyer</button>
-            {{ form_end(form) }}
-        </div>
-    </div>
+
+	<h1 class="text-center my-3">Creer votre compte</h1>
+
+	<div class="container ms-auto mb-5 form-control">
+
+
+		{{form_start (form)}}
+
+		<div class="row">
+
+			<div class="col-4 my-3 label-form">
+				{{form_row (form.firstname)}}
+			</div>
+
+			<div class="col-4 my-3 label-form">
+				{{form_row (form.lastname)}}
+			</div>
+
+			<div class="col-4 my-3 label-form">
+				{{form_row (form.username)}}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-6 mb-4 label-form">
+				{{form_row (form.email)}}
+			</div>
+
+			<div class="col-6 mb-4 label-form">
+				{{form_row (form.plainPassword)}}
+			</div>
+		</div>
+
+        <div class="d-flex justify-content-center mb-4 "><button class="btn btn-action col-4 p-0" type="submit">Creer</button></div>
+		
+		{{form_end (form)}}
+
+	</div>
+
 {% endblock %}
