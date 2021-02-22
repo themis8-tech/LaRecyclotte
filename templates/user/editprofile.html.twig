@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+   
+{% block title %}Modification du profile de {{ app.user.firstname }} {{ app.user.lastname }}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    	{{ encore_entry_link_tags('page_profile') }}
+{% endblock %}
+
+   {% block body %}
+    
+        <div class="container">
+            <div class="">
+                <h1>Modification du profile de {{ app.user.firstname }} {{ app.user.lastname }}</h1>
+                {{ form(form) }}            
+            </div>
+            
+
+        {% endfor %} 
+
+    {% endblock %}
+
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_profile') }}
+{% endblock %}
