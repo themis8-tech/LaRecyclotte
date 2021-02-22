@@ -49,7 +49,7 @@ class ProductController extends AbstractController
     */
     public function display(): Response
     {
-
+        
         return $this->render('product/display.html.twig');
     }
 
