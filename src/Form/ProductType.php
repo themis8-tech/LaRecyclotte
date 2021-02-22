@@ -39,7 +39,7 @@ class ProductType extends AbstractType
                 ))
 
             ->add('description', null, array(
-                'label' => "Déscription*",
+                'label' => "Déscription",
                 'attr' => array(
                     'rows'=>7,
                 'placeholder' => 'Couleur, dimension, matériaux...',
@@ -89,6 +89,8 @@ class ProductType extends AbstractType
                  'class' => 'form'
                 )
                 ))
+
+            ->add ('enabled')
         ;
     }
 

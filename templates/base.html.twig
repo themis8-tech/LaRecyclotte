@@ -23,7 +23,20 @@
 	<body>
 		{% include "components/header.html.twig" %}
 
-        <main>{% block body %}{% endblock %}</main>
+        <main>
+		
+		{% for label, messages in app.flashes %}
+        {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{ message }}
+        </div>
+        
+		{% endfor %}
+		{% endfor %}
+
+		{% block body %}{% endblock %}
+		</main>
 
 		  {% include "components/share.html.twig"%}
 

@@ -71,7 +71,13 @@ class ProductController extends AbstractController
 
                 $this->em->persist($product);
                 $this->em->flush();
+                $this->addFlash('success',
+                                    "Votre objet est enregister celui-ci sera
+                                    publié dans les 24h"
+            );
             }
+            return $this->redirectToroute('product_list');
+            
         }
 
 
