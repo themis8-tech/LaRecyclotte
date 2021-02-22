@@ -224,17 +224,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $password): self
-    {
-        $this->plainPassword = $password;
-
-        return $this;
-    }
     /**
      * @ORM\PrePersist
      */
