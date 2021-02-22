@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+   
+{% block title %}Mon compte - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    	{{ encore_entry_link_tags('page_profile') }}
+{% endblock %}
+
+   {% block body %}
+    
+        <div class="container">
+            <div class=""><h1>Profil de {{ app.user.firstname }} {{ app.user.lastname }}</h1></div>
+
+            <div class="">Nom</div>
+            <div class="">{{ app.user.lastname }}</div>
+            <div class=""></div>
+            <div class="">Prénom</div>
+            <div class="">{{ app.user.firstname }}</div>
+            <div class="">Email</div>
+            <div class="">{{ app.user.email }}</div>
+
+            <button type="button" class="btn btn-primary btn-lg">Modifier le profil</button>
+            <button type="button" class="btn btn-secondary btn-lg">Modifier le mot de passe</button>
+        </div>
+
+        <div class="container">
+            <h1>Annonces {{ app.user.firstname }} {{ app.user.lastname }} ({{ app.user.annonces|length }})</h1>
+        </div>
+        {% for annonce in app.user.annonces %}
+
+            <div class="">Titre :</div>
+            <div class="">{{ annonce.title }}</div>
+
+        {% endfor %} 
+
+    {% endblock %}
+
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_profile') }}
+{% endblock %}

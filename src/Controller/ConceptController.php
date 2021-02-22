@@ -13,7 +13,7 @@ class ConceptController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('concept/index.html.twig', [
+        return $this->render('single/concept.html.twig', [
             'controller_name' => 'ConceptController',
         ]);
     }

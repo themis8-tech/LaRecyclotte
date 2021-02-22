@@ -1,0 +1,38 @@
+{% extends 'users.html.twig' %}
+
+{% block title %}Mon compte - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    	{{ encore_entry_link_tags('page_profile') }}
+{% endblock %}
+
+{% block body %}
+
+
+    <ul class="nav flex-column">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Mon compte</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Mes messages</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Mes annonces</a>
+        </li>
+    </ul>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('page_profile') }}
+{% endblock %}
+ 
+
+
+
+
+
+
+
+
+
