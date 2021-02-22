@@ -4,25 +4,43 @@
 
 
 {% block stylesheets %}
-{{ encore_entry_link_tags('page_product') }}
+{{ encore_entry_link_tags('page_product-display') }}
 {% endblock %}
 
 {% block body %}
 
-<div class="container-fluid  d-flex justify-content-center background">
-    <section class="mt-5 display-product">
-        <div class="row">     
-            <div class="card mb-3">
-                <img src="{{asset('build/images/img1.webp')}}" class="card-img-top " alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                        content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div> 
-        </div>      
+<div class="container-fluid background">
+    <section class="text-center">
+        <span class="uppercase">Meuble-Literie</span>
+        <hr>
+        <h1>Coffre banquette</h1>
+        <h2>à récupérer sur Lille (59000)</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <article>
+                    <div class="d-flex justify-content-center">
+                        <div class="card product-card margin-cards">
+                            <img src="#" class="card-img-top product-img" alt="...">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="card-title bold">Coffre banquette</h4>
+                                    <p class="blue bold">Bon état</p>   
+                                </div>
+                                <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>Lille (59000)</p>
+                                <p class="card-text grey bold">Posté le 21 fev à 16:05</p>
+                                <hr>
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
     </section>
+
 </div>
 
 
@@ -30,5 +48,5 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ encore_entry_script_tags('page_product') }}
+{{ encore_entry_script_tags('page_product-display') }}
 {% endblock %}
