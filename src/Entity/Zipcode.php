@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\ZipcodeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
