@@ -24,7 +24,7 @@
 							<a class="nav-link" href="#">Donner un objet</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Le Concept</a>
+							<a class="nav-link" href="{{path('concept')}}">Le Concept</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Contact</a>
@@ -33,8 +33,8 @@
 
 					{# login user #}
 					<div class="d-flex">
-						<button type="button" class="btn btn-secondary text-btn-nav btn-nav mx-2" href="{{ path('register') }}">Inscription</button>
-						<button type="button" class="btn btn-primary text-btn-nav btn-nav mx-2">Connexion</button>
+						<a href="{{ path('user_register') }}" class="btn btn-secondary text-btn-nav btn-nav mx-2" >Inscription</a>
+						<a href="#" class="btn btn-primary text-btn-nav btn-nav mx-2">Connexion</a>
 					</div>
 
 				</div>
