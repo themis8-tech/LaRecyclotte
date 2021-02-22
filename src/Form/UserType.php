@@ -13,19 +13,19 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', null, array(
-                'label'=> "Entrez votre prénom"
+                'label'=> "Prénom"
             ))
             ->add('lastname', null, array(
-                'label'=> "Entrez votre nom"
+                'label'=> "Nom"
             ))
             ->add('username', null, array(
-                'label'=> "Entrez votre pseudonyme"
+                'label'=> "Nom d'utilisateur"
             ))
             ->add('email', EmailType::class, array(
                 'label' => 'E-mail',
             ))
             ->add('plainPassword', PasswordType::class, array(
-                'label' => 'Entrez votre mot de passe',
+                'label' => 'Mot de passe',
             ))
 
         ;

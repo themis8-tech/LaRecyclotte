@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -181,6 +181,19 @@ class User
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Product[]
      */
@@ -211,17 +224,6 @@ class User
         return $this;
     }
 
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $password): self
-    {
-        $this->plainPassword = $password;
-
-        return $this;
-    }
     /**
      * @ORM\PrePersist
      */
@@ -229,4 +231,11 @@ class User
     {
         $this->setCreatedAt( new DateTime() );
     }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials(){}
 }
