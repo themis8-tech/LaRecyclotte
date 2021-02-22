@@ -21,7 +21,7 @@
             }}
                 <div class="row mt-3">
                     <div class = "col">
-                        {{ form_row( form.name ) }}        
+                        {{ form_row( form.title ) }}        
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -53,23 +53,17 @@
                     <div class = "col">
                         {{ form_row( form.zipcode ) }}        
                     </div>
+                </div>           
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.endAt ) }}        
+                    </div>
                 </div>
                 <div class="row mt-3">
                     <div class = "col">
                         {{ form_row( form.user ) }}        
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class = "col">
-                        {{ form_row( form.visible ) }}        
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class = "col">
-                        {{ form_row( form.createdAt ) }}        
-                    </div>
-                </div>
-                
                 <div class="row mt-3 mb-3 justify-content-center">
                     <button class=" col-4 col-sm-6 col-xs-12 btn btn-secondary text-center">Enrgistrer</button>
                 </div>

@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use App\Repository\ProductRepository;
+use App\Service\FileUploader;
 use App\Service\ProductService;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -19,10 +22,11 @@ class ProductController extends AbstractController
 {
     private $productService;
     
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, EntityManagerInterface $em)
 
     {
          $this->productService = $productService;
+         $this->em = $em;
     }
 
     /**
@@ -52,11 +56,24 @@ class ProductController extends AbstractController
     /**
     * @Route("/create", name="create")
     */
-    public function create(Request $request, ProductRepository $productRepository): Response
+    public function create(Request $request, SluggerInterface $slugger, FileUploader $fileUploader): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
-        //$form->handleRequest($request);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()  )
+        {
+            $picture = $form->get('picture')->getData();
+            if ($picture) {
+                $pictureFileName = $fileUploader->upload($picture);
+                $product->setPicture($pictureFileName);
+
+                $this->em->persist($product);
+                $this->em->flush();
+            }
+        }
+
 
         return $this->render('product/create.html.twig', array(
             'form' => $form ->createView(),
