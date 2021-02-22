@@ -7,6 +7,10 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -70,6 +74,9 @@ class User
 
     public function __construct()
     {
+
+        $this->createdAt = new \DateTime();
+        $this->enabled = false;
         $this->products = new ArrayCollection();
     }
 
@@ -200,6 +207,18 @@ class User
                 $product->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $password): self
+    {
+        $this->plainPassword = $password;
 
         return $this;
     }
