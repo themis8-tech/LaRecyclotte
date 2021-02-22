@@ -19,7 +19,7 @@ class ProductService{
 
     public function getLast()
     {
-        return $this->repository->findAll();
+        return $this->repository->findLast();
     }
     
    }

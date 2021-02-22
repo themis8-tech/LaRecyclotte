@@ -23,7 +23,7 @@ class MainController extends AbstractController
     public function home(): Response
     {
         $products = $this->productService->getLast();
-
+        
         return $this->render('main/home.html.twig', array(
             'products'=> $products,
         ));

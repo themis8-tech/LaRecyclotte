@@ -89,7 +89,7 @@
                                                 <p class="blue bold">{{ product.state.name }}</p>   
                                             </div>
                                             <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>{{ product.city }} ({{ product.zipcode.code }})</p>
-                                            <p class="card-text grey bold">Posté le {{ product.createdAt|date('d M Y')}} à {{ product.createdAt|date('h:m') }}</p>
+                                            <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                                             <hr>
                                             <div class="text-center">
                                                 <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
