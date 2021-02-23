@@ -8,37 +8,43 @@
 {% endblock %}
 
 {% block body %}
+    {{ dump (app.request.query.get('sortCat') )}}
+    
 <div class="background-white px-5 py-3">
     <span>Accueil > </span>
     <span class="bold">Liste des Objets</span>
 </div>
 <div class="container-fluid background"> {# ouverture du container  #}
-
     {# titre #}
     <div class="text-center pt-5 pb-3">
         <h1>Listes des Objets</h1>
         <h2>à récuperer sur <span class="bold"> Lille </span> et sa métropole</h2>
     </div>
-
+    
     {# filtres de recherche #}
     <form action="{{path('product_list')}}" method="GET">
         <div class="row g-3 justify-content-center">
             <div class="col-sm-12 col-md-3 col-lg-2">
-                <select id="inputState" class="form-select form-select-sm">
+                <select name="sortDate" class="form-select form-select-sm">
                     <option value="DESC">Tri : Plus récents</option>
-                    <option>...</option>
+                    <option value="ASC">Tri : Plus anciens</option>
                 </select>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
-                <select name="sort" class="form-select form-select-sm">
-                    <option>Catégorie : Toutes les catégories</option>
-                    <option>...</option>
+                <select name="sortCat" class="form-select form-select-sm">
+                    <option value="">Catégorie : Toutes les catégories</option>
+                    {% for cat in category %}
+                        <option value="{{ cat.name }}" {% if cat.name == app.request.query.get('sortCat') %}"selected"{% endif %}>
+                    Catégorie : {{ cat.name }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-2">
-                <select id="inputState" class="form-select form-select-sm">
-                    <option>Filtre : Tous les états</option>
-                    <option>...</option>
+                <select name="sortState" class="form-select form-select-sm">
+                    <option value="">Filtre : Tous les états</option>
+                    {% for stat in state %}
+                        <option value="{{ stat.name }}" {% if stat.name == app.request.query.get('sortState') %}"selected"{% endif %}>Etat : {{ stat.name }}</option>
+                    {% endfor %}
                 </select>
             </div>
         <div>
@@ -49,9 +55,14 @@
      {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ listProducts|length }}</span>
+            <p>Objets disponibles: <span class="blue"> {{ products|length }}</span>
                 - Objets par pages :<span class="blue"> 15</span>
                 - Nombre de pages :<span class="blue"> 10</span></p>
+        </div>
+        <div>
+            {% if products is empty %}
+                <p>Aucun résultat trouvé</p>
+            {% endif %}
         </div>
     </div>
     <hr>
@@ -65,8 +76,11 @@
 
     {# liste des objets #}
     <div class="row">
-    {% for product in listProducts %}
-        <div class="col d-flex justify-content-center my-5">
+    
+
+    {% for product in products %}
+        
+        <div class="col-lg-4 col-md-6 d-flex justify-content-center my-5">
             <div class="card product-card margin-cards">
                 <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="...">
                 <div class="d-flex justify-content-around border-bottom">

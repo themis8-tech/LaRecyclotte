@@ -21,20 +21,41 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     // Requete de recherche form general
-    public function search ($query)
+    public function search($query, $sortDate, $sortCat, $sortState)
     { 
         $stmt = $this->createQueryBuilder('p');
         
         //si query est vide : affichage de tous les produits sinon apllication des filtres
         if(!empty($query)){
-        
-        $stmt->leftJoin('p.category', 'c');
+            
+            $stmt->leftJoin('p.category', 'c');
 
-        $stmt->where('p.title LIKE :query');
-        $stmt->orwhere('c.name LIKE :query');
-        $stmt->orwhere('p.city LIKE :query');
+            $stmt->where('p.title LIKE :query');
+            $stmt->orwhere('c.name LIKE :query');
+            $stmt->orwhere('p.city LIKE :query');
 
-        $stmt->setParameter('query', '%' . $query . '%'); 
+            $stmt->setParameter('query', '%' . $query . '%'); 
+        }
+        if(!empty($sortCat))
+        {
+            $stmt->leftJoin('p.category', 'c');
+            $stmt->orwhere('c.name LIKE :sort');
+            $stmt->setParameter('sort', '%' . $sortCat . '%');
+        }
+        if(!empty($sortState))
+        {
+            $stmt->leftJoin('p.state', 's');
+            $stmt->orwhere('s.name LIKE :sort');
+            $stmt->setParameter('sort', '%' . $sortState . '%');
+        }
+        switch ($sortDate){
+            case 'ASC':
+                $stmt->orderBy('p.createdAt', 'ASC');
+            break;
+
+            case 'DESC':
+                $stmt->orderBy('p.createdAt', 'DESC');
+            break;
         }
     
         return $stmt->getQuery()->getResult();

@@ -23,7 +23,7 @@ class ProductType extends AbstractType
                   ) 
                   ))
 
-            ->add('picture', FileType::Class, array( 
+            ->add('picture', FileType::class, array( 
                     'label'=> "Photo de l'objet*",
                     'attr' => array(
                     'class' => 'form-control'

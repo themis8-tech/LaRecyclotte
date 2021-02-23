@@ -5,9 +5,14 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Service\FileUploader;
+use App\Service\StateService;
 use App\Service\ProductService;
+use App\Service\CategoryService;
+use App\Repository\StateRepository;
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,35 +26,43 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     private $productService;
+    private $categoryService;
+    private $stateService;
     
-    public function __construct(ProductService $productService, EntityManagerInterface $em)
+    public function __construct(ProductService $productService, EntityManagerInterface $em,
+     CategoryService $categoryService, StateService $stateService)
 
     {
          $this->productService = $productService;
+         $this->categoryService = $categoryService;
+         $this->stateService = $stateService;
          $this->em = $em;
     }
 
     /**
     * @Route("/list", name="list")
     */
-    public function list(Request $request, ProductRepository $repo): Response
+    public function list(Request $request, ProductRepository $repo,
+     CategoryRepository $category, StateRepository $state ): Response
     {
         // Moteur de recherche interne
         $query = $request->query->get('q');
-        $listProducts = $this->productService->buildResult($query);
-
         // Tri select
-        //$sort =$request->query->get('sort');
-
-        // Tout les produits disponibles
-        //$listProducts = $this->productService->getAll();
-        //$listProducts = $this->productService->sortResult($sort);
-
-        return $this->render('product/list.html.twig', array(
-            //'products'=> $products,
+        $sortDate   = $request->query->get('sortDate');
+        $sortCat = $request->query->get('sortCat');
+        $sortState = $request->query->get('sortState');
+        $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState);
+       
+        $category = $this->categoryService->getAll();
+        $state = $this->stateService->getAll();
+            return $this->render('product/list.html.twig', array(
+            'products'=> $products,
             'query'=> $query,
-            'listProducts' => $listProducts,
-        ));
+            'category' => $category,
+            'state' => $state,
+            ),
+          
+        );
     }
 
     /**
