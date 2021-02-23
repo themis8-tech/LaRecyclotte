@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ConceptController extends AbstractController
+class SingleController extends AbstractController
 {
     /**
      * @Route("/concept", name="concept")
