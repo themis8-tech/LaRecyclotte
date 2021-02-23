@@ -27,5 +27,10 @@ class ProductService{
     {
         return $this->repository->findLast();
     }
+
+    public function getOne($id)
+    {
+        return $this->repository->find($id);
+    }
     
    }
