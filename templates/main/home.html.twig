@@ -84,7 +84,9 @@
                                 <li class="splide__slide">
                                     <div class="d-flex justify-content-center">
                                         <div class="card product-card margin-cards">
-                                            <img src="{{ asset ('build/images/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">
+                                            <figure>
+                                                <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">
+                                            </figure>
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <h4 class="card-title bold">{{ product.title }}</h4>
