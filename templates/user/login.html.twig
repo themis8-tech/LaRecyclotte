@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion -
@@ -9,20 +7,23 @@
 {% block body %}
 	<div class="container">
 		<h1 class="text-center title-form my-3">Connectez-vous à votre compte</h1>
-		<div class="d-flex col-lg-4 col-sm-6 mx-auto justify-content-center">
-			<div class="container mb-5 form-control">
-				<form  method="post">
-					<label for="email" class="form-label label-color">E-mail</label>
-					<input type="email" name="_email" placeholder="Veuillez saisir votre E-mail" class="form-control my-2">
-					<label for="password" class="form-label label-color">Mot de passe</label>
-					<input type="password" name="_password" placeholder="Veuillez saisir votre mot de passe" class="form-control my-2">
 
-                    <div class="row d-flex justify-content-center">
-					<button type="submit" class="btn btn-action col-6 my-2 p-0">Connexion</button>
-                    </div>
+		<div class="d-flex col-lg-4 col-sm-6 mx-auto justify-content-center">
+
+			<div class="container mb-5 form-control">
+
+				<form method="post" action="{{path('user_login')}}">
+					<label for="email" class="form-label label-color mb-0">E-mail</label>
+					<input class="form-control mb-3" type="email" name="_username" placeholder="Veuillez saisir votre E-mail" value="{{ lastEmail }}">
+
+					<label for="password" class="form-label label-color mb-0">Mot de passe</label>
+					<input class="form-control mb-3" type="password" name="_password" placeholder="Veuillez saisir votre mot de passe">
+
+					<div class="row d-flex justify-content-center">
+						<button type="submit" class="btn btn-action col-6 my-2 p-0">Connexion</button>
+					</div>
 				</form>
 
 			</div>
 		</div>
 	{% endblock %}
->>>>>>> 1bd41041f98a76c22d1146aa22fa033efdf9b8f3
