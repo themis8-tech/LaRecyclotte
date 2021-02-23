@@ -38,7 +38,6 @@ Encore
     .addEntry('page_product', './assets/js/pages/product.js')
     .addEntry('page_concept', './assets/js/pages/concept.js')
     .addEntry('page_profile', './assets/js/pages/profile.js')  
-    .addEntry('page_concept', './assets/js/pages/concept.js')  
     .addEntry('page_product-display', './assets/js/pages/product-display.js')  
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
