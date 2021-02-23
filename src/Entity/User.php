@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity("email", message="Cette adresse mail est déjà associée à un compte")
+ *
  */
 class User implements UserInterface
 {
@@ -53,7 +54,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @Assert\NotBlank(message="Vous devez sasir votre prénom")
+     * @Assert\NotBlank(message="Vous devez saisir votre prénom")
      * @Assert\Length(
      *     min=3,
      *     max=45,
@@ -87,6 +88,11 @@ class User implements UserInterface
      * @Assert\NotCompromisedPassword(message="Ce mot de passe a déjà été compromis")
      */
     private $plainPassword;
+
+    /**
+     * @Assert\IsTrue(message="Vous devez accpeter les CGU")
+     */
+    private $CGU;
 
     /**
      * @ORM\Column(type="datetime")
@@ -229,6 +235,21 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getCGU(): ?bool
+    {
+       
+        return $this->CGU;
+    }
+
+    public function setCGU(bool $CGU): self
+    {
+        $this->CGU = $CGU;
+
+        return $this;
+    }
+
+    
 
     /**
      * @return Collection|Product[]

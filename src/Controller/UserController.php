@@ -85,4 +85,9 @@ class UserController extends AbstractController
      */
     public function logout(){}
 
+    /**
+     * @Route("/reset/ask", name="reset_ask")
+     */
+    public function resetAsk(){}
+
 }
