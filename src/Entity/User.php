@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -259,7 +260,29 @@ class User implements UserInterface
         return $this;
     }
 
-    
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenExpiredAt(): ?\DateTimeInterface
+    {
+        return $this->tokenExpiredAt;
+    }
+
+    public function setTokenExpiredAt(?\DateTimeInterface $tokenExpiredAt): self
+    {
+        $this->tokenExpiredAt = $tokenExpiredAt;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Product[]
@@ -306,27 +329,4 @@ class User implements UserInterface
 
     public function eraseCredentials(){}
 
-    public function getToken(): ?string
-    {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    public function getTokenExpiredAt(): ?\DateTimeInterface
-    {
-        return $this->tokenExpiredAt;
-    }
-
-    public function setTokenExpiredAt(?\DateTimeInterface $tokenExpiredAt): self
-    {
-        $this->tokenExpiredAt = $tokenExpiredAt;
-
-        return $this;
-    }
 }

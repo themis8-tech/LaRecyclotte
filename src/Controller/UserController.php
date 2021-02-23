@@ -91,9 +91,9 @@ class UserController extends AbstractController
     /**
      * @Route("/reset/ask", name="reset_ask")
      */
-    public function resetAsk(Request $request): Response
+    public function resetAsk(Request $request, MailerInterface $mailer): Response
     {
-        //recuperation du mail entré dasn le formulaire
+        //recuperation du mail entré dans le formulaire
         $email = $request->request->get('email');
 
         //retrouver le mail dasn la bdd
@@ -108,7 +108,7 @@ class UserController extends AbstractController
                 $token = bin2hex(random_bytes(24));
                 $user->setToken($token);
 
-                //validité du reset de 10 mn
+                //validité du token de 10 mn
                 $now = new DateTime();
                 $now->add(new DateInterval('PT600S'));
                 $user->setTokenExpiredAt($now);
@@ -120,10 +120,10 @@ class UserController extends AbstractController
                 $mail = new Email();
                 $mail->from('larecyclotte@gmail.com');
                 $mail->to($user->getEmail());
-                $mail->subject('Réinitialisation de mot de passe');
+                $mail->subject('Réinitialisation du mot de passe');
 
                 //affichage de la vue dédié dans le corps du mail
-                $view = $this->renderView('mail/reset-mail.html.twig', array(
+                $view = $this->renderView('mail/reset-password.html.twig', array(
                     'user' => $user,
                 ));
                 $mail->html($view);
@@ -131,8 +131,12 @@ class UserController extends AbstractController
                 $mailer->send($mail);
             }
 
-            $message = "Vous allez recevoir un lien de réinitialisation valable 2 heures";
+            $message = "Vous allez recevoir un lien de réinitialisation valable 10 minutes";
         }
+
+        return $this->render('user/reset-ask.html.twig', array(
+            'message' => $message
+        ));
     }
     
     /**
@@ -140,16 +144,18 @@ class UserController extends AbstractController
      */
     public function resetConfirm(Request $request): Response
     {
+        // recupération de l'user qui correspond au token
         $token = $request->query->get('token');
         $user = $this->repository->findOneBy(array(
             'token' => $token,
         ));
 
+        // verification de la validité du token et de l'user
         $now = new DateTime();
         if (empty($user) || $user->getTokenExpiredAt() < $now) {
             throw new NotFoundHttpException();
         }
 
-        return new Response('Formulaire de changement de mot de passe');
+        return new Response('Formulaire de réinitialisation du mot de passe');
     }
 }
