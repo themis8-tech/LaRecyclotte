@@ -1,0 +1,188 @@
+/* ------------ TITLE STYLE ------------ */
+h1 {
+    position: absolute;
+    top: -500px;
+}
+
+h2 {
+    font-family: "LT Emphasis Bold", sans-serif;
+    color: var(--blue);
+    font-size: 60px;
+}
+
+h3 {
+    font-family: "Sansation Regular", sans-serif;
+    color: var(--darkGrey);
+    font-size: 22px;
+}
+
+h4 {
+    font-family: "Sansation Regular", sans-serif;
+    color: var(--darkGrey);
+    font-size: 18px;
+}
+
+/* ------------ TEXT STYLE ------------ */
+.grey {
+    color: var(--grey);
+}
+
+.container {
+    max-width: 1140px;
+}
+
+/* ------------ BANNER ------------ */
+.banner {
+    background-image: url("../../images/la-recyclotte-banner.jpg");
+    height: calc(100vh - 160px);
+    min-height: 450px;
+    background-position: center 80%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position : relative;
+    border-bottom-right-radius: 25%;
+}
+
+.banner .align-v {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.banner h2, .banner h3, .banner p, .banner span {
+    color: #fff;
+}
+
+.banner h2 {
+    margin-bottom: 0.5em;
+}
+
+.banner h3 {
+    margin-bottom: 2em;
+    padding: 0 2em;
+}
+
+.banner .text-bigger {
+    font-size: 22px;
+}
+
+/* ------------ CONCEPT ------------ */
+.concept .container {
+    padding: 3em 0;
+}
+
+.title {
+    margin-top: 3em;
+    margin-bottom: 4em;
+}
+
+hr {
+    width: 13em;
+    margin: 4em auto 2.5em auto;
+    color: var(--grey);
+    border: transparent;
+}
+
+hr:not([size]) {
+    height: 3px;
+}
+
+.picto {
+    position: relative;
+    display: inline-block;
+}
+
+.process {
+    background-color: var(--blue);
+    width: 1.6em;
+    height: 1.6em;
+    color: #fff;
+    border-radius: 50%;
+    font-family: "LT Emphasis Bold", sans-serif;
+    font-size: 2.4em;
+    position : absolute;
+    bottom: -20px;
+    left: -30px;
+}
+
+/* ------------ PRODUCTS ------------ */
+.products {
+    background-color: var(--lightGrey);
+}
+
+.margin-cards {
+    margin-right: 1em;
+    margin-left: 1em;
+    width: 20em;
+}
+
+.product-card{
+    border-radius: 15px;
+}
+.product-img{
+    border-radius: 15px 0;
+}
+
+.products .fa-map-marker-alt {
+    font-size: 16px;
+    padding: 0 0.3em 0 0;
+}
+
+.blue {
+    color: var(--blue);
+}
+
+/* Slider */
+.splide__arrow--prev {
+    left: calc(50% - 32px) !important;
+}
+
+.splide__arrow--next {
+    right: calc(50% - 32px) !important;
+}
+
+.splide__arrow {
+    background: transparent !important;
+    top: calc(100% + 0.5em) !important;
+}
+
+/* ------------ RESPONSIVE ------------ */
+
+@media (min-width: 1200px) {
+
+    /* BANNER */
+    .banner {
+        background-position: left 80%;
+    }
+
+    .banner .align-v {
+        padding: 0 5em;
+    }
+
+}
+
+@media (min-width: 1400px) {
+
+    /* BANNER */
+    .banner {
+        background-position: left 80%;
+    }
+
+    .banner .align-v {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+}
+
+@media (min-width: 1920px) {
+
+    /* BANNER */
+    .banner {
+        background-position: center 80%;
+        background-size: cover;
+    }
+
+}
