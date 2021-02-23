@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} - Dons d'objets sur la métropole lilloise{% endblock %}
+{% block title %}{{parent()}} - Site internet de dons d'objets sur la métropole lilloise{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('page_home') }}
@@ -38,7 +38,7 @@
                     </div>
                     <br>
                     <h4 class="pb-3 pt-5">Créez votre compte</h4>
-                    <p class="grey">Créez votre compte en ligne sur <a href="#" class="link" title="Site internet La Recyclotte">la-recyclotte.fr</a></p>
+                    <p class="grey">Créez votre compte en ligne sur <a href="{{path('main_home')}}" class="link" title="La Recyclotte - Site internet de dons d'objets sur la métropole lilloise">la-recyclotte.fr</a></p>
                 </div>
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
