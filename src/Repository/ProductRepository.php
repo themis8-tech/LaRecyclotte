@@ -40,6 +40,20 @@ class ProductRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
+    // Requete de recherche Tri select
+    public function sortSearch ($sort)
+    { 
+        $stmt = $this->createQueryBuilder('p');
+        
+        if(!empty($sort)){  
+        //$stmt->leftJoin('p.category', 'c');
+        $stmt->orderby('p.createdAt', '%'.$sort.'%' );
+       
+        }
+    
+        return $stmt->getQuery()->getResult();
+    }
+
     public function findLast()
     {
         $stmt = $this->createQueryBuilder('p');

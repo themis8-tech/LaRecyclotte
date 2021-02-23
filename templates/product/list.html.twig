@@ -21,34 +21,35 @@
     </div>
 
     {# filtres de recherche #}
-    <div class="row g-3 justify-content-center">
-        <div class="col-sm-12 col-md-3 col-lg-2">
-            <select id="inputState" class="form-select form-select-sm">
-                <option>Tri : Plus récents</option>
-                <option>...</option>
-            </select>
+    <form action="{{path('product_list')}}" method="GET">
+        <div class="row g-3 justify-content-center">
+            <div class="col-sm-12 col-md-3 col-lg-2">
+                <select id="inputState" class="form-select form-select-sm">
+                    <option value="DESC">Tri : Plus récents</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <select name="sort" class="form-select form-select-sm">
+                    <option>Catégorie : Toutes les catégories</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-2">
+                <select id="inputState" class="form-select form-select-sm">
+                    <option>Filtre : Tous les états</option>
+                    <option>...</option>
+                </select>
+            </div>
+        <div>
+        <div class=" btn d-flex justify-content-center">
+            <button class="btn btn-action text-btn-nav btn-search">Chercher</button>
         </div>
-        <div class="col-sm-12 col-md-3 col-lg-3">
-            <select id="inputState" class="form-select form-select-sm">
-                <option>Catégorie : Toutes les catégories</option>
-                <option>...</option>
-            </select>
-        </div>
-        <div class="col-sm-12 col-md-3 col-lg-2">
-            <select id="inputState" class="form-select form-select-sm">
-                <option>Filtre : Tous les états</option>
-                <option>...</option>
-            </select>
-        </div>
-    <div>
-    <div class=" btn d-flex justify-content-center">
-        <button>Chercher</button>
-    </div>
-
+    </form>
      {# infos resultat #}
-    <div class="row text-center ">
+    <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ listProduct|length }}</span>
+            <p>Objets disponibles: <span class="blue"> {{ listProducts|length }}</span>
                 - Objets par pages :<span class="blue"> 15</span>
                 - Nombre de pages :<span class="blue"> 10</span></p>
         </div>
@@ -64,7 +65,7 @@
 
     {# liste des objets #}
     <div class="row">
-    {% for product in listProduct %}
+    {% for product in listProducts %}
         <div class="col d-flex justify-content-center my-5">
             <div class="card product-card margin-cards">
                 <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="...">

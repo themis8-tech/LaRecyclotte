@@ -19,7 +19,12 @@ class ProductService{
 
     public function buildResult($query)
     {
-        return $this->repository->search( $query);
+        return $this->repository->search($query);
+    }
+
+    public function sortResult($sort)
+    {
+        return $this->repository->sortSearch($sort);
     }
 
     public function getLast()

@@ -34,13 +34,21 @@ class ProductController extends AbstractController
     */
     public function list(Request $request, ProductRepository $repo): Response
     {
-        //$query = $request->query->get('q');
-       // $products = $this->productService->buildResult($query);
-        $listProduct = $this->productService->getAll();
+        // Moteur de recherche interne
+        $query = $request->query->get('q');
+        $listProducts = $this->productService->buildResult($query);
+
+        // Tri select
+        //$sort =$request->query->get('sort');
+
+        // Tout les produits disponibles
+        //$listProducts = $this->productService->getAll();
+        //$listProducts = $this->productService->sortResult($sort);
+
         return $this->render('product/list.html.twig', array(
             //'products'=> $products,
-            //'query'=> $query,
-            'listProduct' => $listProduct,
+            'query'=> $query,
+            'listProducts' => $listProducts,
         ));
     }
 
@@ -65,6 +73,7 @@ class ProductController extends AbstractController
         if($form->isSubmitted() && $form->isValid()  )
         {
             $picture = $form->get('picture')->getData();
+
             if ($picture) {
                 $pictureFileName = $fileUploader->upload($picture);
                 $product->setPicture($pictureFileName);
