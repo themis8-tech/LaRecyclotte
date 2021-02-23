@@ -1,0 +1,83 @@
+/* ------------ GLOBAL STYLE PAGE ------------ */
+hr {
+    width: 13em;
+    margin: 1.5em auto;
+    color: var(--grey);
+    border: transparent;
+}
+
+hr:not([size]) {
+    height: 3px;
+}
+
+.container {
+    max-width: 1140px;
+}
+
+/* ------------ PRODUCTS ------------ */
+.product {
+    background-color: var(--lightGrey);
+}
+
+.margin-cards {
+    margin-right: 1em;
+    margin-left: 1em;
+    width: 20em;
+}
+
+.product-card{
+    border-radius: 15px;
+}
+
+.product .card-body {
+    padding: 1.5rem 1.5em;
+}
+.product-img{
+    border-radius: 15px 15px 0 0;
+}
+
+.product .fa-map-marker-alt, .product .fa-clock {
+    font-size: 16px;
+    padding: 0 0.4em 0 0;
+    color: var(--orange);
+}
+
+.state {
+    color: var(--blue);
+    font-size: 20px;
+}
+
+.product h3 {
+    font-size: 20px;;
+}
+
+.grey {
+    color: var(--grey);
+}
+
+.product .bold {
+    font-family: "Sansation Bold", sans-serif;
+}
+
+.card hr {
+    width: initial;
+    height: 1px;
+    margin: 1em auto;
+}
+
+.card hr:not([size]) {
+    height: 1px;
+}
+
+.product .card {
+    width: 100%;
+}
+
+.category {
+    font-size: 20px;
+}
+
+.user {
+    color: var(--blue);
+    font-size: 30px;
+}

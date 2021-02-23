@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -22,52 +26,46 @@ class UserController extends AbstractController
     private $em;
     private $repository;
 
-    /**
-     *
-     * @Route("/inscription", name="register")
-     * @param EntityManagerInterface $em
-     */
-
-    public function __construct( EntityManagerInterface $em )
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
         $this->repository = $this->em->getRepository(User::class);
     }
-
+    /**
+     *
+     * @Route("/inscription", name="register")
+     */
     public function register(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
-
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($encoded);
-            $em->persist($user);
-            $em->flush();
 
-            return $this->redirectToRoute('login');
+            $this->em->persist($user);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Félicitations ! Votre compte à bien été créé');
+            return $this->redirectToRoute('main_home');
         }
 
-
-
-        return $this->render('user/register.html.twig',[
+        return $this->render('user/register.html.twig', [
             'form' => $form->createView()
-            ]);
-
-
+        ]);
     }
 
-     /**
+    /**
      *
      * @Route("/connexion", name="login")
      */
-     public function login(): Response
-     {
-        return $this->render('user/login.html.twig',[
+    public function login(): Response
+    {
+        return $this->render('user/login.html.twig', [
             'controller_name' => 'UserController',
         ]);
-     }
-
+    }
 }

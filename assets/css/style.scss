@@ -205,6 +205,12 @@ body {
 width:20em;
 }
 
+/*FORM REGISTER STYLE*/
+.label-color {
+    color: var(--blueGreen);
+}
+
+
 @media all and (max-width: 425px){
      .responsive{
         text-align:center;
@@ -227,6 +233,9 @@ width:20em;
      }
      .body-pad{
         padding: 0.8rem!important;
+     }
+     .title-form{
+         font-size: 26px;
      }
 }
 
