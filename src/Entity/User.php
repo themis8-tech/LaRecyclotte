@@ -114,6 +114,16 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenExpiredAt;
+
     public function __construct()
     {
 
@@ -295,4 +305,28 @@ class User implements UserInterface
     }
 
     public function eraseCredentials(){}
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenExpiredAt(): ?\DateTimeInterface
+    {
+        return $this->tokenExpiredAt;
+    }
+
+    public function setTokenExpiredAt(?\DateTimeInterface $tokenExpiredAt): self
+    {
+        $this->tokenExpiredAt = $tokenExpiredAt;
+
+        return $this;
+    }
 }

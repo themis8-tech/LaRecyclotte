@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use DateInterval;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Component\Mime\Email;
@@ -71,8 +72,8 @@ class UserController extends AbstractController
 
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        if( $error ){
-            $this->addFlash('danger', 'Email ou mot de passe incorrect' );
+        if ($error) {
+            $this->addFlash('danger', 'Email ou mot de passe incorrect');
         }
 
         return $this->render('user/login.html.twig', array(
@@ -83,11 +84,72 @@ class UserController extends AbstractController
     /**
      * @Route("/déconnexion", name="logout")
      */
-    public function logout(){}
+    public function logout()
+    {
+    }
 
     /**
      * @Route("/reset/ask", name="reset_ask")
      */
-    public function resetAsk(){}
+    public function resetAsk(Request $request): Response
+    {
+        //recuperation du mail entré dasn le formulaire
+        $email = $request->request->get('email');
 
+        //retrouver le mail dasn la bdd
+        $message = "";
+        if (!empty($email)) {
+            $user = $this->repository->findOneBy(array(
+                'email' => $email
+            ));
+
+            //generation du token de reintialisation unique
+            if (!empty($user)) {
+                $token = bin2hex(random_bytes(24));
+                $user->setToken($token);
+
+                //validité du reset de 10 mn
+                $now = new DateTime();
+                $now->add(new DateInterval('PT600S'));
+                $user->setTokenExpiredAt($now);
+
+                //insertion du token dans la bdd sur l'user concerné
+                $this->em->flush();
+
+                //envoi du mail
+                $mail = new Email();
+                $mail->from('larecyclotte@gmail.com');
+                $mail->to($user->getEmail());
+                $mail->subject('Réinitialisation de mot de passe');
+
+                //affichage de la vue dédié dans le corps du mail
+                $view = $this->renderView('mail/reset-mail.html.twig', array(
+                    'user' => $user,
+                ));
+                $mail->html($view);
+
+                $mailer->send($mail);
+            }
+
+            $message = "Vous allez recevoir un lien de réinitialisation valable 2 heures";
+        }
+    }
+    
+    /**
+     * @Route("/reset/confirm", name="reset_confirm")
+     */
+    public function resetConfirm(Request $request): Response
+    {
+        $token = $request->query->get('token');
+        $user = $this->repository->findOneBy(array(
+            'token' => $token,
+        ));
+
+        $now = new DateTime();
+        if (empty($user) || $user->getTokenExpiredAt() < $now) {
+            throw new NotFoundHttpException();
+        }
+
+        return new Response('Formulaire de changement de mot de passe');
+    }
 }
