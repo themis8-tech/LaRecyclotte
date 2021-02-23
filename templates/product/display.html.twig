@@ -15,12 +15,12 @@
         {# Start Title #}
         <div class="title text-center">
             <div class="d-flex justify-content-center align-items-center">
-                <img class="px-1" src="{{asset('build/images/meuble-category.png')}}" alt="Catégorie Meuble-Literie">
-                <div class="category uppercase grey px-1">Meuble-Literie</div>
+                <img class="px-1" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie Meuble-Literie">
+                <div class="category uppercase grey px-1">{{ product.category.name }}</div>
             </div>
             <hr>    
-            <h1>Coffre banquette</h1>
-            <h2>à récupérer sur <span class="bold">Lille</span> (59000)</h2>    
+            <h1>{{ product.title }}</h1>
+            <h2>à récupérer sur <span class="bold">{{ product.city }}</span> ({{ product.zipcode.code }})</h2>
         </div>
         {# End Title #}
 
@@ -31,22 +31,22 @@
                 <article>
                     <div class="d-flex justify-content-center">
                         <div class="card product-card margin-cards">
-                            <img src="{{asset('build/images/objet-banquette.jpg')}}" class="card-img-top product-img" alt="...">
+                            <img src="{{asset('build/images/' ~ product.picture)}}" class="card-img-top product-img" alt="...">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-start">
-                                        <img class="pe-2" src="{{asset('build/images/meuble-category.png')}}" alt="Catégorie Meuble-Literie" style="height: 22px;">
-                                        <h3 class="card-title">Coffre banquette</h3>  
+                                        <img class="pe-2" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie {{ product.category.name }}" style="height: 22px;">
+                                        <h3 class="card-title">{{ product.title }}</h3>  
                                     </div>
-                                    <p class="state">Bon état</p>   
+                                    <p class="state">{{ product.state.name }}</p>   
                                 </div>
-                                <p class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie laoreet lectus ac venenatis. Aliquam in lectus eget ante finibus porttitor nec in velit. Donec vitae elementum nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas</p>
+                                <p class="grey">{{ product.description }}</p>
                                 <p class="grey">
-                                    <i class="fas fa-map-marker-alt"></i><span class="bold">Lille</span> (59000)<br>
-                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">25 février 2021</span>.
+                                    <i class="fas fa-map-marker-alt"></i><span class="bold">{{ product.city }}</span> ({{ product.zipcode.code }})<br>
+                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">{{ product.endAt|date("j M Y \à G:i")}}</span>
                                 </p>
                                 <hr>
-                                <p class="card-text grey">Posté le 21 fev à 16:05</p>
+                                <p class="card-text grey">Posté le {{ product.createdAt|date("j M Y \à G:i")}}</p>
                             </div>
                         </div>
                     </div>
@@ -61,11 +61,11 @@
                     <div class="card product-card margin-cards">
                         <div class="card-body text-center">
                             <h3 class="card-title">Information sur le donneur</h3>
-                            <div class="user py-3">Username</div>
+                            <div class="user py-3">{{ product.user.username }}</div>
                             <div class="grey"><span class="bold">5</span> annonces publiées.</div>
                             </p>
                             <hr>
-                            <p class="card-text grey">Inscrit sur le site depuis le <span class="bold">15 février 2021</span></p>
+                            <p class="card-text grey">Inscrit sur le site depuis le <span class="bold">{{ product.user.createdAt|date("j M Y")}}</span></p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <div class="card product-card margin-cards">
                         <div class="card-body text-center">
                             <p>Intéressé par cet objet ?</p>
-                            <h3 class="card-title">Contacter Username</h3>
+                            <h3 class="card-title">Contacter {{ product.user.username }}</h3>
                         </div>
                     </div>
                 </div>

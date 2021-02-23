@@ -17,7 +17,7 @@
                 <div class="col-xl-6 col-xxl-12 text-center align-v">
                     <h2>N'abandonnez pas, <span class="uppercase">donnez</span></h2>
                     <h3>Meubles, vaisselle, électro-ménager, décoration, jouets...</h3>
-                    <a href="#" class="btn btn-action">Je donne un objet</a><br>
+                    <a href="{{path('product_create')}}" class="btn btn-action">Je donne un objet</a><br>
                     <span class="text-bigger">Dans la <strong>métropole lilloise</strong></span>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                                                 <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                                                 <hr>
                                                 <div class="text-center">
-                                                    <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                                    <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">Voir l'objet en détail</a>   
                                                 </div>
                                             </div>
                                         </div>
