@@ -5,16 +5,15 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\User;
 use App\Form\UserType;
-use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -63,26 +62,10 @@ class UserController extends AbstractController
      *
      * @Route("/connexion", name="login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(): Response
     {
-        if( $this->getUser() ){
-            return $this->redirectToRoute('main_home');
-        }
-
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        if( $error ){
-            $this->addFlash('danger', 'Email ou mot de passe incorrect' );
-        }
-
-        return $this->render('user/login.html.twig', array(
-            'lastEmail' => $authenticationUtils->getLastUsername(),
-        ));
+        return $this->render('user/login.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
     }
-
-    /**
-     * @Route("/déconnexion", name="logout")
-     */
-    public function logout(){}
-
 }
