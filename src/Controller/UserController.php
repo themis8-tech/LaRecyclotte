@@ -49,6 +49,7 @@ class UserController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
 
+            $this->addFlash('success', 'Félicitations ! Votre compte à bien été créé');
             return $this->redirectToRoute('main_home');
         }
 

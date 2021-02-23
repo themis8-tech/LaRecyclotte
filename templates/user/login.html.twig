@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion - {{ parent() }}{% endblock %}
+{% block title %}Connexion -
+	{{ parent() }}
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="text-center my-3">Connectez-vous à votre compte</h1>
+	<div class="container">
+		<h1 class="text-center title-form my-3">Connectez-vous à votre compte</h1>
+		<div class="d-flex col-lg-4 col-sm-6 mx-auto justify-content-center">
+			<div class="container mb-5 form-control">
+				<form  method="post">
+					<label for="email" class="form-label label-color">E-mail</label>
+					<input type="email" name="_email" placeholder="Veuillez saisir votre E-mail" class="form-control my-2">
+					<label for="password" class="form-label label-color">Mot de passe</label>
+					<input type="password" name="_password" placeholder="Veuillez saisir votre mot de passe" class="form-control my-2">
 
-<div class="row">
-    <form class="col-6" method="post">
-        <input type="email" name="_email" placeholder="E-mail" class="form-control my-4">
-        <input type="password" name="_password" placeholder="Mot de passe" class="form-control my-4">
-        <button type="submit" class="btn btn-action mb-4">Connexion</button>
-    </form>
-</div>
-</div>
-{% endblock %}
+                    <div class="row d-flex justify-content-center">
+					<button type="submit" class="btn btn-action col-6 my-2 p-0">Connexion</button>
+                    </div>
+				</form>
+
+			</div>
+		</div>
+	{% endblock %}
