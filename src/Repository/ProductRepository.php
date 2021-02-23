@@ -40,4 +40,14 @@ class ProductRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
+    public function findLast()
+    {
+        $stmt = $this->createQueryBuilder('p');
+        
+        $stmt->setMaxResults(10);
+        $stmt->orderBy('p.createdAt', 'DESC');
+
+        return $stmt->getQuery()->getResult();
+    }
+
 }

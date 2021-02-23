@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -15,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity("username", message="Ce pseudonyme est déjà pris")
+ * @UniqueEntity("email", message="Cette adresse mail est déjà associée à un compte")
  */
 class User implements UserInterface
 {
@@ -26,21 +29,44 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank(message="vous devez entrer votre prénom")
+     * @Assert\Length(
+     *     min=3,
+     *     max=45,
+     *     minMessage="Votre prénom doit contenir au minimum {{ limit }} caractères",
+     *     maxMessage="VVotre prénom doit contenir au maximum {{ limit }} caractères",
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $firstname;
 
     /**
+     * @Assert\NotBlank(message="Vous devez saisir votre prénom")
+     * @Assert\Length(
+     *     min=3,
+     *     max=45,
+     *     minMessage="Votre nom doit contenir au minimum {{ limit }} caractères",
+     *     maxMessage="VVotre nom doit contenir au maximum {{ limit }} caractères",
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $lastname;
 
     /**
+     * @Assert\NotBlank(message="Vous devez sasir votre prénom")
+     * @Assert\Length(
+     *     min=3,
+     *     max=45,
+     *     minMessage="Votre pseudonyme doit contenir au minimum {{ limit }} caractères",
+     *     maxMessage="VVotre pseudonyme doit contenir au maximum {{ limit }} caractères",
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $username;
 
     /**
+     * @Assert\NotBlank(message="Vous devez saisir une adresse mail")
+     * @Assert\Email(message="L'adresse mail n'est pas valide")
      * @ORM\Column(type="string", length=95)
      */
     private $email;
@@ -50,6 +76,16 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank(message="Vous devez saisir un mot de passe")
+     * @Assert\Length(
+     *     min=8,
+     *     max=30,
+     *     minMessage="Votre mot de passe doit contenir au minimum {{ limit }} caractères",
+     *     maxMessage="Votre mot de passe doit contenir au maximum {{ limit }} caractères",
+     * )
+     * @Assert\NotCompromisedPassword(message="Ce mot de passe a déjà été compromis")
+     */
     private $plainPassword;
 
     /**
@@ -76,7 +112,7 @@ class User implements UserInterface
     {
 
         $this->createdAt = new \DateTime();
-        $this->enabled = false;
+        $this->enabled = true;
         $this->products = new ArrayCollection();
     }
 

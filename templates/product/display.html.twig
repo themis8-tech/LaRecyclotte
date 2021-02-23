@@ -4,25 +4,89 @@
 
 
 {% block stylesheets %}
-{{ encore_entry_link_tags('page_product') }}
+{{ encore_entry_link_tags('page_product-display') }}
 {% endblock %}
 
 {% block body %}
 
-<div class="container-fluid  d-flex justify-content-center background">
-    <section class="mt-5 display-product">
-        <div class="row">     
-            <div class="card mb-3">
-                <img src="{{asset('build/images/img1.webp')}}" class="card-img-top " alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                        content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<section class="product">
+    <div class="container py-5">
+
+        {# Start Title #}
+        <div class="title text-center">
+            <div class="d-flex justify-content-center align-items-center">
+                <img class="px-1" src="{{asset('build/images/meuble-category.png')}}" alt="Catégorie Meuble-Literie">
+                <div class="category uppercase grey px-1">Meuble-Literie</div>
+            </div>
+            <hr>    
+            <h1>Coffre banquette</h1>
+            <h2>à récupérer sur <span class="bold">Lille</span> (59000)</h2>    
+        </div>
+        {# End Title #}
+
+        <div class="row">
+            <div class="col-md-6 py-5">
+
+                {# Start Product #}
+                <article>
+                    <div class="d-flex justify-content-center">
+                        <div class="card product-card margin-cards">
+                            <img src="{{asset('build/images/objet-banquette.jpg')}}" class="card-img-top product-img" alt="...">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-start">
+                                        <img class="pe-2" src="{{asset('build/images/meuble-category.png')}}" alt="Catégorie Meuble-Literie" style="height: 22px;">
+                                        <h3 class="card-title">Coffre banquette</h3>  
+                                    </div>
+                                    <p class="state">Bon état</p>   
+                                </div>
+                                <p class="grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie laoreet lectus ac venenatis. Aliquam in lectus eget ante finibus porttitor nec in velit. Donec vitae elementum nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas</p>
+                                <p class="grey">
+                                    <i class="fas fa-map-marker-alt"></i><span class="bold">Lille</span> (59000)<br>
+                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">25 février 2021</span>.
+                                </p>
+                                <hr>
+                                <p class="card-text grey">Posté le 21 fev à 16:05</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {# End Product #}
+
+            </div>
+            <div class="col-md-6 py-5">
+
+                {# Start User #}
+                <div class="d-flex justify-content-center">
+                    <div class="card product-card margin-cards">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Information sur le donneur</h3>
+                            <div class="user py-3">Username</div>
+                            <div class="grey"><span class="bold">5</span> annonces publiées.</div>
+                            </p>
+                            <hr>
+                            <p class="card-text grey">Inscrit sur le site depuis le <span class="bold">15 février 2021</span></p>
+                        </div>
+                    </div>
                 </div>
-            </div> 
-        </div>      
-    </section>
+                {# End User #}
+
+                {# Start Form #}
+                <div class="d-flex justify-content-center mt-4">
+                    <div class="card product-card margin-cards">
+                        <div class="card-body text-center">
+                            <p>Intéressé par cet objet ?</p>
+                            <h3 class="card-title">Contacter Username</h3>
+                        </div>
+                    </div>
+                </div>
+                {# End Form #}
+
+            </div>
+        </div>
+    </div>
+</section>
+
 </div>
 
 
@@ -30,5 +94,5 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ encore_entry_script_tags('page_product') }}
+{{ encore_entry_script_tags('page_product-display') }}
 {% endblock %}
