@@ -68,4 +68,18 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    /**
+     *
+     * @Route("/profil", name="profile")
+     * @return Response
+     */
+    public function index()
+    {
+
+        return $this->render('user/profile.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+
+    }
 }

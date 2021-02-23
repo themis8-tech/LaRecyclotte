@@ -31,20 +31,25 @@
       <main class="col">
         <div class="container">
 
-            <h2>Profil de </h2>
+            <div class=""><h2>Profil de {{ app.user.firstname }} {{ app.user.lastname }}</h2></div>
 
-            <div class="">Nom :</div>
-            <br>
+            <div class="">Nom</div>
+            <div class="">{{ app.user.lastname }}</div>
+            
+            <div class="">Prénom</div>
+            <div class="">{{ app.user.firstname }}</div>
 
-            <div class="">Prénom :</div>
+            <div class="">Nom d'utilisateur</div>
+            <div class="">{{ app.user.username }}</div>
+
+            <div class="">Email</div>
+            <div class="">{{ app.user.email }}</div>
+
             <br>
             
-            <div class="">Email :</div>
-
-            <br>
-
             <a href="" class="btn btn-secondary btn-lg">Modifier le profil</a>
-            <a href="" class="btn btn-secondary btn-lg">Modifier le mot de passe</a>
+            <a href="" class="btn btn-secondary btn-lg">Modifier le mot de passe</a>        
+
         </div>
       </main>
     </div>
