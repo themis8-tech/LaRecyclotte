@@ -47,7 +47,6 @@ class ProductController extends AbstractController
     public function list(Request $request, ProductRepository $repo,
      CategoryRepository $category, StateRepository $state ): Response
     {
-<<<<<<< HEAD
         // Moteur de recherche interne
         $query = $request->query->get('q');
         // Tri select
@@ -66,16 +65,6 @@ class ProductController extends AbstractController
             ),
           
         );
-=======
-        $query = $request->query->get('q');
-
-        $products = $this->productService->buildResult($query);
-        
-        return $this->render('product/list.html.twig', array(
-            'products'=> $products,
-            'query'=> $query,
-        ));
->>>>>>> master
     }
 
     /**
