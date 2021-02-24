@@ -44,10 +44,7 @@ class UserType extends AbstractType
             ->add('CGU', CheckboxType::class, array(
                 'label' => "J'accepte les CGU",
                 'required'=> false,
-            ))
-
-
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

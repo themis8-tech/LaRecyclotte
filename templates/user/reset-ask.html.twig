@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mot de passe oublié - {{ parent() }}{% endblock %}
+{% block title %}Mot de passe oublié -
+	{{ parent() }}
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Mot de passe oublié</h1>
+	<div class="container">
+		<h1 class="text-center">Mot de passe oublié</h1>
+		<div class="d-flex col-lg-6 col-sm-6 mx-auto justify-content-center">
+			{% if message %}
+				<p>
+					{{ message }}
+				</p>
+			{% else %}
 
-    {% if message %}
-        <p>
-            {{ message }}
-        </p>
-    {% else %}
-        <form method="post">
-            <label class="label-color" for="emailField">E-mail</label>
-            <input type="email" name="email" placeholder="Veuillez saisir votre adresse e-mail" id="emailField" class="form-control my-4">
-            <button type="submit" class="btn btn-action mb-4">Réinitialiser le mot de passe</button>
-        </form>
-    {% endif %}
-</div>
-{% endblock %}
+				<form method="post" action="{{path('user_reset_ask')}}">
+					<label class="label-color mb-0" for="emailField">E-mail</label>
+					<input type="email" name="email" placeholder="Veuillez saisir votre adresse e-mail" id="emailField" class="form-control mb-4">
+					<button type="submit" class="btn btn-action mb-4">Réinitialiser le mot de passe</button>
+				</form>
+			{% endif %}
+		</div>
+    </div>
+	{% endblock %}

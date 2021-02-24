@@ -6,6 +6,7 @@ use DateTime;
 use DateInterval;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\ResetType;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,7 +52,7 @@ class UserController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
 
-            $this->addFlash('success', 'Félicitations ! Votre compte à bien été créé');
+            $this->addFlash('success', 'Félicitations ! Votre compte a bien été créé');
             return $this->redirectToRoute('main_home');
         }
 
@@ -110,7 +111,7 @@ class UserController extends AbstractController
 
                 //validité du token de 10 mn
                 $now = new DateTime();
-                $now->add(new DateInterval('PT600S'));
+                $now->add(new DateInterval('PT1H'));
                 $user->setTokenExpiredAt($now);
 
                 //insertion du token dans la bdd sur l'user concerné
@@ -131,7 +132,7 @@ class UserController extends AbstractController
                 $mailer->send($mail);
             }
 
-            $message = "Vous allez recevoir un lien de réinitialisation valable 10 minutes";
+            $message = "Vous allez recevoir un lien de réinitialisation valable 1 heure";
         }
 
         return $this->render('user/reset-ask.html.twig', array(
@@ -142,7 +143,7 @@ class UserController extends AbstractController
     /**
      * @Route("/reset/confirm", name="reset_confirm")
      */
-    public function resetConfirm(Request $request): Response
+    public function resetConfirm(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         // recupération de l'user qui correspond au token
         $token = $request->query->get('token');
@@ -156,6 +157,24 @@ class UserController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return new Response('Formulaire de réinitialisation du mot de passe');
+        //enregistrement  du nouveau mot de passe dans la BDD
+        $form = $this->createForm(ResetType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($encoded);
+
+            $this->em->persist($user);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Félicitations ! Votre nouveau mot de passe a bien été enregistré');
+            return $this->redirectToRoute('main_home');
+        }
+
+        return $this->render('user/reset-confirm.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

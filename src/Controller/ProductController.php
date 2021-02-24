@@ -35,13 +35,13 @@ class ProductController extends AbstractController
     */
     public function list(Request $request): Response
     {
-        //$query = $request->query->get('q');
+        $query = $request->query->get('q');
 
-       // $products = $this->productService->buildResult($query);
+        $products = $this->productService->buildResult($query);
         
         return $this->render('product/list.html.twig', array(
-            //'products'=> $products,
-            //'query'=> $query,
+            'products'=> $products,
+            'query'=> $query,
         ));
     }
 
