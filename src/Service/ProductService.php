@@ -12,9 +12,15 @@ class ProductService{
         
     }
 
-    public function buildResult($query)
+    public function getAll()
     {
-        return $this->repository->search( $query);
+        return $this->repository->findAll();
+    }
+
+    public function buildResult($query, $sortDate, $sortCat, $sortState)
+    {
+        //dd($sortState, $sortDate, $sortCat);
+        return $this->repository->search($query, $sortDate, $sortCat, $sortState);
     }
 
     public function getLast()

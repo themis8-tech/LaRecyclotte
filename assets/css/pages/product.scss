@@ -6,6 +6,22 @@ body{
     background-color:white ;
 }
 
+.product-card .fa-map-marker-alt{
+   padding: 0px;
+}
+
+.product-card img{
+   height: 200px;
+   background-position: center;
+   background-size: cover;
+}
+
+.margin-cards {
+   margin-right: 1em;
+   margin-left: 1em;
+   width: 20em;
+}
+
 .product-card{
     border-radius: 15px  ;
 }
@@ -23,6 +39,15 @@ body{
    border: 1px solid var(-darkGrey);
    border-radius: 15px ;
    color: var(--blue);
+}
+
+.form-product li{
+   color: red;
+   
+}
+
+.form-product ul{
+   margin:none;
 }
 
 .form-img{

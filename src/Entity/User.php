@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -18,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity("email", message="Cette adresse mail est déjà associée à un compte")
+ *
  */
 class User implements UserInterface
 {
@@ -53,7 +55,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @Assert\NotBlank(message="Vous devez sasir votre prénom")
+     * @Assert\NotBlank(message="Vous devez saisir votre prénom")
      * @Assert\Length(
      *     min=3,
      *     max=45,
@@ -89,6 +91,11 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
+     * @Assert\IsTrue(message="Vous devez accpeter les CGU")
+     */
+    private $CGU;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -107,6 +114,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
      */
     private $products;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenExpiredAt;
 
     public function __construct()
     {
@@ -226,6 +243,43 @@ class User implements UserInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getCGU(): ?bool
+    {
+       
+        return $this->CGU;
+    }
+
+    public function setCGU(bool $CGU): self
+    {
+        $this->CGU = $CGU;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenExpiredAt(): ?\DateTimeInterface
+    {
+        return $this->tokenExpiredAt;
+    }
+
+    public function setTokenExpiredAt(?\DateTimeInterface $tokenExpiredAt): self
+    {
+        $this->tokenExpiredAt = $tokenExpiredAt;
 
         return $this;
     }

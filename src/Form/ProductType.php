@@ -19,14 +19,13 @@ class ProductType extends AbstractType
                  'label'=> "Titre*",
                   'attr' =>array(
                   'Placeholder'=>'Ex: Fauteuil',
-                  'class' => 'form-control'
                   ) 
                   ))
 
             ->add('picture', FileType::class, array( 
                     'label'=> "Photo de l'objet*",
                     'attr' => array(
-                    'class' => 'form-control'
+                    'class'=>'form-control'
                     )
                     ))
 
@@ -34,16 +33,14 @@ class ProductType extends AbstractType
                 'label' => "Ville*",
                 'attr' => array(
                 'placeholder' => 'Ex: Lille',
-                 'class' => 'form-control'
                 )
                 ))
 
             ->add('description', null, array(
                 'label' => "Déscription",
                 'attr' => array(
-                    'rows'=>7,
+                'rows'=>5,
                 'placeholder' => 'Couleur, dimension, matériaux...',
-                 'class' => 'form-control'
                 )
                 ))
 
@@ -51,17 +48,6 @@ class ProductType extends AbstractType
                 'label' => "Categories*",
                 'placeholder' => '---Choisissez sa catégorie---',
                 'choice_label' => 'name',
-                'attr' => array(
-                'class' => 'form-control'
-                )
-                ))
-
-            ->add('user', null, array(
-                'label' => "Utilisateur",
-                'choice_label' => 'username',
-                'attr' => array(
-                'class' => 'form-control'
-                )
                 ))
 
             ->add('zipcode', null, array(
@@ -69,28 +55,24 @@ class ProductType extends AbstractType
                 'placeholder' => '---Choisissez le lieu de retrait---',
                 'choice_label' => 'code',
                 'attr' => array(
-                'class' => 'form-control'
                 )
                 ))
+                
             ->add('state', null, array(
                 'label' => "Etat de l'objet*",
                 'placeholder' => '---Choisissez son état---',
                 'choice_label' => 'name',
-                'attr' => array(
-                    'class' => 'form-control'
-                )
                 ))
 
             ->add('endAt', null, array(
                 'label' => "Date d'expiration*",
-                
                 'attr' => array(
-                'placelholder'=>'Date', 
-                 'class' => 'form'
+                'placelholder'=>'Date',
+                'class' => 'd-flex' 
                 )
                 ))
 
-            ->add ('enabled')
+           
         ;
     }
 
