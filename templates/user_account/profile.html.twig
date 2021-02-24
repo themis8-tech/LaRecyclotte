@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse">
             <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
                 <li class="nav-item">
-                    <a class="nav-link pl-0" href="{{ path('user_profile')}}">Mon profil</a>
+                    <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
                 </li>
 
                 <li class="nav-item">
@@ -23,7 +23,7 @@
               </li>
 
                 <li class="nav-item">
-                    <a class="nav-link pl-0" href="{{ path('user_myproducts')}}">Mes annonces</a>
+                    <a class="nav-link pl-0" href="{{ path('user_account_myproducts')}}">Mes annonces</a>
                 </li>
                         
             </ul>
@@ -65,8 +65,8 @@
             <br>
             
             <div class="">
-              <a href="{{ path('user_editprofile')}}" class="btn btn-action">Modifier le profil</a>
-              <a href="" class="btn btn-action btn-lg">Modifier le mot de passe</a>        
+              <a href="{{ path('user_account_editprofile')}}" class="btn btn-secondary">Modifier le profil</a>
+              <a href="" class="btn btn-secondary">Modifier le mot de passe</a>        
             </div>
 
         </div>
