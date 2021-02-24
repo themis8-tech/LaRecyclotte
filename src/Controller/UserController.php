@@ -86,42 +86,5 @@ class UserController extends AbstractController
      */
     public function logout(){}
 
-    /**
-     *
-     * @Route("/profil", name="profile")
-     * @return Response
-     */
-    public function profile()
-    {
-
-        return $this->render('user/profile.html.twig');
-
-    }
-
-    /**
-     *
-     * @Route("/modifier", name="editprofile")
-     * @return Response
-     */
-    public function editProfile(Request $request)
-    {
-            $user = $this->getUser();
-            $form = $this->createForm(EditProfileType::class, $user);  
-            
-            $form->handleRequest($request);
-
-            if($form->isSubmitted() && $form->isValid()){
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
-
-                $this->addFlash('message', 'Profil mis à jour');
-                return $this->redirectToRoute('user_profile');
-            }
-
-            return $this->render('user/editprofile.html.twig', [
-                'form' => $form->createView(),
-            ]);
-
-    }
 
 }
