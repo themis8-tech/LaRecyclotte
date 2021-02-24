@@ -8,11 +8,12 @@ use App\Service\FileUploader;
 use App\Service\StateService;
 use App\Service\ProductService;
 use App\Service\CategoryService;
+use App\Repository\UserRepository;
 use App\Repository\StateRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormBuilder;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -85,7 +86,8 @@ class ProductController extends AbstractController
     /**
     * @Route("/create", name="create")
     */
-    public function create(Request $request, SluggerInterface $slugger, FileUploader $fileUploader): Response
+    public function create(Request $request, SluggerInterface $slugger,
+     FileUploader $fileUploader, UserRepository $userRepo): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -94,7 +96,7 @@ class ProductController extends AbstractController
         if($form->isSubmitted() && $form->isValid()  )
         {
             $picture = $form->get('picture')->getData();
-
+            $product->setUser($this->getUser());
             if ($picture) {
                 $pictureFileName = $fileUploader->upload($picture);
                 $product->setPicture($pictureFileName);
@@ -102,11 +104,14 @@ class ProductController extends AbstractController
                 $this->em->persist($product);
                 $this->em->flush();
                 $this->addFlash('success',
-                                    "Votre objet est enregister celui-ci sera
-                                    publié dans les 24h"
+                                "Félicitation ! Votre annonce est enregistrée
+                                , celle-ci sera publiée sous 24h.
+                                Merci d'avoir choisi La Recyclotte"
             );
             }
-            return $this->redirectToroute('product_list');
+            return $this->redirectToroute('product_display', array(
+                'id' =>$product->getId(),
+            ));
             
         }
 
