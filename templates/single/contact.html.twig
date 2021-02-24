@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire De Contact - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-sm-12 ">
+        <div class="form-group ">
+            {{ form_start(our_form) }}
+            {{ form_row(our_form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(our_form.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(our_form.phone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(our_form.message, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-primary py-3 px-5">
+        </div>
+        {{ form_end(our_form) }}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
