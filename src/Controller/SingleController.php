@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\entity\Contact;
+use App\Entity\Contact;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -82,7 +83,7 @@ class SingleController extends AbstractController
 
             $message = (new Email())
                 ->from($contactFormData['email'])
-                ->to('@gmail.com')
+                ->to('larecyclotte@gmail.com')
                 ->subject('Mail recu')
                 ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
                     $contactFormData['Message'],
@@ -99,7 +100,7 @@ class SingleController extends AbstractController
 
 
 
-        return $this->render('contact/index.html.twig', [
+        return $this->render('single/contact.html.twig', [
             'our_form' => $form->createView()
         ]);
     }
