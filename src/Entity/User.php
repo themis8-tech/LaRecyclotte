@@ -77,7 +77,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\NotBlank(message="Vous devez saisir un mot de passe")
+     * @Assert\NotBlank(message="Vous devez saisir un mot de passe", groups={"registration"})
      * @Assert\Length(
      *     min=8,
      *     max=30,
@@ -274,4 +274,5 @@ class User implements UserInterface
     }
 
     public function eraseCredentials(){}
+
 }

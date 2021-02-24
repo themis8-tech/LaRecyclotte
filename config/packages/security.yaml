@@ -23,10 +23,10 @@ security:
             form_login:
                 login_path: user_login
                 check_path: user_login
-                default_target_path: product_create
+                default_target_path: product_list
             logout:
                 path: user_logout
-                target: product_list
+                target: main_home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -38,4 +38,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_MANAGER }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/user, roles: ROLE_USER }

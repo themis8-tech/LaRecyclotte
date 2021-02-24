@@ -4,16 +4,18 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
+use App\Form\EditProfileType;
 use App\Form\UserType;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -62,24 +64,64 @@ class UserController extends AbstractController
      *
      * @Route("/connexion", name="login")
      */
-    public function login(): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('user/login.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main_home');
+        }
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        if( $error ){
+            $this->addFlash('danger', 'Email ou mot de passe incorrect' );
+        }
+
+        return $this->render('user/login.html.twig', array(
+            'lastEmail' => $authenticationUtils->getLastUsername(),
+        ));
     }
+
+    /**
+     * @Route("/déconnexion", name="logout")
+     */
+    public function logout(){}
 
     /**
      *
      * @Route("/profil", name="profile")
      * @return Response
      */
-    public function index()
+    public function profile()
     {
 
-        return $this->render('user/profile.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        return $this->render('user/profile.html.twig');
 
     }
+
+    /**
+     *
+     * @Route("/modifier", name="editprofile")
+     * @return Response
+     */
+    public function editProfile(Request $request)
+    {
+            $user = $this->getUser();
+            $form = $this->createForm(EditProfileType::class, $user);  
+            
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                $this->addFlash('message', 'Profil mis à jour');
+                return $this->redirectToRoute('user_profile');
+            }
+
+            return $this->render('user/editprofile.html.twig', [
+                'form' => $form->createView(),
+            ]);
+
+    }
+
 }

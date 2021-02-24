@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -45,12 +46,19 @@ class ProductController extends AbstractController
     }
 
     /**
-    * @Route("/display", name="display")
+    * @Route("/{id}", name="display", requirements={"id"="\d+"})
     */
-    public function display(): Response
+    public function display($id): Response
     {
+        $product = $this->productService->getOne($id);
+
+        if (empty($product)) {
+            throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
+        }
         
-        return $this->render('product/display.html.twig');
+        return $this->render('product/display.html.twig', array(
+            'product' => $product,
+        ));
     }
 
     /**
