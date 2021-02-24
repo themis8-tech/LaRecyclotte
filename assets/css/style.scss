@@ -156,6 +156,12 @@ body {
     padding: 0px 10px 20px 40px;;
 }
 
+.fa-user-circle{
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+
 /*FOOTER STYLE*/
 
 .footer-link{
@@ -239,5 +245,11 @@ width:20em;
      }
 
      
+}
+
+@media (max-width: 1200px){
+.nav-wrap {
+    flex-wrap: wrap;
+}
 }
 
