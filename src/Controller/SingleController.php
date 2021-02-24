@@ -29,7 +29,7 @@ class SingleController extends AbstractController
     }
 
     /**
-     * @Route("/mentions_légales", name="mentions_légales")
+     * @Route("/mentions_légales", name="mentions_legales")
      */
     public function mentions(): Response
     {
@@ -39,7 +39,7 @@ class SingleController extends AbstractController
     }
 
     /**
-     * @Route("/CGU", name="cgu")
+     * @Route("/cgu", name="cgu")
      */
     public function cgu(): Response
     {
@@ -49,7 +49,7 @@ class SingleController extends AbstractController
     }
 
     /**
-     * @Route("/plan", name="plan")
+     * @Route("/plan", name="plan_du_site")
      */
     public function plan(): Response
     {
@@ -57,5 +57,4 @@ class SingleController extends AbstractController
             'controller_name' => 'SingleController',
         ]);
     }
-
 }
