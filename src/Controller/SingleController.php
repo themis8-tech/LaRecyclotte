@@ -86,7 +86,7 @@ class SingleController extends AbstractController
                 ->to('larecyclotte@gmail.com')
                 ->subject('Mail recu')
                 ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
-                    $contactFormData['Message'],
+                    $contactFormData['message'],
                     'text/plain');
             $mailer->send($message);
 
