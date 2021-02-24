@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Entity\ContactDisplay;
 use App\Repository\ProductRepository;
 
 class ProductService{
@@ -25,6 +26,11 @@ class ProductService{
     public function getOne($id)
     {
         return $this->repository->find($id);
+    }
+
+    public function notifyForm(ContactDisplay $contact)
+    {
+
     }
     
    }

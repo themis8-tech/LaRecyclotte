@@ -55,6 +55,10 @@ hr:not([size]) {
     color: var(--grey);
 }
 
+.blue {
+    color: var(--blue);
+}
+
 .product .bold {
     font-family: "Sansation Bold", sans-serif;
 }
@@ -79,5 +83,9 @@ hr:not([size]) {
 
 .user {
     color: var(--blue);
+    font-size: 30px;
+}
+
+.contact {
     font-size: 30px;
 }

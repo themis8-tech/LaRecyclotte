@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Service\FileUploader;
+use App\Entity\ContactDisplay;
 use App\Service\ProductService;
+use App\Form\ContactDisplayType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,16 +50,28 @@ class ProductController extends AbstractController
     /**
     * @Route("/{id}", name="display", requirements={"id"="\d+"})
     */
-    public function display($id): Response
+    public function display($id, Request $request): Response
     {
         $product = $this->productService->getOne($id);
 
         if (empty($product)) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
         }
+
+        $contact = new ContactDisplay();
+        $form = $this->createForm(ContactDisplayType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $this->productService->notifyForm($contact);
+            $this->addFlash('success', 'Votre email a bien été envoyé.');
+            return $this->redirectToRoute('product_list');
+        }
         
         return $this->render('product/display.html.twig', array(
             'product' => $product,
+            'form' => $form->createView()
         ));
     }
 
