@@ -11,7 +11,7 @@ class SingleController extends AbstractController
     /**
      * @Route("/concept", name="concept")
      */
-    public function index(): Response
+    public function concept(): Response
     {
         return $this->render('single/concept.html.twig', [
             'controller_name' => 'SingleController',
@@ -57,5 +57,4 @@ class SingleController extends AbstractController
             'controller_name' => 'SingleController',
         ]);
     }
-    
 }
