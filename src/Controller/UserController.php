@@ -5,7 +5,6 @@ namespace App\Controller;
 use DateTime;
 use DateInterval;
 use App\Entity\User;
-use App\Form\EditProfileType;
 use App\Form\UserType;
 use App\Form\ResetType;
 use Symfony\Component\Mime\Email;
@@ -178,4 +177,5 @@ class UserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
 }
