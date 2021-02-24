@@ -72,7 +72,7 @@
                 {# End User #}
 
                 {# Start Form #}
-                {% if app.user.email != product.user.email %}
+                {% if app.user is empty or app.user.email != product.user.email %}
                     <div class="d-flex justify-content-center mt-4">
                         <div class="card product-card margin-cards">
                             <div class="card-body ">
