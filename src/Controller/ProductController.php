@@ -106,10 +106,10 @@ class ProductController extends AbstractController
 
                 $this->em->persist($product);
                 $this->em->flush();
-                $this->addFlash('success',
-                                "Félicitation ! Votre annonce est enregistrée
-                                , celle-ci sera publiée sous 24h.
-                                Merci d'avoir choisi La Recyclotte"
+                $this->addFlash(
+                'success',
+                "Félicitations ! Votre annonce est enregistrée
+                , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"          
             );
             }
             return $this->redirectToroute('product_display', array(
