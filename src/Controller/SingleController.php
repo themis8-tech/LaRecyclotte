@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use App\entity\Contact;
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 class SingleController extends AbstractController
 {
@@ -29,11 +35,11 @@ class SingleController extends AbstractController
     }
 
     /**
-     * @Route("/mentions_légales", name="mentions_légales")
+     * @Route("/mentions_légales", name="mentions_legales")
      */
     public function mentions(): Response
     {
-        return $this->render('single/mentions.html.twig', [
+        return $this->render('single/mentions_legales.html.twig', [
             'controller_name' => 'SingleController',
         ]);
     }
@@ -43,18 +49,77 @@ class SingleController extends AbstractController
      */
     public function cgu(): Response
     {
-        return $this->render('single/cgu.html.twig', [
+        return $this->render('single/CGU.html.twig', [
             'controller_name' => 'SingleController',
         ]);
     }
 
     /**
-     * @Route("/plan", name="plan")
+     * @Route("/plan", name="plan_du_site")
      */
     public function plan(): Response
     {
-        return $this->render('single/plan.html.twig', [
+        return $this->render('single/plan_site.html.twig', [
             'controller_name' => 'SingleController',
         ]);
     }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+
+    public function contact(Request $request, MailerInterface $mailer)
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $contactFormData = $form->getData();
+
+            $message = (new Email())
+                ->from($contactFormData['email'])
+                ->to('@gmail.com')
+                ->subject('Mail recu')
+                ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
+                    $contactFormData['Message'],
+                    'text/plain');
+            $mailer->send($message);
+
+
+
+
+            $this->addFlash('success', 'Votre message est envoyé');
+
+            return $this->redirectToRoute('contact');
+        }
+
+
+
+        return $this->render('contact/index.html.twig', [
+            'our_form' => $form->createView()
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
