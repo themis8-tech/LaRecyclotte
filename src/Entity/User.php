@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -18,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity("email", message="Cette adresse mail est déjà associée à un compte")
+ *
  */
 class User implements UserInterface
 {
@@ -53,7 +55,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @Assert\NotBlank(message="Vous devez sasir votre prénom")
+     * @Assert\NotBlank(message="Vous devez saisir votre prénom")
      * @Assert\Length(
      *     min=3,
      *     max=45,
@@ -77,7 +79,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\NotBlank(message="Vous devez saisir un mot de passe")
+     * @Assert\NotBlank(message="Vous devez saisir un mot de passe", groups={"registration"})
      * @Assert\Length(
      *     min=8,
      *     max=30,
@@ -87,6 +89,11 @@ class User implements UserInterface
      * @Assert\NotCompromisedPassword(message="Ce mot de passe a déjà été compromis")
      */
     private $plainPassword;
+
+    /**
+     * @Assert\IsTrue(message="Vous devez accpeter les CGU")
+     */
+    private $CGU;
 
     /**
      * @ORM\Column(type="datetime")
@@ -107,6 +114,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
      */
     private $products;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenExpiredAt;
 
     public function __construct()
     {
@@ -230,6 +247,43 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getCGU(): ?bool
+    {
+       
+        return $this->CGU;
+    }
+
+    public function setCGU(bool $CGU): self
+    {
+        $this->CGU = $CGU;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenExpiredAt(): ?\DateTimeInterface
+    {
+        return $this->tokenExpiredAt;
+    }
+
+    public function setTokenExpiredAt(?\DateTimeInterface $tokenExpiredAt): self
+    {
+        $this->tokenExpiredAt = $tokenExpiredAt;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Product[]
      */
@@ -274,4 +328,5 @@ class User implements UserInterface
     }
 
     public function eraseCredentials(){}
+
 }

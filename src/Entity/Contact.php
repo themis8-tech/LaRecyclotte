@@ -1,5 +1,5 @@
 <?php
-namespace App\entity;
+namespace App\Entity;
 
 
 
@@ -39,10 +39,6 @@ private $name;
      */
     private $message;
 
-    /**
-     * @var Property|null
-     */
-    private $property;
 
     /**
      * @return string|null

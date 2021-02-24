@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Zipcode;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -21,21 +24,42 @@ class Product
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Vous devez saisir un nom !")
+     * @Assert\Length(
+     *     min=5,
+     *     max=60,
+     *     minMessage="Le titre doit contenir au moins {{ limit }} caractères !")
+     *     
+     * 
+     * @Assert\Regex("/^[0-9]+$/", match=false, message="Le titre doit contenir des lettres !")
      * @ORM\Column(type="string", length=60)
      */
     private $title;
 
     /**
+     * @Assert\File(
+     *     maxSize = "2024k",
+     *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/bmp"},
+     *     mimeTypesMessage = "La phot doit être au format : png, jpeg, webp, bmp, webp")
+     *
+     * @Assert\NotBlank(message="Vous devez joindre une photos !")
      * @ORM\Column(type="string", length=255)
      */
     private $picture;
 
     /**
+     * @Assert\NotBlank(message=" Vous devez indiquer la ville !")
+     * @Assert\Regex("/[^a-z]+$/", match=false, message="La ville doit contenir uniquement des lettres  !")
      * @ORM\Column(type="string", length=100)
      */
     private $city;
 
     /**
+     * @Assert\NotBlank(message=" Vous devez indiquer une déscription !")
+     * @Assert\Length(
+     *     min=20,
+     *     minMessage="Le déscription doit contenir au moins {{ limit }} caractères !")
+     *     
      * @ORM\Column(type="text")
      */
     private $description;
@@ -46,11 +70,14 @@ class Product
     private $createdAt;
 
     /**
+     * @Assert\NotBlank(message="Vous devez saisir une date de début")
+     * @Assert\GreaterThan("today", message="Vous ne pouvez pas choisir une date antérieur")
      * @ORM\Column(type="datetime")
      */
     private $endAt;
 
     /**
+     * 
      * @ORM\Column(type="boolean")
      */
     private $enabled;
@@ -62,22 +89,32 @@ class Product
     private $user;
 
     /**
+     * @Assert\NotBlank(message="Indiquez la catégorie !")
      * @ORM\ManyToOne(targetEntity=Category::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
+     * @Assert\NotBlank(message=" Vous devez indiquer l'état !")
      * @ORM\ManyToOne(targetEntity=State::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $state;
 
     /**
+     * @Assert\NotBlank(message=" Vous devez indiquer le code postale !")
      * @ORM\ManyToOne(targetEntity=Zipcode::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $zipcode;
+
+    public function __construct()
+    {
+  
+        $this->enabled = true;
+       
+    }
 
     public function getId(): ?int
     {
