@@ -33,27 +33,27 @@ class SingleController extends AbstractController
      */
     public function mentions(): Response
     {
-        return $this->render('single/mentions.html.twig', [
+        return $this->render('single/mentions_legales.html.twig', [
             'controller_name' => 'SingleController',
         ]);
     }
 
     /**
-     * @Route("/cdu", name="cgu")
+     * @Route("/CGU", name="cgu")
      */
     public function cgu(): Response
     {
-        return $this->render('single/cgu.html.twig', [
+        return $this->render('single/CGU.html.twig', [
             'controller_name' => 'SingleController',
         ]);
     }
 
-/**
+    /**
      * @Route("/plan", name="plan")
      */
     public function plan(): Response
     {
-        return $this->render('single/plan.html.twig', [
+        return $this->render('single/plan_site.html.twig', [
             'controller_name' => 'SingleController',
         ]);
     }
