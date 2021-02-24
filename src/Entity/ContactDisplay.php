@@ -11,7 +11,7 @@ class ContactDisplay {
      * @Assert\NotBlank(message="Ce champs doit être rempli.")
      * @Assert\Length(min=2, max=90)
      */
-    private $name;
+    private $username;
 
     /**
      * @var string|null
@@ -37,18 +37,18 @@ class ContactDisplay {
     /**
      * @return null|string
      */
-    public function getName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
-     * @param null|string $name
+     * @param null|string $username
      * @return ContactDisplay
      */
-    public function setName(string $name): ContactDisplay
+    public function setUsername(string $username): ContactDisplay
     {
-        $this->name = $name;
+        $this->username = $username;
 
         return $this;
     }

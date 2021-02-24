@@ -14,14 +14,13 @@ class ContactDisplayType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
-                'label'=> "Nom ou pseudo*",
+            ->add('username', TextType::class, array(
+                'label'=> "Nom d'utilisateur*",
                 'label_attr' => array(
                     'class' => 'blue',
                 ),
                 'attr' => array(
-                    'class' => 'form-control'
-                    )
+                    'class' => 'form-control'                    )
             ))
             ->add('email', TextType::class, array(
                 'label'=> "Email*",

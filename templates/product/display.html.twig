@@ -81,11 +81,15 @@
                                 {{ form_start(form) }}
                                 <div>
                                     <div class="mt-4">
-                                        {{ form_row(form.name) }}
+                                        {{ form_row(form.username, {
+                                            'attr' : {'value' : app.user.username ?? ""}
+                                        }) }}
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col">
-                                            {{ form_row(form.email) }}
+                                            {{ form_row(form.email, {
+                                                'attr' : {'value' : app.user.email ?? ""}
+                                            }) }}
                                         </div>
                                         <div class="col">
                                             {{ form_row(form.phone) }}
