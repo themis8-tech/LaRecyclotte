@@ -1,9 +1,9 @@
 <header>
 	<div class="container">
 
-		<nav class="navbar navbar-expand-lg navbar-light">
+		<nav class="navbar navbar-expand-lg navbar-light nav-wrap">
 			<div
-				class="container-fluid">
+				class="container-fluid ">
 				{# logo #}
 				<a class="navbar-brand " href="{{path('main_home')}}">
 					<img src="{{asset('build/images/logo.png')}}" width="230" alt="logo de la recyclotte">
@@ -26,15 +26,13 @@
 						<li class="nav-item">
 							<a class="nav-link" href="{{path('concept')}}">Le Concept</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{path('contact')}}">Contact</a>
-						</li>
+
 					</ul>
 
 					{# login user #}
 					{% if app.user %}
 						<div class="d-flex">
-							<span class="d-flex align-items-center me-2 label-color"> Bonjour {{ app.user.username }}</span>
+							<a href="{{ path('user_account_profile') }}" class="d-flex align-items-center me-2 label-color"><i class="far fa-user-circle "> </i>{{ app.user.username }}  </a>
 							<a href="{{ path('user_logout') }}" class="btn btn-primary text-btn-nav btn-nav mx-2 px-2">Déconnexion</a>
 						{% else %}
 							<a href="{{ path('user_register') }}" class="btn btn-secondary text-btn-nav btn-nav px-2">Inscription</a>
