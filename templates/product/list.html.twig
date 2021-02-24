@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block body %}
-    {{ dump (app.request.query.get('sortCat') )}}
     
 <div class="background-white px-5 py-3">
     <span>Accueil > </span>
     <span class="bold">Liste des Objets</span>
 </div>
+
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
     <div class="text-center pt-5 pb-3">
@@ -26,15 +26,15 @@
         <div class="row g-3 justify-content-center">
             <div class="col-sm-12 col-md-3 col-lg-2">
                 <select name="sortDate" class="form-select form-select-sm">
-                    <option value="DESC">Tri : Plus récents</option>
-                    <option value="ASC">Tri : Plus anciens</option>
+                    <option value="DESC" {% if "DESC" == app.request.query.get('sortDate') %}selected{% endif %}>Tri : Plus récents</option>
+                    <option value="ASC" {% if "ASC" == app.request.query.get('sortDate') %}selected{% endif %}>Tri : Plus anciens</option>
                 </select>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
                 <select name="sortCat" class="form-select form-select-sm">
                     <option value="">Catégorie : Toutes les catégories</option>
                     {% for cat in category %}
-                        <option value="{{ cat.name }}" {% if cat.name == app.request.query.get('sortCat') %}"selected"{% endif %}>
+                        <option value="{{ cat.name }}" {% if cat.name == app.request.query.get('sortCat') %}selected{% endif %}>
                     Catégorie : {{ cat.name }}</option>
                     {% endfor %}
                 </select>
@@ -43,7 +43,7 @@
                 <select name="sortState" class="form-select form-select-sm">
                     <option value="">Filtre : Tous les états</option>
                     {% for stat in state %}
-                        <option value="{{ stat.name }}" {% if stat.name == app.request.query.get('sortState') %}"selected"{% endif %}>Etat : {{ stat.name }}</option>
+                        <option value="{{ stat.name }}" {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>Etat : {{ stat.name }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -82,7 +82,7 @@
         
         <div class="col-lg-4 col-md-6 d-flex justify-content-center my-5">
             <div class="card product-card margin-cards">
-                <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="...">
+                <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
                 <div class="d-flex justify-content-around border-bottom">
                     <div class="card-body">
                         <h5 class="card-title bold">{{ product.title}}</h5>
