@@ -5,14 +5,8 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Service\FileUploader;
-use App\Service\StateService;
 use App\Service\ProductService;
-use App\Service\CategoryService;
-use App\Repository\UserRepository;
-use App\Repository\StateRepository;
 use App\Repository\ProductRepository;
-use App\Repository\CategoryRepository;
-use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,43 +22,27 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProductController extends AbstractController
 {
     private $productService;
-    private $categoryService;
-    private $stateService;
     
-    public function __construct(ProductService $productService, EntityManagerInterface $em,
-     CategoryService $categoryService, StateService $stateService)
+    public function __construct(ProductService $productService, EntityManagerInterface $em)
 
     {
          $this->productService = $productService;
-         $this->categoryService = $categoryService;
-         $this->stateService = $stateService;
          $this->em = $em;
     }
 
     /**
     * @Route("/list", name="list")
     */
-    public function list(Request $request, ProductRepository $repo,
-     CategoryRepository $category, StateRepository $state ): Response
+    public function list(Request $request): Response
     {
-        // Moteur de recherche interne
         $query = $request->query->get('q');
-        // Tri select
-        $sortDate   = $request->query->get('sortDate');
-        $sortCat = $request->query->get('sortCat');
-        $sortState = $request->query->get('sortState');
-        $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState);
-       
-        $category = $this->categoryService->getAll();
-        $state = $this->stateService->getAll();
-            return $this->render('product/list.html.twig', array(
+
+        $products = $this->productService->buildResult($query);
+        
+        return $this->render('product/list.html.twig', array(
             'products'=> $products,
             'query'=> $query,
-            'category' => $category,
-            'state' => $state,
-            ),
-          
-        );
+        ));
     }
 
     /**
@@ -86,8 +64,7 @@ class ProductController extends AbstractController
     /**
     * @Route("/create", name="create")
     */
-    public function create(Request $request, SluggerInterface $slugger,
-     FileUploader $fileUploader, UserRepository $userRepo): Response
+    public function create(Request $request, SluggerInterface $slugger, FileUploader $fileUploader): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -96,7 +73,6 @@ class ProductController extends AbstractController
         if($form->isSubmitted() && $form->isValid()  )
         {
             $picture = $form->get('picture')->getData();
-            $product->setUser($this->getUser());
             if ($picture) {
                 $pictureFileName = $fileUploader->upload($picture);
                 $product->setPicture($pictureFileName);
@@ -104,14 +80,11 @@ class ProductController extends AbstractController
                 $this->em->persist($product);
                 $this->em->flush();
                 $this->addFlash('success',
-                                "Félicitation ! Votre annonce est enregistrée
-                                , celle-ci sera publiée sous 24h.
-                                Merci d'avoir choisi La Recyclotte"
+                                    "Votre objet est enregister celui-ci sera
+                                    publié dans les 24h"
             );
             }
-            return $this->redirectToroute('product_display', array(
-                'id' =>$product->getId(),
-            ));
+            return $this->redirectToroute('product_list');
             
         }
 

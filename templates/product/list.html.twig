@@ -26,8 +26,10 @@
         <div class="row g-3 justify-content-center">
             <div class="col-sm-12 col-md-3 col-lg-2">
                 <select name="sortDate" class="form-select form-select-sm">
-                    <option value="DESC" {% if "DESC" == app.request.query.get('sortDate') %}selected{% endif %}>Tri : Plus récents</option>
-                    <option value="ASC" {% if "ASC" == app.request.query.get('sortDate') %}selected{% endif %}>Tri : Plus anciens</option>
+                    <option value="DESC" {% if "DESC" == app.request.query.get('sortDate') %}selected{% endif %}>
+                    Tri : Plus récents</option>
+                    <option value="ASC" {% if "ASC" == app.request.query.get('sortDate') %}selected{% endif %}>
+                    Tri : Plus anciens</option>
                 </select>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
@@ -43,7 +45,8 @@
                 <select name="sortState" class="form-select form-select-sm">
                     <option value="">Filtre : Tous les états</option>
                     {% for stat in state %}
-                        <option value="{{ stat.name }}" {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>Etat : {{ stat.name }}</option>
+                        <option value="{{ stat.name }}" {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>
+                        Etat : {{ stat.name }}</option>
                     {% endfor %}
                 </select>
             </div>
