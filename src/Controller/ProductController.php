@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Service\FileUploader;
+use App\Service\StateService;
 use App\Entity\ContactDisplay;
 use App\Service\ProductService;
 use App\Form\ContactDisplayType;
-use App\Service\StateService;
 use App\Service\CategoryService;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\StateRepository;
 use App\Repository\ProductRepository;
@@ -17,6 +18,7 @@ use App\Repository\CategoryRepository;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -72,9 +74,10 @@ class ProductController extends AbstractController
     /**
     * @Route("/{id}", name="display", requirements={"id"="\d+"})
     */
-    public function display($id, Request $request): Response
+    public function display($id, Request $request, MailerInterface $mailer): Response
     {
         $product = $this->productService->getOne($id);
+        //dd($product);
 
         if (empty($product)) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
@@ -86,9 +89,20 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $this->productService->sendEmail($contact);
+            $data = $form->getData();
+
+            $email = new Email();
+            $email->from($data->getEmail())
+                ->to($product->getUser()->getEmail())
+                ->cc($data->getEmail())
+                ->replyTo($data->getEmail())
+                ->subject('La Recyclotte - Réponse à votre annonce : '.$product->getTitle().' (annonce #'.$product->getId().')')
+                ->html($data->getMessage());
+            
+                $mailer->send($email);
+
             $this->addFlash('success', 'Votre email a bien été envoyé.');
-            return $this->redirectToRoute('product_list');
+            return $this->redirectToRoute('product_display', ['id' => $product->getId()]);
         }
         
         return $this->render('product/display.html.twig', array(
