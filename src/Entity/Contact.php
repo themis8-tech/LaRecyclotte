@@ -6,15 +6,16 @@ namespace App\Entity;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Contact{
+class Contact
+{
 
-/**
- * @var string|null
- * @Assert\NotBlank()
- * @Assert\Length(min=2)
- *
- */
-private $name;
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2)
+     *
+     */
+    private $name;
 
     /**
      * @var string|null
@@ -111,25 +112,5 @@ private $name;
         $this->message = $message;
         return $this;
     }
-
-    /**
-     * @return Property|null
-     */
-    public function getProperty(): ?Property
-    {
-        return $this->property;
-    }
-
-    /**
-     * @param Property|null $property
-     * @return Contact
-     */
-    public function setProperty(?Property $property): Contact
-    {
-        $this->property = $property;
-        return $this;
-    }
-
-
 
 }
