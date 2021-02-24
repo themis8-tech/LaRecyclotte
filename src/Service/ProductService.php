@@ -29,7 +29,7 @@ class ProductService{
         return $this->repository->find($id);
     }
 
-    public function sendEmail(ContactDisplay $contact, MailerInterface $mailer)
+    public function sendEmail(ContactDisplay $contact)
     {
 
     }
