@@ -97,12 +97,14 @@ class ProductController extends AbstractController
                 ->cc($data->getEmail())
                 ->replyTo($data->getEmail())
                 ->subject('La Recyclotte - Réponse à votre annonce : '.$product->getTitle().' (annonce #'.$product->getId().')')
-                ->html($data->getMessage());
+                ->html('<p>Bonjour, vous recevez ce mail car une personne à répondu à votre annonce passée sur le site de la Recyclotte.</p><h3>Votre annonce</h3><ul><li>Titre : <b>'.$product->getTitle().' ('.$product->getState()->getName().')</b></li><li>Lieu de retrait : <b>'.$product->getCity().' ('.$product->getZipcode()->getCode().')</b></li><li>Posté le : <b>'.$product->getCreatedAt()->format('j M Y \à G:i').'</b></li></ul><h3>Informations de la personne intéressée</h3><ul><li>Nom d\'utilisateur : <b>'.$data->getUsername().'</b></li><li>Email : <b>'.$data->getEmail().'</b></li><li>Téléphone : <b>'.$data->getPhone().'</b></li><li>Message : <b>'.$data->getMessage().'</b></li></ul><p>Nous vous invitons à répondre directement à ce mail pour entrer en contact avec la personne intéressée.</p><p>Cordialement,<br>L\'équipe de La Recyclotte.</p>');
             
-                $mailer->send($email);
+            $mailer->send($email);
 
             $this->addFlash('success', 'Votre email a bien été envoyé.');
-            return $this->redirectToRoute('product_display', ['id' => $product->getId()]);
+            return $this->redirectToRoute('product_display', array(
+                'id' => $product->getId()
+            ));
         }
         
         return $this->render('product/display.html.twig', array(
