@@ -28,7 +28,7 @@ class ProductService{
         return $this->repository->find($id);
     }
 
-    public function notifyForm(ContactDisplay $contact)
+    public function sendEmail(ContactDisplay $contact)
     {
 
     }
