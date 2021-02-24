@@ -16,7 +16,7 @@
 
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
-    <div class="text-center pt-5 pb-3">
+    <div class="text-center pt-2 pb-3">
         <h1>Listes des Objets</h1>
         <h2>à récuperer sur <span class="bold"> Lille </span> et sa métropole</h2>
     </div>
@@ -83,7 +83,7 @@
 
     {% for product in products %}
         
-        <div class="col-lg-4 col-md-6 d-flex justify-content-center my-5">
+        <div class="col-lg-4 col-md-6 d-flex justify-content-center my-3">
             <div class="card product-card margin-cards">
                 <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
                 <div class="d-flex justify-content-around border-bottom">
