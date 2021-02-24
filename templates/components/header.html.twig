@@ -21,20 +21,25 @@
 							<a class="nav-link active" aria-current="page" href="{{path('product_list')}}">Liste des objets</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Donner un objet</a>
+							<a class="nav-link" href="{{path('product_create')}}">Donner un objet</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{path('concept')}}">Le Concept</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
+							<a class="nav-link" href="{{path('contact')}}">Contact</a>
 						</li>
 					</ul>
 
 					{# login user #}
-					<div class="d-flex">
-						<a href="{{ path('user_register') }}" class="btn btn-secondary text-btn-nav btn-nav mx-2" >Inscription</a>
-						<a href="{{ path('user_login') }}" class="btn btn-primary text-btn-nav btn-nav mx-2">Connexion</a>
+					{% if app.user %}
+						<div class="d-flex">
+							<span class="d-flex align-items-center me-2 label-color"> Bonjour {{ app.user.username }}</span>
+							<a href="{{ path('user_logout') }}" class="btn btn-primary text-btn-nav btn-nav mx-2 px-2">Déconnexion</a>
+						{% else %}
+							<a href="{{ path('user_register') }}" class="btn btn-secondary text-btn-nav btn-nav px-2">Inscription</a>
+							<a href="{{ path('user_login') }}" class="btn btn-primary text-btn-nav btn-nav mx-2 px-2">Connexion</a>
+						{% endif %}
 					</div>
 
 				</div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} - Dons d'objets sur la métropole lilloise{% endblock %}
+{% block title %}{{parent()}} - Site internet de dons d'objets sur la métropole lilloise{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('page_home') }}
@@ -17,7 +17,7 @@
                 <div class="col-xl-6 col-xxl-12 text-center align-v">
                     <h2>N'abandonnez pas, <span class="uppercase">donnez</span></h2>
                     <h3>Meubles, vaisselle, électro-ménager, décoration, jouets...</h3>
-                    <a href="#" class="btn btn-action">Je donne un objet</a><br>
+                    <a href="{{path('product_create')}}" class="btn btn-action">Je donne un objet</a><br>
                     <span class="text-bigger">Dans la <strong>métropole lilloise</strong></span>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     </div>
                     <br>
                     <h4 class="pb-3 pt-5">Créez votre compte</h4>
-                    <p class="grey">Créez votre compte en ligne sur <a href="#" class="link" title="Site internet La Recyclotte">la-recyclotte.fr</a></p>
+                    <p class="grey">Créez votre compte en ligne sur <a href="{{path('main_home')}}" class="link" title="La Recyclotte - Site internet de dons d'objets sur la métropole lilloise">la-recyclotte.fr</a></p>
                 </div>
                 <div class="col-md-4 px-5 py-4">
                     <div class="picto">
@@ -84,7 +84,9 @@
                                 <li class="splide__slide">
                                     <div class="d-flex justify-content-center">
                                         <div class="card product-card margin-cards">
-                                            <img src="{{ asset ('build/images/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">
+                                            <figure>
+                                                <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">
+                                            </figure>
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <h4 class="card-title bold">{{ product.title }}</h4>
@@ -94,7 +96,7 @@
                                                 <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                                                 <hr>
                                                 <div class="text-center">
-                                                    <a href="#" class="btn btn-secondary">Voir l'objet en détail</a>   
+                                                    <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">Voir l'objet en détail</a>   
                                                 </div>
                                             </div>
                                         </div>
