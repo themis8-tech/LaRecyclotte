@@ -8,11 +8,12 @@
 {% endblock %}
 
 {% block body %}
-{% set pages = (total / limit)|round(0,'ceil') %}    
-<div class="background-white px-5 py-3">
+{% set pages = (total / limit)|round(0,'ceil') %}
+{{ dump (app.request.query) }}    
+{# <div class="background-white px-5 py-3">
     <span>Accueil > </span>
     <span class="bold">Liste des Objets</span>
-</div>
+</div> #}
 
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
@@ -58,7 +59,7 @@
      {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ products|length   }}</span>
+            <p>Objets disponibles: <span class="blue"> {{ products|length }}</span>
                 - Objets par pages :<span class="blue"> {{ limit }}</span>
                 - Nombre de pages :<span class="blue"> {{ pages }}</span></p>
         </div>
@@ -79,10 +80,8 @@
 
     {# liste des objets #}
     <div class="row">
-    
-
     {% for product in products %}
-        <div class="col-lg-4 col-md-6 d-flex justify-content-center my-3">
+        <div class="col-lg-4 col-md-6 d-flex justify-content-center mb-3">
             <div class="card product-card margin-cards">
                 <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
                 <div class="d-flex justify-content-around border-bottom">

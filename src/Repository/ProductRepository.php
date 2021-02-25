@@ -50,8 +50,8 @@ class ProductRepository extends ServiceEntityRepository
         }
         
         $stmt->orderby('p.createdAt', $sortDate);
-        $stmt->setFirstResult(($page * $limit) - $limit);
-        $stmt->setMaxResults($limit);
+        //$stmt->setFirstResult(($page * $limit) - $limit);
+        //$stmt->setMaxResults($limit);
 
         return $stmt->getQuery()->getResult();
     }
@@ -62,9 +62,9 @@ class ProductRepository extends ServiceEntityRepository
         $stmt->select('COUNT(p)');
     
          return $stmt->getQuery()->getSingleScalarResult();   
-
     }
-   
+
+    //Caroussel homepage
     public function findLast()
     {
         $stmt = $this->createQueryBuilder('p');
