@@ -227,8 +227,12 @@ width:20em;
         text-align:center;
         display:flex;
         flex-direction:column;
-       
      }
+
+     .align-center{
+        align-items: center;
+     }
+
      .fa-map-marker-alt {
         padding-left: 0px;
      }
@@ -247,9 +251,14 @@ width:20em;
      }
      .title-form{
          font-size: 26px;
-     }
+        }
 
-     
+     .fa-external-link-alt{
+         position: relative;
+         top: -55px;
+         left: 34px; 
+         }
+        
 }
 
 @media (max-width: 1200px){
