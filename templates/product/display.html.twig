@@ -43,10 +43,10 @@
                                 <p class="grey">{{ product.description }}</p>
                                 <p class="grey">
                                     <i class="fas fa-map-marker-alt"></i><span class="bold">{{ product.city }}</span> ({{ product.zipcode.code }})<br>
-                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">{{ product.endAt|date("j M Y \à G:i")}}</span>
+                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">{{ product.endAt|date("j F Y")}}</span>
                                 </p>
                                 <hr>
-                                <p class="card-text grey">Posté le {{ product.createdAt|date("j M Y \à G:i")}}</p>
+                                <p class="card-text grey">Posté le {{ product.createdAt|date("j F Y \à G:i")}}</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             <div class="grey"><span class="bold">{{ productByUser|length }}</span> annonce{{ productByUser|length > 1 ? 's' : ''}} publiée{{ productByUser|length > 1 ? 's' : ''}}.</div>
                             </p>
                             <hr>
-                            <p class="card-text grey">Inscrit(e) sur le site depuis le <span class="bold">{{ product.user.createdAt|date("j M Y")}}</span></p>
+                            <p class="card-text grey">Inscrit(e) sur le site depuis le <span class="bold">{{ product.user.createdAt|date("j F Y")}}</span></p>
                         </div>
                     </div>
                 </div>
