@@ -24,7 +24,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
 * @Route("/product", name="product_")
@@ -137,6 +138,7 @@ class ProductController extends AbstractController
     }
 
     /**
+    * @IsGranted("ROLE_USER")
     * @Route("/create", name="create")
     */
     public function create(Request $request, SluggerInterface $slugger,
