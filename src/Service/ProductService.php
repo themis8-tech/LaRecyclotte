@@ -41,5 +41,4 @@ class ProductService{
             array($column => $data)
         );
     }
-    
-   }
+}

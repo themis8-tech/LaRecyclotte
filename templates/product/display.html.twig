@@ -15,7 +15,7 @@
         {# Start Title #}
         <div class="title text-center">
             <div class="d-flex justify-content-center align-items-center">
-                <img class="px-1" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie Meuble-Literie">
+                <img class="px-1" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie {{ product.category.name }}">
                 <div class="category uppercase grey px-1">{{ product.category.name }}</div>
             </div>
             <hr>    
@@ -31,7 +31,7 @@
                 <article>
                     <div class="d-flex justify-content-center">
                         <div class="card product-card margin-cards">
-                            <img src="{{asset('uploads/' ~ product.picture)}}" class="card-img-top product-img" alt="...">
+                            <img src="{{asset('uploads/' ~ product.picture)}}" class="card-img-top product-img" alt="{{ product.title }}">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-start">
