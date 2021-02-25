@@ -77,7 +77,7 @@ class ProductController extends AbstractController
     public function display($id, Request $request, MailerInterface $mailer): Response
     {
         $product = $this->productService->getOne($id);
-        //dd($product);
+        $productByUser = $this->productService->getBy('user', $product->getUser());
 
         if (empty($product)) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
@@ -109,6 +109,7 @@ class ProductController extends AbstractController
         
         return $this->render('product/display.html.twig', array(
             'product' => $product,
+            'productByUser' => $productByUser,
             'form' => $form->createView()
         ));
     }

@@ -120,7 +120,7 @@
                 {% if products is not empty %}
                     <a href="{{path('product_list')}}" class="btn btn-primary mb-4">Voir tous les objets</a>
                 {% else %}
-                    <a href="#" class="btn btn-action mb-4">Donner un objet</a>
+                    <a href="{{path('product_create')}}" class="btn btn-action mb-4">Donner un objet</a>
                 {% endif %}
             </div>
         </div>

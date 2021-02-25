@@ -34,5 +34,12 @@ class ProductService{
     {
         return $this->repository->find($id);
     }
+
+    public function getBy($column, $data)
+    {
+        return $this->repository->findBy(
+            array($column => $data)
+        );
+    }
     
    }

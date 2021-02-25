@@ -62,7 +62,7 @@
                         <div class="card-body text-center">
                             <h3 class="card-title">Informations sur le donneur</h3>
                             <div class="user py-3">{{ product.user.username }}</div>
-                            <div class="grey"><span class="bold">5</span> annonces publiées.</div>
+                            <div class="grey"><span class="bold">{{ productByUser|length }}</span> annonce{{ productByUser|length > 1 ? 's' : ''}} publiée{{ productByUser|length > 1 ? 's' : ''}}.</div>
                             </p>
                             <hr>
                             <p class="card-text grey">Inscrit(e) sur le site depuis le <span class="bold">{{ product.user.createdAt|date("j M Y")}}</span></p>
