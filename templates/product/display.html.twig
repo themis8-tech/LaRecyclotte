@@ -72,14 +72,46 @@
                 {# End User #}
 
                 {# Start Form #}
-                <div class="d-flex justify-content-center mt-4">
-                    <div class="card product-card margin-cards">
-                        <div class="card-body text-center">
-                            <p>Intéressé par cet objet ?</p>
-                            <h3 class="card-title">Contacter {{ product.user.username }}</h3>
+                {% if app.user is empty or app.user.email != product.user.email %}
+                    <div class="d-flex justify-content-center mt-4">
+                        <div class="card product-card margin-cards">
+                            <div class="card-body ">
+                                <h3 class="text-center">Intéressé par cet objet ?</h3>
+                                <hr>
+                                <div class="mt-4">
+                                    {{ form_start(form) }}
+                                    <div>
+                                        <div class="mt-4">
+                                            {{ form_row(form.username, {
+                                                'attr' : {'value' : app.user.username ?? ""}
+                                            }) }}
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col">
+                                                {{ form_row(form.email, {
+                                                    'attr' : {'value' : app.user.email ?? ""}
+                                                }) }}
+                                            </div>
+                                            <div class="col">
+                                                {{ form_row(form.phone) }}
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            {{ form_row(form.message) }}
+                                        </div>
+                                        <div class="require grey mt-3">
+                                            * champs obligatoires
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button class="btn btn-action">Envoyer à {{ product.user.username }}</button>
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
                 {# End Form #}
 
             </div>

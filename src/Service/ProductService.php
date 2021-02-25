@@ -1,7 +1,9 @@
 <?php
 namespace App\Service;
 
+use App\Entity\ContactDisplay;
 use App\Repository\ProductRepository;
+use Symfony\Component\Mailer\MailerInterface;
 
 class ProductService{
     private $repository;

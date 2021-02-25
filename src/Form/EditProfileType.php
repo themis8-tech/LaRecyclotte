@@ -32,12 +32,7 @@ class EditProfileType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Email'
             ])
-                      
-            ->add('Valider', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-secondary'
-                ]
-            ])
+
         ;
     }
 
