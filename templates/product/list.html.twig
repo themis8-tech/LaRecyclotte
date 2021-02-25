@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    
+{% set pages = (total / limit)|round(0,'ceil') %}    
 <div class="background-white px-5 py-3">
     <span>Accueil > </span>
     <span class="bold">Liste des Objets</span>
@@ -58,9 +58,9 @@
      {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ products|length }}</span>
-                - Objets par pages :<span class="blue"> 15</span>
-                - Nombre de pages :<span class="blue"> 10</span></p>
+            <p>Objets disponibles: <span class="blue"> {{ products|length   }}</span>
+                - Objets par pages :<span class="blue"> {{ limit }}</span>
+                - Nombre de pages :<span class="blue"> {{ pages }}</span></p>
         </div>
         <div>
             {% if products is empty %}
@@ -71,8 +71,8 @@
     <hr>
     <div class="row text-center">
         <div class="col-sm-6 col-md-4 justify-content-start">
-            <p>Page: <span class="blue">1</span>
-                - Objets: <span class="blue">15</span> sur 145
+            <p>Page: <span class="blue">{{ page }}</span>
+                - Objets: <span class="blue">{{ products|length }}</span> sur {{ products|length  }}
         </div>
     </div>
            
@@ -82,7 +82,6 @@
     
 
     {% for product in products %}
-        
         <div class="col-lg-4 col-md-6 d-flex justify-content-center my-3">
             <div class="card product-card margin-cards">
                 <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
@@ -105,10 +104,31 @@
         </div>
     {% endfor %}
     </div>
-
+    
 </div> {#  fin container #}
 
-
+    {# pagination #}
+    <div class = " d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item {{ ( page == 1 ) ? 'disabled' : ''}}">
+                    <a class="page-link" href="{{ (page >  1 ) ? '?page=' ~ ( page - 1 ) :'' }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>      
+                {% for item in 1..pages %}
+                    <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+                        <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page + 1 }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
 {% endblock %}
 

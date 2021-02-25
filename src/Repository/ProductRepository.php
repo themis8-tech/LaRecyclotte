@@ -21,7 +21,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     // Requete de recherche form general
-    public function search($query, $sortDate, $sortCat, $sortState)
+    public function search($query, $sortDate, $sortCat, $sortState, $page, $limit)
     { 
         $stmt = $this->createQueryBuilder('p');
         
@@ -48,33 +48,23 @@ class ProductRepository extends ServiceEntityRepository
             $stmt->orwhere('s.name LIKE :sort');
             $stmt->setParameter('sort', '%' . $sortState . '%');
         }
-        switch ($sortDate){
-            case 'ASC':
-                $stmt->orderBy('p.createdAt', 'ASC');
-            break;
-
-            case 'DESC':
-                $stmt->orderBy('p.createdAt', 'DESC');
-            break;
-        }
-    
-        return $stmt->getQuery()->getResult();
-    }
-
-    // Requete de recherche Tri select
-    public function sortSearch ($sort)
-    { 
-        $stmt = $this->createQueryBuilder('p');
         
-        if(!empty($sort)){  
-        //$stmt->leftJoin('p.category', 'c');
-        $stmt->orderby('p.createdAt', '%'.$sort.'%' );
-       
-        }
-    
+        $stmt->orderby('p.createdAt', $sortDate);
+        $stmt->setFirstResult(($page * $limit) - $limit);
+        $stmt->setMaxResults($limit);
+
         return $stmt->getQuery()->getResult();
     }
 
+    public function findTotalProducts()
+    {
+        $stmt = $this->createQueryBuilder('p');
+        $stmt->select('COUNT(p)');
+    
+         return $stmt->getQuery()->getSingleScalarResult();   
+
+    }
+   
     public function findLast()
     {
         $stmt = $this->createQueryBuilder('p');

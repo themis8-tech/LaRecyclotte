@@ -50,21 +50,31 @@ class ProductController extends AbstractController
     public function list(Request $request, ProductRepository $repo,
      CategoryRepository $category, StateRepository $state ): Response
     {
+        // Nombre d'éléments par page
+        $limit = 12;
+        $page= $request->query->get("page", 1);
+
         // Moteur de recherche interne
         $query = $request->query->get('q');
         // Tri select
         $sortDate   = $request->query->get('sortDate');
         $sortCat = $request->query->get('sortCat');
         $sortState = $request->query->get('sortState');
-        $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState);
+
+        $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState, $page, $limit);
+        $total = $this->productService->getTotalProducts();                                               
        
         $category = $this->categoryService->getAll();
         $state = $this->stateService->getAll();
+        
             return $this->render('product/list.html.twig', array(
-            'products'=> $products,
-            'query'=> $query,
+            'products' => $products,
+            'query'    => $query,
             'category' => $category,
-            'state' => $state,
+            'state'    => $state,
+            'limit'    => $limit,
+            'page'     => $page,
+            'total'    => $total
             ),
           
         );
