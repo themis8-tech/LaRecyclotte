@@ -21,6 +21,7 @@ class ProductService{
 
     public function getTotalProducts()
     {
+<<<<<<< HEAD
         return $this->repository->findTotalProducts();
     }
     
@@ -28,6 +29,10 @@ class ProductService{
     {
        
         return $this->repository->search($query, $sortDate, $sortCat, $sortState, $page, $limit);
+=======
+        
+        return $this->repository->search($query, $sortDate, $sortCat, $sortState);
+>>>>>>> master
     }
 
     public function getLast()
@@ -38,11 +43,6 @@ class ProductService{
     public function getOne($id)
     {
         return $this->repository->find($id);
-    }
-
-    public function sendEmail(ContactDisplay $contact)
-    {
-
     }
     
    }
