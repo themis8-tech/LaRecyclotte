@@ -10,71 +10,82 @@
     
    <div class="container-fluid h-100">
     <div class="row h-100">
-      <aside class="col-12 col-md-2 p-0">
-        <nav class="navbar navbar-expand navbar-light bg-light flex-md-column flex-row align-items-start">
-          <div class="collapse navbar-collapse">
-            <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                <li class="nav-item">
-                    <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
+        <aside class="col-12 col-md-2 p-0">
+          <nav class="navbar navbar-expand navbar-light bg-light flex-md-column flex-row align-items-start">
+            <div class="collapse navbar-collapse">
+              <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+                  <li class="nav-item">
+                      <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link pl-0" href="">Mes messages</a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link pl-0" href="">Mes messages</a>
-              </li>
-
-                <li class="nav-item">
-                    <a class="nav-link pl-0" href="{{ path('user_account_myproducts')}}">Mes annonces</a>
-                </li>
-                        
-            </ul>
-          </div>
-        </nav>
-      </aside>
-
-
-      <main class="col">
-        <div class="container">
-          {% for message in app.flashes('message') %}
-            <div class="col-xs4">
-              <div class="alert alert-success" role="alert">{{message}}</div>
+                  <li class="nav-item">
+                      <a class="nav-link pl-0" href="{{ path('user_account_myproducts')}}">Mes annonces</a>
+                  </li>
+                          
+              </ul>
             </div>
-          {% endfor %}
+          </nav>
+        </aside>
 
-            <div class=""><h2>Profil de {{ app.user.firstname }} {{ app.user.lastname }}</h2></div>
 
-            <div class="row">
-              <div class="col-6">Nom :</div>
-              <div class="col-6">{{ app.user.lastname }}</div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-6">Prénom :</div>
-              <div class="col-6">{{ app.user.firstname }}</div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-6">Nom d'utilisateur :</div>
-              <div class="col-6">{{ app.user.username }}</div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-6">Email</div>
-              <div class="col-6">{{ app.user.email }}</div>
-            </div>
+        <main class="col">
+          <div class="container">
 
-            <br>
+            {% for message in app.flashes('message') %}
+              <div class="col-xs4">
+                <div class="alert alert-success" role="alert">{{message}}</div>
+              </div>
+            {% endfor %}
+           
+            <h2 class="text-center my-3 title-form">Profil de {{ app.user.firstname }} {{ app.user.lastname }}</h2>
             
-            <div class="">
-              <a href="{{ path('user_account_editprofile')}}" class="btn btn-secondary">Modifier le profil</a>
-              <a href="" class="btn btn-secondary">Modifier le mot de passe</a>        
-            </div>
 
-        </div>
-      </main>
+              <div class="col-lg-4 mx-auto justify-content-center">
+
+                <div class="row">
+                    <div class="col-6">Nom :</div>
+                    <div class="col-6">{{ app.user.lastname }}</div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                  <div class="col-6">Prénom :</div>
+                  <div class="col-6">{{ app.user.firstname }}</div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                  <div class="col-6">Nom d'utilisateur :</div>
+                  <div class="col-6">{{ app.user.username }}</div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                  <div class="col-6">Email</div>
+                  <div class="col-6">{{ app.user.email }}</div>
+                </div>
+              </div>
+
+                <br>
+                
+                <div class="row d-flex my-4 justify-content-around">
+                  <a href="{{ path('user_account_editprofile')}}" class="btn btn-secondary col-3 mb-3 p-2">Modifier le profil</a>
+                  <a href="" class="btn btn-secondary col-3 mb-3 p-2">Modifier le mot de passe</a>        
+                </div>
+             
+          </div>
+        </main>
     </div>
   </div>
 
-  <hr>
+  <br>
     {% endblock %}
 
 
