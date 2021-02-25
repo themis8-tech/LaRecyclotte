@@ -210,7 +210,12 @@ body {
 .widht-desk{
 width:20em;
 }
-
+.fa-external-link-alt{
+    color:var(--grey);
+    font-size: 10px;
+    position: relative;
+    top: -24px; left: -5px;
+}
 /*FORM REGISTER STYLE*/
 .label-color {
     color: var(--blueGreen);
@@ -222,8 +227,12 @@ width:20em;
         text-align:center;
         display:flex;
         flex-direction:column;
-       
      }
+
+     .align-center{
+        align-items: center;
+     }
+
      .fa-map-marker-alt {
         padding-left: 0px;
      }
@@ -242,9 +251,14 @@ width:20em;
      }
      .title-form{
          font-size: 26px;
-     }
+        }
 
-     
+     .fa-external-link-alt{
+         position: relative;
+         top: -55px;
+         left: 34px; 
+         }
+        
 }
 
 @media (max-width: 1200px){
