@@ -210,7 +210,12 @@ body {
 .widht-desk{
 width:20em;
 }
-
+.fa-external-link-alt{
+    color:var(--grey);
+    font-size: 10px;
+    position: relative;
+    top: -24px; left: -5px;
+}
 /*FORM REGISTER STYLE*/
 .label-color {
     color: var(--blueGreen);
