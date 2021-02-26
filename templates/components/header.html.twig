@@ -36,7 +36,7 @@
 					{% if app.user %}
 						<div class="d-flex">
 							<a href="{{ path('user_account_profile') }}" class="d-flex align-items-center me-2 label-color"><i class="far fa-user-circle "> </i>{{ app.user.username }}</a>
-							{% if is_granted ('ROLE_ADMIN') %}
+							{% if is_granted ('ROLE_MODERATOR') %}
 							<a href="{{ path('admin') }}" class="btn btn-secondary text-btn-nav btn-nav px-2">Admin</a>{% endif %}
 							<a href="{{ path('user_logout') }}" class="btn btn-primary text-btn-nav btn-nav mx-2 px-2">Déconnexion</a>
 							
