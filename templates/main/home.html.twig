@@ -93,7 +93,7 @@
                                                     <p class="blue bold">{{ product.state.name }}</p>   
                                                 </div>
                                                 <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>{{ product.city }} ({{ product.zipcode.code }})</p>
-                                                <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
+                                                <p class="card-text grey bold">Posté le {{ product.createdAt|date("j F Y \à G:i") }}</p>
                                                 <hr>
                                                 <div class="text-center">
                                                     <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">Voir l'objet en détail</a>   
@@ -120,12 +120,12 @@
                 {% if products is not empty %}
                     <a href="{{path('product_list')}}" class="btn btn-primary mb-4">Voir tous les objets</a>
                 {% else %}
-                    <a href="#" class="btn btn-action mb-4">Donner un objet</a>
+                    <a href="{{path('product_create')}}" class="btn btn-action mb-4">Donner un objet</a>
                 {% endif %}
             </div>
         </div>
     </section>
-
+    
 {% endblock %}
 
 {% block javascripts %}

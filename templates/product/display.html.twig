@@ -15,7 +15,7 @@
         {# Start Title #}
         <div class="title text-center">
             <div class="d-flex justify-content-center align-items-center">
-                <img class="px-1" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie Meuble-Literie">
+                <img class="px-1" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie {{ product.category.name }}">
                 <div class="category uppercase grey px-1">{{ product.category.name }}</div>
             </div>
             <hr>    
@@ -31,7 +31,7 @@
                 <article>
                     <div class="d-flex justify-content-center">
                         <div class="card product-card margin-cards">
-                            <img src="{{asset('uploads/' ~ product.picture)}}" class="card-img-top product-img" alt="...">
+                            <img src="{{asset('uploads/' ~ product.picture)}}" class="card-img-top product-img" alt="{{ product.title }}">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-start">
@@ -43,10 +43,10 @@
                                 <p class="grey">{{ product.description }}</p>
                                 <p class="grey">
                                     <i class="fas fa-map-marker-alt"></i><span class="bold">{{ product.city }}</span> ({{ product.zipcode.code }})<br>
-                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">{{ product.endAt|date("j M Y \à G:i")}}</span>
+                                    <i class="fas fa-clock"></i>Disponible jusqu'au <span class="bold">{{ product.endAt|date("j F Y")}}</span>
                                 </p>
                                 <hr>
-                                <p class="card-text grey">Posté le {{ product.createdAt|date("j M Y \à G:i")}}</p>
+                                <p class="card-text grey">Posté le {{ product.createdAt|date("j F Y \à G:i")}}</p>
                             </div>
                         </div>
                     </div>
@@ -62,54 +62,56 @@
                         <div class="card-body text-center">
                             <h3 class="card-title">Informations sur le donneur</h3>
                             <div class="user py-3">{{ product.user.username }}</div>
-                            <div class="grey"><span class="bold">5</span> annonces publiées.</div>
+                            <div class="grey"><span class="bold">{{ productByUser|length }}</span> annonce{{ productByUser|length > 1 ? 's' : ''}} publiée{{ productByUser|length > 1 ? 's' : ''}}.</div>
                             </p>
                             <hr>
-                            <p class="card-text grey">Inscrit(e) sur le site depuis le <span class="bold">{{ product.user.createdAt|date("j M Y")}}</span></p>
+                            <p class="card-text grey">Inscrit(e) sur le site depuis le <span class="bold">{{ product.user.createdAt|date("j F Y")}}</span></p>
                         </div>
                     </div>
                 </div>
                 {# End User #}
 
                 {# Start Form #}
-                <div class="d-flex justify-content-center mt-4">
-                    <div class="card product-card margin-cards">
-                        <div class="card-body ">
-                            <h3 class="text-center">Intéressé par cet objet ?</h3>
-                            <hr>
-                            <div class="mt-4">
-                                {{ form_start(form) }}
-                                <div>
-                                    <div class="mt-4">
-                                        {{ form_row(form.username, {
-                                            'attr' : {'value' : app.user.username ?? ""}
-                                        }) }}
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="col">
-                                            {{ form_row(form.email, {
-                                                'attr' : {'value' : app.user.email ?? ""}
+                {% if app.user is empty or app.user.email != product.user.email %}
+                    <div class="d-flex justify-content-center mt-4">
+                        <div class="card product-card margin-cards">
+                            <div class="card-body ">
+                                <h3 class="text-center">Intéressé par cet objet ?</h3>
+                                <hr>
+                                <div class="mt-4">
+                                    {{ form_start(form) }}
+                                    <div>
+                                        <div class="mt-4">
+                                            {{ form_row(form.username, {
+                                                'attr' : {'value' : app.user.username ?? ""}
                                             }) }}
                                         </div>
-                                        <div class="col">
-                                            {{ form_row(form.phone) }}
+                                        <div class="row mt-4">
+                                            <div class="col">
+                                                {{ form_row(form.email, {
+                                                    'attr' : {'value' : app.user.email ?? ""}
+                                                }) }}
+                                            </div>
+                                            <div class="col">
+                                                {{ form_row(form.phone) }}
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            {{ form_row(form.message) }}
+                                        </div>
+                                        <div class="require grey mt-3">
+                                            * champs obligatoires
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button class="btn btn-action">Envoyer à {{ product.user.username }}</button>
                                         </div>
                                     </div>
-                                    <div class="mt-4">
-                                        {{ form_row(form.message) }}
-                                    </div>
-                                    <div class="require grey mt-3">
-                                        * champs obligatoires
-                                    </div>
-                                    <div class="text-center mt-4">
-                                        <button class="btn btn-action">Envoyer à {{ product.user.username }}</button>
-                                    </div>
+                                    {{ form_end(form) }}
                                 </div>
-                                {{ form_end(form) }}
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
                 {# End Form #}
 
             </div>

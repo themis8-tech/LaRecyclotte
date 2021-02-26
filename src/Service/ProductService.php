@@ -19,10 +19,15 @@ class ProductService{
         return $this->repository->findAll();
     }
 
-    public function buildResult($query, $sortDate, $sortCat, $sortState)
+    public function getTotalProducts()
     {
-        //dd($sortState, $sortDate, $sortCat);
-        return $this->repository->search($query, $sortDate, $sortCat, $sortState);
+        return $this->repository->findTotalProducts();
+    }
+    
+    public function buildResult($query, $sortDate, $sortCat, $sortState, $page, $limit)
+    {
+       
+        return $this->repository->search($query, $sortDate, $sortCat, $sortState, $page, $limit);
     }
 
     public function getLast()
@@ -35,9 +40,10 @@ class ProductService{
         return $this->repository->find($id);
     }
 
-    public function sendEmail(ContactDisplay $contact)
+    public function getBy($column, $data)
     {
-
+        return $this->repository->findBy(
+            array($column => $data)
+        );
     }
-    
-   }
+}

@@ -36,7 +36,7 @@ class ContactType extends AbstractType
                 )
             ))
             ->add('message',TextareaType::class,array(
-                'label'=> "Nom",
+                'label'=> "Message",
                 'attr'=>array(
                     'placeholder'=>'Entrez votre Message'
                 )
