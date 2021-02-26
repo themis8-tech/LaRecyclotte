@@ -53,7 +53,7 @@ class ProductController extends AbstractController
      CategoryRepository $category, StateRepository $state ): Response
     {
         // Nombre d'éléments par page
-        $limit = 3;
+        $limit = 15;
         $page= $request->query->get("page", 1);
 
         // Moteur de recherche interne
@@ -176,9 +176,9 @@ class ProductController extends AbstractController
             );
             }
             
-            // return $this->redirectToroute('product_display', array(
-            //     'id' =>$product->getId(),
-            // ));
+            return $this->redirectToroute('product_display', array(
+                'id' =>$product->getId(),
+            ));
             
         }
 
