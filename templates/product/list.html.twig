@@ -9,11 +9,11 @@
 
 {% block body %}
 {% set pages = (total / limit)|round(0,'ceil') %}
-{{ dump (app.request.query) }}
-{# <div class="background-white px-5 py-3">
+{# {{ dump (app.request.query) }} #}
+<div class="background-white px-5 py-3">
     <span>Accueil > </span>
     <span class="bold">Liste des Objets</span>
-</div> #}
+</div>
 
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
