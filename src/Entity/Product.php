@@ -112,7 +112,8 @@ class Product
     public function __construct()
     {
   
-        $this->enabled = true;
+        $this->enabled = false;
+        
        
     }
 
