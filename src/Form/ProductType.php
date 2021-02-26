@@ -10,9 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 
 class ProductType extends AbstractType
 {
@@ -55,27 +52,27 @@ class ProductType extends AbstractType
                 ))
 
             ->add('zipcode', null, array(
-                'label'        => "Code Postale*",
-                'placeholder'  => '---Choisissez le lieu de retrait---',
+                'label' => "Code Postale*",
+                'placeholder' => '---Choisissez le lieu de retrait---',
                 'choice_label' => 'code',
                 'attr' => array(
                 )
                 ))
                 
             ->add('state', null, array(
-                'label'        => "Etat de l'objet*",
-                'placeholder'  => '---Choisissez son état---',
+                'label' => "Etat de l'objet*",
+                'placeholder' => '---Choisissez son état---',
                 'choice_label' => 'name',
                 ))
 
-            ->add('endAt', null, array(
+            ->add('endAt', DateType::class, array(
                 'label' => "Date d'expiration*",
                 'widget' => 'single_text',
                 'years'  => range(date('Y'), date('Y') +1),  
-                'months'  => range(date('m'), date('m')+ 12),    
+                'months'  => range(date('m'), date('m')),    
                 'attr'  => array(
                 'placelholder'=>'Date',
-                'class' => 'd-flex' 
+                'class' => 'd-flex'  
                 )
                 ))
 

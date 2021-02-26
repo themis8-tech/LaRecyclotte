@@ -52,21 +52,31 @@ class ProductController extends AbstractController
     public function list(Request $request, ProductRepository $repo,
      CategoryRepository $category, StateRepository $state ): Response
     {
+        // Nombre d'éléments par page
+        $limit = 5;
+        $page= $request->query->get("page", 1);
+
         // Moteur de recherche interne
         $query = $request->query->get('q');
         // Tri select
         $sortDate   = $request->query->get('sortDate');
         $sortCat = $request->query->get('sortCat');
         $sortState = $request->query->get('sortState');
-        $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState);
+
+        $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState, $page, $limit);
+        $total = $this->productService->getTotalProducts();                                               
        
         $category = $this->categoryService->getAll();
         $state = $this->stateService->getAll();
+        
             return $this->render('product/list.html.twig', array(
-            'products'=> $products,
-            'query'=> $query,
+            'products' => $products,
+            'query'    => $query,
             'category' => $category,
-            'state' => $state,
+            'state'    => $state,
+            'limit'    => $limit,
+            'page'     => $page,
+            'total'    => $total
             ),
           
         );
@@ -140,6 +150,7 @@ class ProductController extends AbstractController
     /**
     * @IsGranted("ROLE_USER")
     * @Route("/create", name="create")
+    * 
     */
     public function create(Request $request, SluggerInterface $slugger,
      FileUploader $fileUploader, UserRepository $userRepo): Response
@@ -158,12 +169,13 @@ class ProductController extends AbstractController
 
                 $this->em->persist($product);
                 $this->em->flush();
-                $this->addFlash('success',
-                                "Félicitation ! Votre annonce est enregistrée
-                                , celle-ci sera publiée sous 24h.
-                                Merci d'avoir choisi La Recyclotte"
+                $this->addFlash(
+                'success',
+                "Félicitations ! Votre annonce est enregistrée
+                , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"          
             );
             }
+            
             return $this->redirectToroute('product_display', array(
                 'id' =>$product->getId(),
             ));

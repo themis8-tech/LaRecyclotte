@@ -2,13 +2,14 @@
 
 {% block title %}Product - {{ parent() }}{% endblock %}
 
- 
+
 {% block stylesheets %}
-    	{{ encore_entry_link_tags('page_product') }}
+{{ encore_entry_link_tags('page_product') }}
 {% endblock %}
 
 {% block body %}
-    
+{% set pages = (total / limit)|round(0,'ceil') %}
+{# {{ dump (app.request.query) }} #}
 <div class="background-white px-5 py-3">
     <span>Accueil > </span>
     <span class="bold">Liste des Objets</span>
@@ -16,102 +17,126 @@
 
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
-    <div class="text-center pt-5 pb-3">
+    <div class="text-center pt-2 pb-3">
         <h1>Listes des Objets</h1>
         <h2>à récuperer sur <span class="bold"> Lille </span> et sa métropole</h2>
     </div>
-    
+
     {# filtres de recherche #}
     <form action="{{path('product_list')}}" method="GET">
         <div class="row g-3 justify-content-center">
             <div class="col-sm-12 col-md-3 col-lg-2">
                 <select name="sortDate" class="form-select form-select-sm">
                     <option value="DESC" {% if "DESC" == app.request.query.get('sortDate') %}selected{% endif %}>
-                     Tri : Plus récents</option>
+                        Tri : Plus récents</option>
                     <option value="ASC" {% if "ASC" == app.request.query.get('sortDate') %}selected{% endif %}>
-                     Tri : Plus anciens</option>
+                        Tri : Plus anciens</option>
                 </select>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
                 <select name="sortCat" class="form-select form-select-sm">
                     <option value="">Catégorie : Toutes les catégories</option>
                     {% for cat in category %}
-                        <option value="{{ cat.name }}" {% if cat.name == app.request.query.get('sortCat') %}selected{% endif %}>
-                         {{ cat.name }}</option>
+                    <option value="{{ cat.name }}"
+                        {% if cat.name == app.request.query.get('sortCat') %}selected{% endif %}>
+                        Catégorie : {{ cat.name }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-2">
                 <select name="sortState" class="form-select form-select-sm">
-                    <option value="">Etat : Tous les états</option>
+                    <option value="">Filtre : Tous les états</option>
                     {% for stat in state %}
-                        <option value="{{ stat.name }}" {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>
-                        {{ stat.name }}</option>
+                    <option value="{{ stat.name }}"
+                        {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>
+                        Etat : {{ stat.name }}</option>
                     {% endfor %}
                 </select>
             </div>
-        <div>
-        <div class=" btn d-flex justify-content-center">
-            <button class="btn btn-action text-btn-nav btn-search">Rechercher</button>
-        </div>
+            <div>
+                <div class=" btn d-flex justify-content-center">
+                    <button class="btn btn-action text-btn-nav btn-search">Rechercher</button>
+                </div>
+            </div>
+
     </form>
-     {# infos resultat #}
+    {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
             <p>Objets disponibles: <span class="blue"> {{ products|length }}</span>
-                - Objets par pages :<span class="blue"> 15</span>
-                - Nombre de pages :<span class="blue"> 10</span></p>
+                - Objets par pages :<span class="blue"> {{ limit }}</span>
+                - Nombre de pages :<span class="blue"> {{ pages }}</span></p>
         </div>
         <div>
             {% if products is empty %}
-                <p>Aucun résultat trouvé</p>
+            <p>Aucun résultat trouvé</p>
             {% endif %}
         </div>
     </div>
     <hr>
     <div class="row text-center">
         <div class="col-sm-6 col-md-4 justify-content-start">
-            <p>Page: <span class="blue">1</span>
-                - Objets: <span class="blue">15</span> sur 145
+            <p>Page: <span class="blue">{{ page }}</span>
+                - Objets: <span class="blue">{{ products|length }}</span> sur {{ products|length  }}
         </div>
     </div>
-           
+
 
     {# liste des objets #}
-    <div class="row">
-    
 
     {% for product in products %}
-        
-        <div class="col-lg-4 col-md-6 d-flex justify-content-center my-5">
-            <div class="card product-card margin-cards">
-                <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
-                <div class="d-flex justify-content-around border-bottom">
-                    <div class="card-body">
-                        <h5 class="card-title bold">{{ product.title}}</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt orange"></i> 
-                         {{product.city}} ({{ product.zipcode.code}})</p>
-                        <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
-                    </div>
-                    <div class="card-body">
-                        <p class=" blue bold">{{ product.state.name }}</p>   
-                    </div>
+    <div class="col-lg-3 col-md-4 d-flex justify-content-center my-3">
+        <div class="card product-card margin-cards">
+            <figure>
+                <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img"
+                    alt="{{ product.title }}">
+            </figure>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title bold">{{ product.title }}</h4>
+                    <p class="blue bold">{{ product.state.name }}</p>
+                    <p class="blue bold">{{ product.category.name }}</p>
                 </div>
-                <div class="card-body text-center">
-                    <a href= "{{ path('product_display', {id: product.id}) }}" 
-                     class="btn btn-secondary ">Voir l'objet en détail</a>   
-                </div>     
+                <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>{{ product.city }}
+                    ({{ product.zipcode.code }})</p>
+                <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
+                <hr>
+                <div class="text-center">
+                    <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">Voir l'objet en
+                        détail</a>
+                </div>
             </div>
         </div>
-    {% endfor %}
     </div>
+    {% endfor %}
 
 </div> {#  fin container #}
 
-
+{# pagination #}
+<div class=" d-flex justify-content-center mt-3">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item {{ ( page == 1 ) ? 'disabled' : ''}}">
+                <a class="page-link" href="{{ (page >  1 ) ? '?page=' ~ ( page - 1 ) :'' }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for item in 1..pages %}
+            <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+                <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+            </li>
+            {% endfor %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{page + 1 }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('page_product') }}
+{{ encore_entry_script_tags('page_product') }}
 {% endblock %}
