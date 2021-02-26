@@ -26,7 +26,7 @@ class ContactType extends AbstractType
             ->add('phone',TelType::class,array(
                 'label'=> "Telephone",
                 'attr'=>array(
-                    'placeholder'=>'Votre numero de telephone'
+                    'placeholder'=>'Votre numero de téléphone'
                 )
             ))
             ->add('email',EmailType::class,array(

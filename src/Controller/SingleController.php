@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\User;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,6 +72,7 @@ class SingleController extends AbstractController
 
     public function contact(Request $request, MailerInterface $mailer)
     {
+        $user = new User();
         $contact = new Contact();
         $form = $this->createForm(ContactType::class);
 
@@ -90,10 +92,25 @@ class SingleController extends AbstractController
                     'text/plain');
             $mailer->send($message);
 
+            //envoi du mail
+            $mail = new Email();$mail->from('larecyclotte@gmail.com');
+            $mail->to($user->getEmail());
+            $mail->subject('Message de notification');
 
 
 
-            $this->addFlash('success', 'Votre message est envoyé');
+
+            //affichage de la vue dédié dans le corps du mail
+            $view = $this->renderView('mail/notification-mail.html.twig', array(
+                'user' => $user,
+            ));
+            $mail->html($view);
+
+            $mailer->send($mail);
+
+
+
+            $this->addFlash('success', 'Votre message est envoyé;nous vous repondons rapidement');
 
             return $this->redirectToRoute('contact');
         }
