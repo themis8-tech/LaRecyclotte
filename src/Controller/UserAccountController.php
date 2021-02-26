@@ -44,7 +44,7 @@ class UserAccountController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-                $this->addFlash('message', 'Profil mis à jour');
+                $this->addFlash('success', 'Vos modifications ont bien été enregistrées');
                 return $this->redirectToRoute('user_account_profile');
             }
 
@@ -53,6 +53,7 @@ class UserAccountController extends AbstractController
             ]);
 
     }
+
 
     /**
      *
