@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -64,8 +65,9 @@ class ProductType extends AbstractType
                 'choice_label' => 'name',
                 ))
 
-            ->add('endAt', null, array(
+            ->add('endAt', DateType::class, array(
                 'label' => "Disponible jusqu'au ? *",
+                'widget' => 'single_text',
                 'attr' => array(
                 'placelholder'=>'Date',
                 'class' => 'd-flex' 
