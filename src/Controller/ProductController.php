@@ -87,10 +87,10 @@ class ProductController extends AbstractController
     */
     public function display($id, Request $request, MailerInterface $mailer): Response
     {
-        // 
+        // Annonce de l'ID correspondant
         $product = $this->productService->getOne($id);
 
-        if (empty($product)) {
+        if (empty($product) || $product->getEnabled() == false) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
         }
 
