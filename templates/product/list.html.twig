@@ -9,15 +9,13 @@
 
 {% block body %}
 {% set result = (products|length)  %}
+{% set resultSortPage = (result / limit)|round(0,'ceil') %}
 {% set pages = (total / limit)|round(0,'ceil') %}
 {% set sortDate = app.request.query.get('sortDate') %}
 {% set sortCat = app.request.query.get('sortCat') %}
 {% set sortState = app.request.query.get('sortState') %}
-{# {{ dump (app.request.query) }} #}
-<div class="background-white px-5 py-3">
-    <span>Accueil > </span>
-    <span class="bold">Liste des Objets</span>
-</div>
+{% if sortState or sortCat  is not empty %} {{ (result / limit)|round(0,'ceil')}} {% else %}{{ pages }} {% endif %}
+
 
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
@@ -67,9 +65,9 @@
     {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ total }}</span>
+            <p>Objets disponibles: <span class="blue"> {% if sortState or sortCat  is not empty %} {{result}} {% else %}{{total}} {% endif %} </span>
                 - Objets par pages :<span class="blue"> {{ result }}</span>
-                - Nombre de pages :<span class="blue"> {{ pages }}</span></p>
+                - Nombre de pages :<span class="blue"> {% if sortState or sortCat  is not empty %} {{ (result / limit)|round(0,'ceil')}} {% else %}{{ pages }} {% endif %}</span></p>
         </div>
         <div>
             {% if products is empty %}
@@ -81,7 +79,6 @@
     <div class="row text-center">
         <div class="col-sm-6 col-md-4 justify-content-start">
             <p>Page: <span class="blue">{{ page }}</span>
-                - Objets: <span class="blue">{{ products|length }}</span> sur {{ products|length  }}
         </div>
     </div>
 
@@ -125,11 +122,20 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            {% for item in 1..pages %}
-            <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+            {% if sortState or sortCat  is not empty %}
+            {% for item in 1..resultSortPage %}
+              <li class="page-item {{ ( page == item) ? 'active' : ''}}">
                 <a class="page-link" href="?page={{ item }}">{{ item }}</a>
             </li>
             {% endfor %}
+            {% else %}
+             {% for item in 1..pages %}
+                <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+                    <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+                </li>
+            {% endfor %}   
+            {% endif %}
+            
             <li class="page-item">
                 <a class="page-link" href="?page={{page + 1 }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -142,5 +148,5 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ encore_entry_script_tags('page_product') }}
+    {{ encore_entry_script_tags('page_product') }}
 {% endblock %}

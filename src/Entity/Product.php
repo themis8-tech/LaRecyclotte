@@ -113,6 +113,7 @@ class Product
     {
   
         $this->enabled = true;
+        
        
     }
 

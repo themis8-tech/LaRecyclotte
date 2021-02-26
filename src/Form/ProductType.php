@@ -71,6 +71,7 @@ class ProductType extends AbstractType
                 'years'  => range(date('Y'), date('Y') +1),  
                 'months'  => range(date('m'), date('m')),    
                 'attr'  => array(
+                    
                 'placelholder'=>'Date',
                 'class' => 'd-flex'  
                 )
