@@ -72,7 +72,7 @@ class Product
     /**
      * @Assert\NotBlank(message="Vous devez saisir une date de début")
      * @Assert\GreaterThan("today", message="Vous ne pouvez pas choisir une date antérieur")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $endAt;
 

@@ -7,36 +7,35 @@
 {% endblock %}
 
    {% block body %}
+   <div class="bg-light">
 
-   <div class="container-fluid h-100">
-    <div class="row h-100">
-      <aside class="col-12 col-md-2 p-0">
-        <nav class="navbar navbar-expand navbar-light bg-light flex-md-column flex-row align-items-start">
-          <div class="collapse navbar-collapse">
-            <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                <li class="nav-item">
-                    <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link pl-0" href="#">Mes messages</a>
-                </li>
+   <h2 class="text-center title-form">Modifier vos informations personnelles</h2>
 
-                <li class="nav-item">
-                    <a class="nav-link pl-0" href="#">Mes annonces</a>
-                </li>
-                        
-            </ul>
-          </div>
-        </nav>
-      </aside>
+
+   <div class="container py-5">
+    <div class="row h-100 justify-content-center">
+        <aside class="col-12 col-md-3">
+          <nav class="navbar navbar-expand navbar-light bg-white flex-md-column flex-row align-items-start border rounded">
+            <div class="collapse navbar-collapse">
+              <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+                  <li class="nav-item">
+                      <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link pl-0" href="{{ path('user_account_myproducts')}}">Mes annonces</a>
+                  </li>
+                          
+              </ul>
+            </div>
+          </nav>
+        </aside>
       
-    <main class="col">
-      <h2 class="text-center my-3 title-form">Modifier vos informations personnelles</h2>
+    <main class="col-6 border rounded bg-white">
 
-      <div class="col-lg-4 mx-auto justify-content-center">
+      <div class="">
     
-        <div class="container mb-5 form-control">
+        <div class="container">
       
             {{form_start (form)}}
       
@@ -60,10 +59,11 @@
     
     
           <div class="d-flex justify-content-center">
-          <button class="btn btn-action col-6 mb-3 p-0" type="submit">Valider</button>
+          <button class="btn btn-action col-6 mb-3 p-0" type="submit">Enregistrer</button>
           </div>
           {{form_end (form)}}
     </main>
+  </div>
             
 
     {% endblock %}

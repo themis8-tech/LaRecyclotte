@@ -1,0 +1,39 @@
+<!-- Start HEADER -->
+{% include "mail/components/header.html.twig" %}
+<!-- End HEADER-->
+
+
+<!-- Start BLOC-->
+{% include "mail/components/start-bloc.html.twig" %}
+
+    <!-- ///////////// Start CONTENT ///////////// -->
+    <p>Bonjour <b style="color:#22AF9D">{{ product.user.username }}</b> !</p>
+
+    <p>Vous avez reçu un message de la part de <b>{{ data.username }}</b> qui est intéressé(e) par votre annonce <a href="{{ absolute_url(path('product_display', {id: product.id})) }}" style="color:#ff9600">{{ product.title }}</a> :</p>
+
+    <div style="background-color:#F1F1F1;padding:10px 20px">
+        <p>« {{ data.message }} »</p>
+    </div>
+
+    <p>Vous pouvez contacter <b>{{ data.username }}</b> par mail sur <a href="mailto:{{ data.email }}">{{ data.email }}</a>
+        {% if data.phone is not empty %}
+            ou par téléphone au {{ data.phone }}.
+        {% endif %}
+        </p>
+    
+    <p>N'hésitez pas à répondre directement à cet email pour entrer en contact avec lui.</p>
+
+    <p>Nous espérons que votre don fera son bonheur !</p>
+
+    <p>Bien cordialement,</p>
+
+    <p>L'équipe de La Recyclotte.</p>
+    <!-- ///////////// End CONTENT ///////////// -->
+
+{% include "mail/components/end-bloc.html.twig" %}
+<!-- End BLOC -->
+
+
+<!-- Start HEADER -->
+{% include "mail/components/footer.html.twig" %}
+<!-- End HEADER-->
