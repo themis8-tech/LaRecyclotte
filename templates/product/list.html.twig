@@ -14,7 +14,7 @@
 {% set sortDate = app.request.query.get('sortDate') %}
 {% set sortCat = app.request.query.get('sortCat') %}
 {% set sortState = app.request.query.get('sortState') %}
-{% if sortState or sortCat  is not empty %} {{ (result / limit)|round(0,'ceil')}} {% else %}{{ pages }} {% endif %}
+
 
 
 <div class="container-fluid background"> {# ouverture du container  #}
@@ -126,14 +126,14 @@
             {% for item in 1..resultSortPage %}
               <li class="page-item {{ ( page == item) ? 'active' : ''}}">
                 <a class="page-link" href="?page={{ item }}">{{ item }}</a>
-            </li>
+             </li>
             {% endfor %}
             {% else %}
              {% for item in 1..pages %}
                 <li class="page-item {{ ( page == item) ? 'active' : ''}}">
                     <a class="page-link" href="?page={{ item }}">{{ item }}</a>
                 </li>
-            {% endfor %}   
+             {% endfor %}   
             {% endif %}
             
             <li class="page-item">
