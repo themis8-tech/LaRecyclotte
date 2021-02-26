@@ -1,0 +1,26 @@
+<!-- Start HEADER -->
+{% include "mail/components/header.html.twig" %}
+<!-- End HEADER-->
+
+
+<!-- Start BLOC-->
+{% include "mail/components/start-bloc.html.twig" %}
+
+    <!-- ///////////// Start CONTENT ///////////// -->
+    <p>Bonjour <b style="color:#22AF9D">{{ data.username }}</b> !</p>
+
+    <p>Vous venez de contacter <b>{{ product.user.username }}</b> pour son annonce <a href="{{ absolute_url(path('product_display', {id: product.id})) }}" style="color:#ff9600">{{ product.title }}</a> via notre formulaire de contact.
+    
+    <p>Nous espérons que son don fera votre bonheur !</p>
+
+    <p>Bien cordialement,</p>
+
+    <p>L'équipe de La Recyclotte.</p>
+    <!-- ///////////// End CONTENT ///////////// -->
+
+{% include "mail/components/end-bloc.html.twig" %}
+<!-- End BLOC -->
+
+<!-- Start HEADER -->
+{% include "mail/components/footer.html.twig" %}
+<!-- End HEADER-->

@@ -87,13 +87,17 @@ class ProductController extends AbstractController
     */
     public function display($id, Request $request, MailerInterface $mailer): Response
     {
+        // 
         $product = $this->productService->getOne($id);
-        //dd($product);
 
         if (empty($product)) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
         }
 
+        // Annonces postées par le donneur
+        $productByUser = $this->productService->getBy('user', $product->getUser());
+
+        // Formulaire de contact (utilisateur intéressé -> donneur)
         $contact = new ContactDisplay();
         $form = $this->createForm(ContactDisplayType::class, $contact);
         $form->handleRequest($request);
@@ -103,14 +107,32 @@ class ProductController extends AbstractController
             $data = $form->getData();
 
             $email = new Email();
-            $email->from($data->getEmail())
+            $email->from("larecyclotte@gmail.com")
                 ->to($product->getUser()->getEmail())
-                ->cc($data->getEmail())
                 ->replyTo($data->getEmail())
-                ->subject('La Recyclotte - Réponse à votre annonce : '.$product->getTitle().' (annonce #'.$product->getId().')')
-                ->html('<p>Bonjour, vous recevez ce mail car une personne à répondu à votre annonce passée sur le site de la Recyclotte.</p><h3>Votre annonce</h3><ul><li>Titre : <b>'.$product->getTitle().' ('.$product->getState()->getName().')</b></li><li>Lieu de retrait : <b>'.$product->getCity().' ('.$product->getZipcode()->getCode().')</b></li><li>Posté le : <b>'.$product->getCreatedAt()->format('j M Y \à G:i').'</b></li></ul><h3>Informations de la personne intéressée</h3><ul><li>Nom d\'utilisateur : <b>'.$data->getUsername().'</b></li><li>Email : <b>'.$data->getEmail().'</b></li><li>Téléphone : <b>'.$data->getPhone().'</b></li><li>Message : <b>'.$data->getMessage().'</b></li></ul><p>Nous vous invitons à répondre directement à ce mail pour entrer en contact avec la personne intéressée.</p><p>Cordialement,<br>L\'équipe de La Recyclotte.</p>');
-            
+                ->subject('La Recyclotte - Une personne est intéressée par votre annonce : '.$product->getTitle());
+
+            $viewEmail = $this->renderView('mail/product-contact.html.twig', array(
+                'product' => $product,
+                'data' => $data
+            ));
+    
+            $email->html($viewEmail);
             $mailer->send($email);
+            
+            $notification = new Email();
+            $notification->from("larecyclotte@gmail.com")
+                ->to($data->getEmail())
+                ->replyTo("larecyclotte@gmail.com")
+                ->subject('La Recyclotte - Vous venez de contacter '.$product->getUser()->getUsername().' au sujet de son annonce : '.$product->getTitle());
+
+            $viewNotification = $this->renderView('mail/product-notification.html.twig', array(
+                'product' => $product,
+                'data' => $data
+            ));
+    
+            $notification->html($viewNotification);
+            $mailer->send($notification);
 
             $this->addFlash('success', 'Votre email a bien été envoyé.');
             return $this->redirectToRoute('product_display', array(
@@ -120,6 +142,7 @@ class ProductController extends AbstractController
         
         return $this->render('product/display.html.twig', array(
             'product' => $product,
+            'productByUser' => $productByUser,
             'form' => $form->createView()
         ));
     }
