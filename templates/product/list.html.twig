@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block body %}
+{% set result = (products|length)  %}
 {% set pages = (total / limit)|round(0,'ceil') %}
+{% set sortDate = app.request.query.get('sortDate') %}
+{% set sortCat = app.request.query.get('sortCat') %}
+{% set sortState = app.request.query.get('sortState') %}
 {# {{ dump (app.request.query) }} #}
 <div class="background-white px-5 py-3">
     <span>Accueil > </span>
@@ -27,9 +31,9 @@
         <div class="row g-3 justify-content-center">
             <div class="col-sm-12 col-md-3 col-lg-2">
                 <select name="sortDate" class="form-select form-select-sm">
-                    <option value="DESC" {% if "DESC" == app.request.query.get('sortDate') %}selected{% endif %}>
+                    <option value="DESC" {{ (sortDate == 'DESC') ? "selected"  : '' }}>
                         Tri : Plus récents</option>
-                    <option value="ASC" {% if "ASC" == app.request.query.get('sortDate') %}selected{% endif %}>
+                    <option value="ASC" {{ (sortDate == 'ASC') ? "selected"  : '' }}>
                         Tri : Plus anciens</option>
                 </select>
             </div>
@@ -37,9 +41,9 @@
                 <select name="sortCat" class="form-select form-select-sm">
                     <option value="">Catégorie : Toutes les catégories</option>
                     {% for cat in category %}
-                    <option value="{{ cat.name }}"
-                        {% if cat.name == app.request.query.get('sortCat') %}selected{% endif %}>
-                        Catégorie : {{ cat.name }}</option>
+                    <option value="{{ cat.name }}" {{ (cat.name == sortCat) ? "selected" : '' }}>
+                        Catégorie : {{ cat.name }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -48,7 +52,7 @@
                     <option value="">Filtre : Tous les états</option>
                     {% for stat in state %}
                     <option value="{{ stat.name }}"
-                        {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>
+                        {{ ( stat.name == sortState) ? "selected" : ''}}>
                         Etat : {{ stat.name }}</option>
                     {% endfor %}
                 </select>
@@ -63,8 +67,8 @@
     {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ products|length }}</span>
-                - Objets par pages :<span class="blue"> {{ limit }}</span>
+            <p>Objets disponibles: <span class="blue"> {{ total }}</span>
+                - Objets par pages :<span class="blue"> {{ result }}</span>
                 - Nombre de pages :<span class="blue"> {{ pages }}</span></p>
         </div>
         <div>

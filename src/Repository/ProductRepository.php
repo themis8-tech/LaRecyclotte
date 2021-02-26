@@ -50,8 +50,8 @@ class ProductRepository extends ServiceEntityRepository
         }
         
         $stmt->orderby('p.createdAt', $sortDate);
-        // $stmt->setFirstResult(($page * $limit) - $limit);
-        // $stmt->setMaxResults($limit);
+        $stmt->setFirstResult(($page * $limit) - $limit);
+        $stmt->setMaxResults($limit);
         //dd($stmt->getQuery());
         
         
