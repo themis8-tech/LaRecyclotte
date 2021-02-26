@@ -39,20 +39,22 @@ class ProductRepository extends ServiceEntityRepository
         if(!empty($sortCat))
         {
             $stmt->leftJoin('p.category', 'c');
-            $stmt->orwhere('c.name LIKE :sort');
-            $stmt->setParameter('sort', '%' . $sortCat . '%');
+            $stmt->andWhere('c.name LIKE :sort1');
+           $stmt->setParameter('sort1', '%' . $sortCat . '%');
         }
-        if(!empty($sortState))
+         if(!empty($sortState))
         {
             $stmt->leftJoin('p.state', 's');
-            $stmt->orwhere('s.name LIKE :sort');
+            $stmt->andWhere('s.name LIKE :sort');
             $stmt->setParameter('sort', '%' . $sortState . '%');
         }
         
         $stmt->orderby('p.createdAt', $sortDate);
-        //$stmt->setFirstResult(($page * $limit) - $limit);
-        //$stmt->setMaxResults($limit);
-
+        // $stmt->setFirstResult(($page * $limit) - $limit);
+        // $stmt->setMaxResults($limit);
+        //dd($stmt->getQuery());
+        
+        
         return $stmt->getQuery()->getResult();
     }
 

@@ -53,7 +53,7 @@ class ProductController extends AbstractController
      CategoryRepository $category, StateRepository $state ): Response
     {
         // Nombre d'éléments par page
-        $limit = 12;
+        $limit = 5;
         $page= $request->query->get("page", 1);
 
         // Moteur de recherche interne
@@ -152,6 +152,7 @@ class ProductController extends AbstractController
                 , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"          
             );
             }
+            
             return $this->redirectToroute('product_display', array(
                 'id' =>$product->getId(),
             ));
