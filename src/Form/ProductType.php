@@ -66,11 +66,13 @@ class ProductType extends AbstractType
                 ))
 
             ->add('endAt', DateType::class, array(
-                'label' => "Disponible jusqu'au ? *",
+                'label' => "Date d'expiration*",
                 'widget' => 'single_text',
-                'attr' => array(
+                'years'  => range(date('Y'), date('Y') +1),  
+                'months'  => range(date('m'), date('m')),    
+                'attr'  => array(
                 'placelholder'=>'Date',
-                'class' => 'd-flex' 
+                'class' => 'd-flex'  
                 )
                 ))
 
