@@ -74,6 +74,7 @@ class ProductRepository extends ServiceEntityRepository
         $stmt = $this->createQueryBuilder('p');
         
         $stmt->where('p.endAt > CURRENT_TIMESTAMP()');
+        $stmt->andWhere('p.enabled = 1');
         $stmt->setMaxResults(10);
         $stmt->orderBy('p.createdAt', 'DESC');
 

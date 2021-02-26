@@ -93,3 +93,8 @@ hr:not([size]) {
 .require {
     font-size: 14px;
 }
+
+.end p {
+    margin-bottom: 0;
+    color: red;
+}
