@@ -58,7 +58,7 @@ class ProductController extends AbstractController
 
         // Moteur de recherche interne
         $query = $request->query->get('q');
-        // Tri select
+        // Tri select par date, catégorie, état
         $sortDate   = $request->query->get('sortDate');
         $sortCat = $request->query->get('sortCat');
         $sortState = $request->query->get('sortState');
@@ -90,9 +90,9 @@ class ProductController extends AbstractController
         // Annonce de l'ID correspondant
         $product = $this->productService->getOne($id);
 
-        if (empty($product) || $product->getEnabled() == false) {
-            throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
-        }
+        // if (empty($product) || $product->getEnabled() == false) {
+        //     throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
+        // }
 
         // Annonces postées par le donneur
         $productByUser = $this->productService->getBy('user', $product->getUser());
@@ -153,31 +153,44 @@ class ProductController extends AbstractController
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
-     FileUploader $fileUploader, UserRepository $userRepo): Response
+     FileUploader $fileUploader, UserRepository $userRepo, MailerInterface $mailer ): Response
     {
-        $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
+        $products = new Product();
+        $form = $this->createForm(ProductType::class, $products);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()  )
-        {
+        {   //Récupération de la photo 
             $picture = $form->get('picture')->getData();
-            $product->setUser($this->getUser());
+            $products->setUser($this->getUser());
             if ($picture) {
                 $pictureFileName = $fileUploader->upload($picture);
-                $product->setPicture($pictureFileName);
+                $products->setPicture($pictureFileName);
 
-                $this->em->persist($product);
+                $this->em->persist($products);
                 $this->em->flush();
-                $this->addFlash(
-                'success',
-                "Félicitations ! Votre annonce est enregistrée
-                , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"          
+
+                 //envoi du mail de confirmation d'enregistrement de l'objet
+                  $mailR = new Email();
+                  $mailR->from('larecyclotte@gmail.com');
+                  $mailR->to($products->getUser()->getEmail());
+                  $mailR->subject('Enregistrement de votre annonce');
+ 
+                 //affichage de la vue dédié dans le corps du mail
+                 $view = $this->renderView('mail/confirm-register-product.html.twig', array(
+                    "product" => $products
+                 ));
+                 $mailR->html($view);
+ 
+                 $mailer->send($mailR);
+
+                $this->addFlash('success', "Félicitations ! Votre annonce est enregistrée
+                , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"           
             );
             }
             
             return $this->redirectToroute('product_display', array(
-                'id' =>$product->getId(),
+                'id' =>$products->getId(),
             ));
             
         }

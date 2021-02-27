@@ -64,6 +64,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         $stmt = $this->createQueryBuilder('p');
         $stmt->select('COUNT(p)');
+        $stmt->where('p.endAt > CURRENT_TIMESTAMP()');
+        $stmt->andwhere('p.enabled = 1');
     
          return $stmt->getQuery()->getSingleScalarResult();   
     }

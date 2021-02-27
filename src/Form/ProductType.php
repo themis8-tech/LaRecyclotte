@@ -68,7 +68,7 @@ class ProductType extends AbstractType
             ->add('endAt', DateType::class, array(
                 'label' => "Disponible jusqu'au ? *",
                 'widget' => 'single_text',
-                'empty_data' => 'null',  
+                'empty_data' => '',  
                 'attr'  => array(
                 'class' => 'd-flex'  
                 )
