@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Service\FileUploader;
@@ -22,10 +23,10 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
 * @Route("/product", name="product_")
@@ -64,8 +65,8 @@ class ProductController extends AbstractController
         $sortState = $request->query->get('sortState');
 
         $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState, $page, $limit);
-        $total = $this->productService->getTotalProducts();                                               
-       
+        $total = $this->productService->getTotalProducts(); 
+
         $category = $this->categoryService->getAll();
         $state = $this->stateService->getAll();
         
@@ -153,11 +154,13 @@ class ProductController extends AbstractController
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
-     FileUploader $fileUploader, UserRepository $userRepo, MailerInterface $mailer): Response
+     FileUploader $fileUploader, UserRepository $userRepo, MailerInterface $mailer ): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
+        //$entity->setEndAt(new DateTime('now'));
+      
 
         if($form->isSubmitted() && $form->isValid()  )
         {
@@ -169,19 +172,20 @@ class ProductController extends AbstractController
 
                 $this->em->persist($product);
                 $this->em->flush();
-                //envoi du mail de confirmation d'enregistrement de l'objet
-                $mailR = new Email();
-                $mailR->from('larecyclotte@gmail.com');
-                $mailR->to($product->getUser()->getEmail());
-                $mailR->subject('Enregistrement de votre annonce');
+                 //envoi du mail de confirmation d'enregistrement de l'objet
+                 $mailR = new Email();
+                 $mailR->from('larecyclotte@gmail.com');
+                 $mailR->to($product->getUser()->getEmail());
+                 $mailR->subject('Enregistrement de votre annonce');
 
-               //affichage de la vue dédié dans le corps du mail
-               $view = $this->renderView('mail/confirm-register-product.html.twig', array(
-                  "product" => $product
-               ));
-               $mailR->html($view);
+                //affichage de la vue dédié dans le corps du mail
+                $view = $this->renderView('mail/confirm-register-product.html.twig', array(
+                   "product" => $product
+                ));
+                $mailR->html($view);
 
-               $mailer->send($mailR);
+                $mailer->send($mailR);
+
                 $this->addFlash(
                 'success',
                 "Félicitations ! Votre annonce est enregistrée

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product - {{ parent() }}{% endblock %}
+{% block title %}Listes des objets disponibles - {{ parent() }}{% endblock %}
 
 
 {% block stylesheets %}
@@ -62,6 +62,31 @@
             </div>
 
     </form>
+    {# <div class= "d-flex flex-column align-items-center form-product  mb-5" >
+            {{ form_start (form, {
+                'attr': {'novalidate':'validate'},
+                'method':'POST',
+            })
+            }}
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.order ) }}        
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class = "col">
+                        {{ form_row( form.category ) }}        
+                    </div>
+                    <div class = "col">
+                       {{ form_row( form.state ) }}     
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3 justify-content-center">
+                    <button class=" col-4 col-sm-6 col-xs-12 btn btn-action text-center">Enregistrer</button>
+                </div>
+            {{ form_end (form) }}
+    </div> #}
+    
     {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
@@ -82,9 +107,7 @@
         </div>
     </div>
 
-
     {# liste des objets #}
-
     {% for product in products %}
         <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-3">
             <div class="card product-card margin-cards">

@@ -84,3 +84,9 @@ body{
     color: var(--darkGrey);
  }
 
+ @media (max-width: 1200px){
+   .nav-wrap {
+       flex-wrap: wrap;
+       
+   }
+}

@@ -21,7 +21,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     // Requete de recherche form general
-    public function search($query, $sortDate, $sortCat, $sortState, $page, $limit)
+    public function search($query, $order, $category, $state, $page, $limit)
     { 
         $stmt = $this->createQueryBuilder('p');
         $stmt->where('p.endAt > CURRENT_TIMESTAMP()');
@@ -38,20 +38,20 @@ class ProductRepository extends ServiceEntityRepository
 
             $stmt->setParameter('query', '%' . $query . '%'); 
         }
-        if(!empty($sortCat))
+        if(!empty($category))
         {
             $stmt->leftJoin('p.category', 'c');
             $stmt->andWhere('c.name LIKE :sort1');
-           $stmt->setParameter('sort1', '%' . $sortCat . '%');
+            $stmt->setParameter('sort1', '%' . $category . '%');
         }
-         if(!empty($sortState))
+         if(!empty($state))
         {
             $stmt->leftJoin('p.state', 's');
             $stmt->andWhere('s.name LIKE :sort');
-            $stmt->setParameter('sort', '%' . $sortState . '%');
+            $stmt->setParameter('sort', '%' . $state . '%');
         }
         
-        $stmt->orderby('p.createdAt', $sortDate);
+        $stmt->orderby('p.createdAt', 'ASC');
         $stmt->setFirstResult(($page * $limit) - $limit);
         $stmt->setMaxResults($limit);
         //dd($stmt->getQuery());
