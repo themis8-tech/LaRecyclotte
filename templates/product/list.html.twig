@@ -86,31 +86,33 @@
     {# liste des objets #}
 
     {% for product in products %}
-    <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-3">
-        <div class="card product-card margin-cards">
-            <figure>
-                <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img"
-                    alt="{{ product.title }}">
-            </figure>
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h4 class="card-title bold">{{ product.title }}</h4>
-                    <p class="blue bold">{{ product.state.name }}</p>
-                </div>
-                <img class="pe-2" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie {{ product.category.name }}" style="height: 22px;">
-                <p class="blue bold">{{ product.category.name }}</p>
-                <p class="card-text"><i class="fas fa-map-marker-alt orange"> </i> {{ product.city }}
-                    ({{ product.zipcode.code }})</p>
-                <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
-                <hr>
-                <div class="text-center">
-                    <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">
-                    Voir l'objet en détail</a>
-                       
-                </div>
-            </div> 
+        <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-3">
+            <div class="card product-card margin-cards">
+                <figure>
+                    <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img"
+                        alt="{{ product.title }}">
+                </figure>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between baseligne">
+                        <h4 class="card-title bold">{{ product.title }}</h4>
+                        <p class="blue bold">{{ product.state.name }}</p>
+                    </div>
+                    <div class ="baseligne">
+                    <p class="d-flex align-items-center "> 
+                        <img class="pe-2" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie {{ product.category.name }}" style="height: 22px;">
+                        {{ product.category.name }}</p>
+                    </div>
+                    <p class="card-text"><i class="fas fa-map-marker-alt orange"> </i> {{ product.city }}
+                        ({{ product.zipcode.code }})</p>
+                    <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
+                    <hr>
+                    <div class="text-center">
+                        <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">
+                        Voir l'objet en détail</a>
+                    </div>
+                </div> 
+            </div>
         </div>
-    </div>
     {% endfor %}
 
 </div> {#  fin container #}
