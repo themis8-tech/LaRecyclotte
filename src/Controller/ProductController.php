@@ -58,7 +58,7 @@ class ProductController extends AbstractController
 
         // Moteur de recherche interne
         $query = $request->query->get('q');
-        // Tri select par date, catégorie, état
+        // Tri select
         $sortDate   = $request->query->get('sortDate');
         $sortCat = $request->query->get('sortCat');
         $sortState = $request->query->get('sortState');
@@ -90,9 +90,9 @@ class ProductController extends AbstractController
         // Annonce de l'ID correspondant
         $product = $this->productService->getOne($id);
 
-        // if (empty($product) || $product->getEnabled() == false) {
-        //     throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
-        // }
+        if (empty($product) || $product->getEnabled() == false) {
+            throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
+        }
 
         // Annonces postées par le donneur
         $productByUser = $this->productService->getBy('user', $product->getUser());
@@ -153,45 +153,45 @@ class ProductController extends AbstractController
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
-     FileUploader $fileUploader, UserRepository $userRepo, MailerInterface $mailer ): Response
+     FileUploader $fileUploader, UserRepository $userRepo, MailerInterface $mailer): Response
     {
-        $products = new Product();
-        $form = $this->createForm(ProductType::class, $products);
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()  )
-        {   //Récupération de la photo 
+        {
             $picture = $form->get('picture')->getData();
-            $products->setUser($this->getUser());
+            $product->setUser($this->getUser());
             if ($picture) {
                 $pictureFileName = $fileUploader->upload($picture);
-                $products->setPicture($pictureFileName);
+                $product->setPicture($pictureFileName);
 
-                $this->em->persist($products);
+                $this->em->persist($product);
                 $this->em->flush();
+                //envoi du mail de confirmation d'enregistrement de l'objet
+                $mailR = new Email();
+                $mailR->from('larecyclotte@gmail.com');
+                $mailR->to($product->getUser()->getEmail());
+                $mailR->subject('Enregistrement de votre annonce');
 
-                 //envoi du mail de confirmation d'enregistrement de l'objet
-                  $mailR = new Email();
-                  $mailR->from('larecyclotte@gmail.com');
-                  $mailR->to($products->getUser()->getEmail());
-                  $mailR->subject('Enregistrement de votre annonce');
- 
-                 //affichage de la vue dédié dans le corps du mail
-                 $view = $this->renderView('mail/confirm-register-product.html.twig', array(
-                    "product" => $products
-                 ));
-                 $mailR->html($view);
- 
-                 $mailer->send($mailR);
+               //affichage de la vue dédié dans le corps du mail
+               $view = $this->renderView('mail/confirm-register-product.html.twig', array(
+                  "product" => $product
+               ));
+               $mailR->html($view);
 
-                $this->addFlash('success', "Félicitations ! Votre annonce est enregistrée
-                , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"           
+               $mailer->send($mailR);
+                $this->addFlash(
+                'success',
+                "Félicitations ! Votre annonce est enregistrée
+                , celle-ci sera publiée sous 24h. Merci d'avoir choisi La Recyclotte"          
             );
             }
             
-            return $this->redirectToroute('product_display', array(
-                'id' =>$products->getId(),
-            ));
+            return $this->redirectToroute('main_home');
+               
+           
             
         }
 
