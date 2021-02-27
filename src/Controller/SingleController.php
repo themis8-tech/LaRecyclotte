@@ -72,6 +72,7 @@ class SingleController extends AbstractController
 
     public function contact(Request $request, MailerInterface $mailer)
     {
+
         $user = new User();
         $contact = new Contact();
         $form = $this->createForm(ContactType::class);
@@ -80,6 +81,20 @@ class SingleController extends AbstractController
 
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            //envoi du mail
+            $mail = (new Email())
+            ->from('larecyclotte@gmail.com')
+            ->to($user->getEmail())
+            ->subject('envoi de mail de confirmation');
+
+            //affichage de la vue dédié dans le corps du mail
+            $view = $this->renderView('mail/exemple.html.twig', array(
+                'user' => $user,
+            ));
+            $mail->html($view);
+
+            $mailer->send($mail);
 
             $contactFormData = $form->getData();
 
@@ -92,21 +107,8 @@ class SingleController extends AbstractController
                     'text/plain');
             $mailer->send($message);
 
-            //envoi du mail
-            $mail = new Email();$mail->from('larecyclotte@gmail.com');
-            $mail->to($user->getEmail());
-            $mail->subject('Message de notification');
 
 
-
-
-            //affichage de la vue dédié dans le corps du mail
-            $view = $this->renderView('mail/notification-mail.html.twig', array(
-                'user' => $user,
-            ));
-            $mail->html($view);
-
-            $mailer->send($mail);
 
 
 
@@ -121,22 +123,6 @@ class SingleController extends AbstractController
             'our_form' => $form->createView()
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
