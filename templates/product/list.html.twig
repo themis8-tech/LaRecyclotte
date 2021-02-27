@@ -8,12 +8,14 @@
 {% endblock %}
 
 {% block body %}
+{% set result = (products|length)  %}
+{% set resultSortPage = (result / limit)|round(0,'ceil') %}
 {% set pages = (total / limit)|round(0,'ceil') %}
-{# {{ dump (app.request.query) }} #}
-<div class="background-white px-5 py-3">
-    <span>Accueil > </span>
-    <span class="bold">Liste des Objets</span>
-</div>
+{% set sortDate = app.request.query.get('sortDate') %}
+{% set sortCat = app.request.query.get('sortCat') %}
+{% set sortState = app.request.query.get('sortState') %}
+
+
 
 <div class="container-fluid background"> {# ouverture du container  #}
     {# titre #}
@@ -27,9 +29,9 @@
         <div class="row g-3 justify-content-center">
             <div class="col-sm-12 col-md-3 col-lg-2">
                 <select name="sortDate" class="form-select form-select-sm">
-                    <option value="DESC" {% if "DESC" == app.request.query.get('sortDate') %}selected{% endif %}>
+                    <option value="DESC" {{ (sortDate == 'DESC') ? "selected"  : '' }}>
                         Tri : Plus récents</option>
-                    <option value="ASC" {% if "ASC" == app.request.query.get('sortDate') %}selected{% endif %}>
+                    <option value="ASC" {{ (sortDate == 'ASC') ? "selected"  : '' }}>
                         Tri : Plus anciens</option>
                 </select>
             </div>
@@ -37,9 +39,9 @@
                 <select name="sortCat" class="form-select form-select-sm">
                     <option value="">Catégorie : Toutes les catégories</option>
                     {% for cat in category %}
-                    <option value="{{ cat.name }}"
-                        {% if cat.name == app.request.query.get('sortCat') %}selected{% endif %}>
-                        Catégorie : {{ cat.name }}</option>
+                    <option value="{{ cat.name }}" {{ (cat.name == sortCat) ? "selected" : '' }}>
+                        Catégorie : {{ cat.name }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -48,7 +50,7 @@
                     <option value="">Filtre : Tous les états</option>
                     {% for stat in state %}
                     <option value="{{ stat.name }}"
-                        {% if stat.name == app.request.query.get('sortState') %}selected{% endif %}>
+                        {{ ( stat.name == sortState) ? "selected" : ''}}>
                         Etat : {{ stat.name }}</option>
                     {% endfor %}
                 </select>
@@ -63,9 +65,9 @@
     {# infos resultat #}
     <div class="row text-center mt-2 ">
         <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {{ products|length }}</span>
-                - Objets par pages :<span class="blue"> {{ limit }}</span>
-                - Nombre de pages :<span class="blue"> {{ pages }}</span></p>
+            <p>Objets disponibles: <span class="blue"> {% if sortState or sortCat  is not empty %} {{result}} {% else %}{{total}} {% endif %} </span>
+                - Objets par pages :<span class="blue"> {{ result }}</span>
+                - Nombre de pages :<span class="blue"> {% if sortState or sortCat  is not empty %} {{ (result / limit)|round(0,'ceil')}} {% else %}{{ pages }} {% endif %}</span></p>
         </div>
         <div>
             {% if products is empty %}
@@ -75,9 +77,8 @@
     </div>
     <hr>
     <div class="row text-center">
-        <div class="col-sm-6 col-md-4 justify-content-start">
+        <div class="col-sm-6 col-md-6 col-lg- justify-content-start">
             <p>Page: <span class="blue">{{ page }}</span>
-                - Objets: <span class="blue">{{ products|length }}</span> sur {{ products|length  }}
         </div>
     </div>
 
@@ -85,7 +86,7 @@
     {# liste des objets #}
 
     {% for product in products %}
-    <div class="col-lg-3 col-md-4 d-flex justify-content-center my-3">
+    <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-3">
         <div class="card product-card margin-cards">
             <figure>
                 <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img"
@@ -95,17 +96,19 @@
                 <div class="d-flex justify-content-between">
                     <h4 class="card-title bold">{{ product.title }}</h4>
                     <p class="blue bold">{{ product.state.name }}</p>
-                    <p class="blue bold">{{ product.category.name }}</p>
                 </div>
-                <p class="card-text"><i class="fas fa-map-marker-alt orange"></i>{{ product.city }}
+                <img class="pe-2" src="{{asset('build/images/' ~ product.category.icon)}}" alt="Catégorie {{ product.category.name }}" style="height: 22px;">
+                <p class="blue bold">{{ product.category.name }}</p>
+                <p class="card-text"><i class="fas fa-map-marker-alt orange"> </i> {{ product.city }}
                     ({{ product.zipcode.code }})</p>
                 <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                 <hr>
                 <div class="text-center">
-                    <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">Voir l'objet en
-                        détail</a>
+                    <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">
+                    Voir l'objet en détail</a>
+                       
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
     {% endfor %}
@@ -121,11 +124,20 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            {% for item in 1..pages %}
-            <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+            {% if sortState or sortCat  is not empty %}
+            {% for item in 1..resultSortPage %}
+              <li class="page-item {{ ( page == item) ? 'active' : ''}}">
                 <a class="page-link" href="?page={{ item }}">{{ item }}</a>
-            </li>
+             </li>
             {% endfor %}
+            {% else %}
+             {% for item in 1..pages %}
+                <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+                    <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+                </li>
+             {% endfor %}   
+            {% endif %}
+            
             <li class="page-item">
                 <a class="page-link" href="?page={{page + 1 }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -138,5 +150,5 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ encore_entry_script_tags('page_product') }}
+    {{ encore_entry_script_tags('page_product') }}
 {% endblock %}

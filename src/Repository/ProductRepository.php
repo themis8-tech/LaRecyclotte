@@ -24,13 +24,15 @@ class ProductRepository extends ServiceEntityRepository
     public function search($query, $sortDate, $sortCat, $sortState, $page, $limit)
     { 
         $stmt = $this->createQueryBuilder('p');
+        $stmt->where('p.endAt > CURRENT_TIMESTAMP()');
+        $stmt->andwhere('p.enabled = 1');
         
         //si query est vide : affichage de tous les produits sinon apllication des filtres
         if(!empty($query)){
             
             $stmt->leftJoin('p.category', 'c');
 
-            $stmt->where('p.title LIKE :query');
+            $stmt->andwhere('p.title LIKE :query');
             $stmt->orwhere('c.name LIKE :query');
             $stmt->orwhere('p.city LIKE :query');
 
@@ -50,8 +52,8 @@ class ProductRepository extends ServiceEntityRepository
         }
         
         $stmt->orderby('p.createdAt', $sortDate);
-        // $stmt->setFirstResult(($page * $limit) - $limit);
-        // $stmt->setMaxResults($limit);
+        $stmt->setFirstResult(($page * $limit) - $limit);
+        $stmt->setMaxResults($limit);
         //dd($stmt->getQuery());
         
         
@@ -72,6 +74,7 @@ class ProductRepository extends ServiceEntityRepository
         $stmt = $this->createQueryBuilder('p');
         
         $stmt->where('p.endAt > CURRENT_TIMESTAMP()');
+        $stmt->andWhere('p.enabled = 1');
         $stmt->setMaxResults(10);
         $stmt->orderBy('p.createdAt', 'DESC');
 

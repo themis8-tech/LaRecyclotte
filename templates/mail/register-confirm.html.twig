@@ -1,0 +1,25 @@
+{% include "mail/components/header.html.twig" %}
+
+
+{% include "mail/components/start-bloc.html.twig" %}
+
+<h1>Réinitialisation du mot de passe</h1>
+
+<p>
+	Bonjour
+	{{ user.username }},
+	<br><br>
+	Votre inscription sur la Recyclotte à bien été effectuée
+	<br>
+	Vous pouvez dès à présent vous connecter sur
+	<a href="{{ absolute_url ( path('main_home') ) }}">votre compte</a>
+	pour poster vos annonces et gérer vos informations personnelles.
+
+	<br>
+
+	Merci et à bientôt sur la Recyclotte !
+</p>
+
+{% include "mail/components/end-bloc.html.twig" %}
+
+{% include "mail/components/footer.html.twig" %}
