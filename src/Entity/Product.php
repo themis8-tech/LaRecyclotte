@@ -42,7 +42,7 @@ class Product
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/bmp"},
      *     mimeTypesMessage = "La phot doit être au format : png, jpeg, webp, bmp, webp")
      *
-     * @Assert\NotBlank(message="Vous devez joindre une photos !")
+     * @Assert\NotBlank(message="Vous devez joindre une photo !")
      * @ORM\Column(type="string", length=255)
      */
     private $picture;
@@ -71,7 +71,7 @@ class Product
 
     /**
      * @Assert\NotBlank(message="Vous devez saisir une date de début")
-     * @Assert\GreaterThan("today", message="Vous ne pouvez pas choisir une date antérieur")
+     * @Assert\GreaterThan( "today", message="Vous ne pouvez pas choisir une date antérieur")
      * @ORM\Column(type="date")
      */
     private $endAt;
@@ -112,7 +112,8 @@ class Product
     public function __construct()
     {
   
-        $this->enabled = true;
+        $this->enabled = false;
+        
        
     }
 

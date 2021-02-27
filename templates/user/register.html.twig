@@ -6,6 +6,10 @@
 
 {% form_theme form 'bootstrap_4_layout.html.twig'%}
 
+{% block stylesheets %}
+	{{ encore_entry_link_tags('page_product-display') }}
+{% endblock %}
+
 {% block body %}
 
 	<h1 class="text-center my-3 title-form">Creer votre compte</h1>
@@ -36,17 +40,22 @@
 				{{form_row (form.plainPassword)}}
 			</div>
 
-			<div class="mb-4 label-color">
-				{{form_row (form.CGU)}}
+			<div class="d-flex justify-content-between">
+				<div class="mb-4 label-color">
+					{{form_row (form.CGU)}}
+				</div>
+
+				<div class="require grey ">
+					* champs obligatoires
+				</div>
 			</div>
 
-
 			<div class="row d-flex justify-content-center">
-			<button class="btn btn-action col-6 mb-3 p-0" type="submit">Creer</button>
+				<button class="btn btn-action col-6 mb-3 p-0" type="submit">Creer</button>
 			</div>
 			{{form_end (form)}}
 
 		</div>
-		
+
 	</div>
 {% endblock %}

@@ -66,4 +66,29 @@ class UserAccountController extends AbstractController
         return $this->render('user_account/myproducts.html.twig');
 
     }
+
+    /**
+     * 
+     * @Route("/supprimer_profil"), name="delete_profile")
+     * @return Response
+     */
+    public function deleteUser(Request $request)
+    {
+        $active = 'delete';
+        $user = $this->getUser();
+
+        if($user == null)
+        {
+            return $this->redirect($this->generateUrl('profile'));
+        }
+
+        $form = $this->createFormBuilder()->getForm;
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+        }
+    }
 }
