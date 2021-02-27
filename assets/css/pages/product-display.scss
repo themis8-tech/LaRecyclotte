@@ -94,7 +94,9 @@ hr:not([size]) {
     font-size: 14px;
 }
 
-.end p {
-    margin-bottom: 0;
-    color: red;
+.preview {
+    font-size: 18px;
+    font-family: 'Sansation Bold', sans-serif;
+    color: #fff;;
+    background-color: var(--grey);
 }
