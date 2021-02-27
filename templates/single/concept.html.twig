@@ -8,64 +8,67 @@
 
 {% block body %}
 
-    <section class="banner">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6 text-center align-v">
-                    <h2>La Recyclotte, pour une <strong>consommation responsable</strong>.</h2>
 
+        <div class="py-5 justify-content-center text-center">
+            <h2>La Recyclotte, pour une <strong>consommation responsable</strong>.</h2>
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="mb-3 mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <img src="{{asset('build/images/don.jpg')}}" class="card-img-don" alt="...">
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
+                                De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
+                                </p>                        
+                                </div>
+
+                        <div class="card-body">
+                            <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
+                                Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
+                                </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <h2 class="container-text py-3 text-center">Notre concept</h2>
-    
-    <div class="container text-center">
-        <div class="w-60">
-            <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
-            De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
-            </p>
-        </div>
+        <br><br><br><br>
 
-        <br>
-        
-        <div class="w-60">
-            <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
-            Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
-            </p>
-        </div>
-    </div>
+        <div class="container flex-wrap d-flex justify-content-around">
 
-    <br><br>
-
-    <div class="container flex-wrap d-flex justify-content-around">
-
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top product-img" src="{{asset('build/images/solidarité.jpg')}}" alt="solidarité">
-            <div class="card-body">
-                <h3>Solidarité </h3>
-            <p class="card-text">Notre approche se base sur le partage et la communauté.<br>Nous pouvons tous collaborer et nous entraider en effectuant un geste simple, comme le don.</p>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top product-img" src="{{asset('build/images/solidarité.jpg')}}" alt="solidarité">
+                <div class="card-body">
+                    <h3>Solidarité </h3>
+                <p class="card-text">Notre approche se base sur le partage et la communauté.<br>Nous pouvons tous collaborer et nous entraider en effectuant un geste simple, comme le don.</p>
+                </div>
             </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top product-img" src="{{asset('build/images/écologie.jpg')}}" alt="écologie">
+                <div class="card-body">
+                    <h3>Ecologie</h3>
+                <p class="card-text">Dans un souci de préservation de notre environnement, ne jetons plus ce qui peut encore être utlisé.<br>La protection de notre patrimoine naturel n'exclut personne. Agissons responsablement.</p>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top product-img" src="{{asset('build/images/simplicité.jpeg')}}" alt="simplicité">
+                <div class="card-body">
+                    <h3>Simplicité</h3>
+                <p class="card-text">La Recyclotte vous simplifie les choses en proposant une plate-forme simple d'accès et d'utilisation. </p>
+                </div>
+            </div>        
+            <br>
         </div>
 
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top product-img" src="{{asset('build/images/écologie.jpg')}}" alt="écologie">
-            <div class="card-body">
-                <h3>Ecologie</h3>
-            <p class="card-text">Dans un souci de préservation de notre environnement, ne jetons plus ce qui peut encore être utlisé.<br>La protection de notre patrimoine naturel n'exclut personne. Agissons responsablement.</p>
-            </div>
-        </div>
-
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top product-img" src="{{asset('build/images/simplicité.jpeg')}}" alt="simplicité">
-            <div class="card-body">
-                <h3>Simplicité</h3>
-            <p class="card-text">La Recyclotte vous simplifie les choses en proposant une plate-forme simple d'accès et d'utilisation. </p>
-            </div>
-        </div>        
-        <br>
-    </div>
+    </div>  
 
     <br>
     <br>
