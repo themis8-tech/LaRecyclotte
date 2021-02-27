@@ -53,7 +53,7 @@ class ProductController extends AbstractController
      CategoryRepository $category, StateRepository $state ): Response
     {
         // Nombre d'éléments par page
-        $limit = 5;
+        $limit = 15;
         $page= $request->query->get("page", 1);
 
         // Moteur de recherche interne

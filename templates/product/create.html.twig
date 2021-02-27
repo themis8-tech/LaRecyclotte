@@ -9,13 +9,8 @@
 {% form_theme form 'bootstrap_4_layout.html.twig'%}
 {% block body %}
 
-
-<div class="background-white px-5 py-3">
-    <span>Accueil > </span>
-    <span class="bold">Donner un objet</span>
-</div>
 <div class="container justify-content-center col-sm-8 col-md-8 col-lg-8  mt-3">
-    <div class = " text-center pt-5" >
+    <div class = " text-center pt-3" >
         <h1 >Donner un objet</h1>
         <h2>Dans la <span class="bold">métropole lilloise</span></h2> 
     </div>
@@ -50,7 +45,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class = "col">
-                        {{ form_row( form.city ) }}        
+                        {{ form_row( form.city )}}       
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -60,7 +55,7 @@
                 </div>           
                 <div class="row mt-3">
                     <div class = "col form">
-                        {{ form_row( form.endAt ) }}        
+                        {{ form_row( form.endAt, { attr: {value : "now"|date("m/d/Y") }}) }}        
                     </div>
                 </div>
                 <div class="row mt-3 mb-3 justify-content-center">
