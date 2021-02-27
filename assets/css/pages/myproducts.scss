@@ -85,11 +85,19 @@ hr:not([size]) {
 .product-card{
     border-radius: 15px;
 }
+
 .product-img{
     border-radius: 15px 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.products .fa-map-marker-alt {
+.products figure{
+    height: 300px;
+}
+
+.card .fa-map-marker-alt {
     font-size: 16px;
     padding: 0 0.3em 0 0;
 }

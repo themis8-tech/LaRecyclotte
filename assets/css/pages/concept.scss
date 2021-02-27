@@ -32,7 +32,8 @@ h4 {
 }
 
 /* BANNER */
-.banner {
+.banner{
+    content: "";
     background-image: url("../../images/don.jpg");
     height: calc(100vh - 160px);
     min-height: 400px;
@@ -108,6 +109,18 @@ hr:not([size]) {
 /* PRODUCTS */
 .products {
     background-color: var(--lightGrey);
+}
+
+.product-img{
+    
+    width: 50;
+    height: 50%;
+    object-fit: cover;
+}
+
+
+.card{
+    height: 30rem;
 }
 
 /* ------------------------------------------ */
