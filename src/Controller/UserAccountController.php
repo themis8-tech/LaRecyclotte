@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Session\Session;
+use App\Entity\User;
 
 /**
  * @Route("", name="user_account_")
@@ -68,27 +69,31 @@ class UserAccountController extends AbstractController
     }
 
     /**
-     * 
-     * @Route("/supprimer_profil"), name="delete_profile")
+     * @Route("/suppression_compte", name="deleteuserPage")
      * @return Response
      */
-    public function deleteUser(Request $request)
+    public function deleteuserPage()
     {
-        $active = 'delete';
-        $user = $this->getUser();
+        return $this->render('user_account/deleteuser.html.twig');
 
-        if($user == null)
-        {
-            return $this->redirect($this->generateUrl('profile'));
-        }
-
-        $form = $this->createFormBuilder()->getForm;
-
-        if($form->handleRequest($request)->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
-        }
     }
+
+    /**
+     * @Route("/suppression_compte/{id}", name="deleteuser")
+     * @method({"DELETE"})
+     */
+    public function deleteUser($id)
+    {
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+                
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre compte a bien été supprimé !');
+
+        return $this->redirectToRoute('main_home');
+    }
+
 }
