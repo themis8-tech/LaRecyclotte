@@ -1,0 +1,22 @@
+
+{% include "mail/components/header.html.twig" %}
+
+{% include "mail/components/start-bloc.html.twig" %}
+
+    <p>Bonjour</p>
+
+    <p>Vous avez reçu un message de la part de <b>{{ contact.name }}</b></p>
+
+    <div style="background-color:#F1F1F1;padding:10px 20px">
+        <p>« {{ contact.message }} »</p>
+    </div>
+
+    <p>Merci de répondre à <b>{{ contact.name }}</b> par mail sur <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+        {% if contact.phone is not empty %}
+            ou par téléphone au {{ contact.phone }}.
+        {% endif %}
+        </p>
+    
+{% include "mail/components/end-bloc.html.twig" %}
+
+{% include "mail/components/footer.html.twig" %}

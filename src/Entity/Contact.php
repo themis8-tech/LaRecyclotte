@@ -2,7 +2,7 @@
 namespace App\Entity;
 
 
-
+use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,95 +19,77 @@ class Contact
 
     /**
      * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Regex(
-     * pattern="/[0-9]{10}/"
-     * )
+     * @Assert\Regex("/[0-9]/")
      */
     private $phone;
 
     /**
-     * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(message="Vous devez saisir une adresse mail")
+     * @Assert\Email(message="L'adresse mail n'est pas valide")
+     * @ORM\Column(type="string", length=95)
      */
     private $email;
 
     /**
-     * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\length(min=5)
+     * @Assert\NotBlank(message="Vous devez saisir un message")
+     * @Assert\Length(
+     *     min=30,
+     *     max=300,
+     *     minMessage="Votre message doit contenir au minimum {{ limit }} caractères",
+     *     maxMessage="Votre message doit contenir au maximum {{ limit }} caractères",
+     * )
      */
+     
     private $message;
 
 
-    /**
-     * @return string|null
-     */
+    
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     * @return Contact
-     */
-    public function setName(?string $name): Contact
+    
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
+    
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string|null $phone
-     * @return Contact
-     */
-    public function setPhone(?string $phone): Contact
+   
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
+    
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string|null $email
-     * @return Contact
-     */
-    public function setEmail(?string $email): Contact
+    
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
+   
     public function getMessage(): ?string
     {
         return $this->message;
     }
 
-    /**
-     * @param string|null $message
-     * @return Contact
-     */
-    public function setMessage(?string $message): Contact
+    
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
         return $this;
