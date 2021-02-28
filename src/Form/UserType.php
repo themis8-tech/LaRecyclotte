@@ -16,33 +16,33 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', null, array(
-                'label'=> "Prénom"
+                'label'=> "Prénom*"
             ))
 
             ->add('lastname', null, array(
-                'label'=> "Nom"
+                'label'=> "Nom*"
             ))
             
             ->add('username', null, array(
-                'label'=> "Nom d'utilisateur",
+                'label'=> "Nom d'utilisateur*",
                 'attr'=> array(
                     'placeholder'=> 'Choisissez un pseudonyme',
                     
                 )
             ))
             ->add('email', EmailType::class, array(
-                'label' => 'E-mail',
+                'label' => 'E-mail*',
                 
             ))
             ->add('plainPassword', PasswordType::class, array(
-                'label' => 'Mot de passe',
+                'label' => 'Mot de passe*',
                 'attr'=> array(
                     'placeholder'=> 'Minimum 8 caractères'
                 )
             ))
 
             ->add('CGU', CheckboxType::class, array(
-                'label' => "J'accepte les CGU",
+                'label' => "J'accepte les CGU*",
                 'required'=> false,
             ));
     }

@@ -1,188 +1,142 @@
-/* ------------ TITLE STYLE ------------ */
-h1 {
-    position: absolute;
-    top: -500px;
-}
-
-h2 {
-    font-family: "LT Emphasis Bold", sans-serif;
-    color: var(--blue);
-    font-size: 60px;
-}
-
-h3 {
-    font-family: "Sansation Regular", sans-serif;
-    color: var(--darkGrey);
-    font-size: 22px;
-}
-
-h4 {
-    font-family: "Sansation Regular", sans-serif;
-    color: var(--darkGrey);
-    font-size: 18px;
-}
-
-/* ------------ TEXT STYLE ------------ */
-.grey {
-    color: var(--grey);
-}
-
+/* ------------ GLOBAL STYLE PAGE ------------ */
 .container {
     max-width: 1140px;
 }
 
-/* ------------ BANNER ------------ */
-.banner {
-    background-image: url("../../images/la-recyclotte-banner.jpg");
-    height: calc(100vh - 160px);
-    min-height: 450px;
-    background-position: center 80%;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    position : relative;
-    border-bottom-right-radius: 25%;
-}
-
-.banner .align-v {
-    position: absolute;
-    top: 50%;
-    transform: translate(0%, -50%);
-}
-
-.banner h2, .banner h3, .banner p, .banner span {
-    color: #fff;
-}
-
-.banner h2 {
-    margin-bottom: 0.5em;
-}
-
-.banner h3 {
-    margin-bottom: 2em;
-    padding: 0 2em;
-}
-
-.banner .text-bigger {
-    font-size: 22px;
-}
-
-/* ------------ CONCEPT ------------ */
-.concept .container {
-    padding: 3em 0;
-}
-
-.title {
-    margin-top: 3em;
-    margin-bottom: 4em;
-}
-
 hr {
-    width: 13em;
-    margin: 4em auto 2.5em auto;
-    color: var(--grey);
-    border: transparent;
+    margin: 1rem auto;
+    width: 90%;
 }
 
-hr:not([size]) {
-    height: 3px;
+.profile .btn-action {
+    font-size: 18px;
 }
 
-.picto {
-    position: relative;
-    display: inline-block;
+/* ------------ NAV ------------ */
+.profile .navbar {
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px solid rgba(0,0,0,.125);
 }
 
-.process {
-    background-color: var(--blue);
-    width: 1.6em;
-    height: 1.6em;
-    color: #fff;
+.profile .navbar-nav {
+    width: 100%;
+}
+
+.profile .navbar-nav a {
+    font-size: 18px;
+    text-align: left;
+    border-radius: initial;
+}
+
+.row-col .col:first-child {
+    border-right: 3px solid rgba(0,0,0,.125);
+}
+
+.row-col .col {
+    flex: initial;
+}
+
+.profile .min-nav {
+    width: 285px;
+    margin: 0 auto;
+}
+
+.profile .navbar-nav a:not(.active):hover {
+    color: var(--darkGrey) !important;
+}
+
+.profile .nav-link.active {
+    background-color: transparent;
+    color: var(--blue) !important;
+}
+
+.navbar hr {
+    display: none;
+}
+
+/* ------------ PROFILE ------------ */
+.profile {
+    background-color: var(--lightGrey);
+    min-height: 700px;
+}
+
+.avatar {
     border-radius: 50%;
-    font-family: "LT Emphasis Bold", sans-serif;
-    font-size: 2.4em;
-    position : absolute;
-    bottom: -20px;
-    left: -30px;
 }
+
+.username {
+    font-size: 22px;
+    margin-left: 1em;
+}
+
+.profile .card a {
+    text-decoration: underline;
+}
+
+.product-profile .card-body {
+    padding: 2rem;
+}
+
 
 /* ------------ PRODUCTS ------------ */
-.products {
-    background-color: var(--lightGrey);
+.product-product .card-body {
+    padding: 1rem;
 }
 
-.margin-cards {
-    margin-right: 1em;
-    margin-left: 1em;
-    width: 20em;
-}
-
-.product-card{
-    border-radius: 15px;
-}
-.product-img{
-    border-radius: 15px 0;
-}
-
-.products .fa-map-marker-alt {
+.product-product .fa-map-marker-alt {
+    padding: 0 0.4em 0 0;
     font-size: 16px;
-    padding: 0 0.3em 0 0;
 }
 
-.blue {
-    color: var(--blue);
+.profile .product-img{
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Slider */
-.splide__arrow--prev {
-    left: calc(50% - 32px) !important;
+.profile figure {
+    height: 100%;
 }
 
-.splide__arrow--next {
-    right: calc(50% - 32px) !important;
-}
-
-.splide__arrow {
-    background: transparent !important;
-    top: calc(100% + 0.5em) !important;
+.profile .card-title {
+    font-size: 18px;
 }
 
 /* ------------ RESPONSIVE ------------ */
 
-@media (min-width: 1200px) {
+@media (min-width: 576px) {
 
-    /* BANNER */
-    .banner {
-        background-position: left 80%;
+    /* PRODUCTS */
+    .profile .product-img{
+        border-radius: 15px 0 0 15px;
     }
-
-    .banner .align-v {
-        padding: 0 5em;
-    }
-
+    
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 768px) {
 
-    /* BANNER */
-    .banner {
-        background-position: left 80%;
+    /* PRODUCTS */
+    .row-col {
+        flex-direction: column;
     }
 
-    .banner .align-v {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .navbar hr {
+        display: block;
+        margin: 0.5rem auto;
     }
 
-}
-
-@media (min-width: 1920px) {
-
-    /* BANNER */
-    .banner {
-        background-position: center 80%;
-        background-size: cover;
+    .row-col .col:first-child {
+        border-right: inherit;
     }
 
+    .row-col .col {
+        flex: 1 0 0%;
+    }
+
+    .profile .min-nav {
+        width: 100%;
+    }
+    
 }

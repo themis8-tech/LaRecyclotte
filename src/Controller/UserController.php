@@ -38,7 +38,7 @@ class UserController extends AbstractController
      *
      * @Route("/inscription", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -46,20 +46,40 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //encodage du mot de passe
             $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($encoded);
 
+            //enregistrement dans la bdd
             $this->em->persist($user);
             $this->em->flush();
 
-            $this->addFlash('success', 'Félicitations ! Votre compte a bien été créé');
+            //envoi du mail
+            $mail = new Email();
+            $mail->from('larecyclotte@gmail.com');
+            $mail->to($user->getEmail());
+            $mail->subject('Inscription sur la recyclotte');
+
+            //affichage de la vue dédié dans le corps du mail
+            $view = $this->renderView('mail/register-confirm.html.twig', array(
+                'user' => $user,
+            ));
+            $mail->html($view);
+
+            $mailer->send($mail);
+
+            $this->addFlash('success', 'Félicitations ! Votre compte a bien été créé. Vous allez recevoir un mail de confirmation.');
             return $this->redirectToRoute('main_home');
+        
         }
 
         return $this->render('user/register.html.twig', [
             'form' => $form->createView()
         ]);
     }
+
+
 
     /**
      *
@@ -139,7 +159,7 @@ class UserController extends AbstractController
             'message' => $message
         ));
     }
-    
+
     /**
      * @Route("/reset/confirm", name="reset_confirm")
      */
@@ -177,5 +197,4 @@ class UserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
 }

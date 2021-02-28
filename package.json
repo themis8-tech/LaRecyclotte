@@ -15,5 +15,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "force": "0.0.3"
     }
 }

@@ -19,25 +19,30 @@
         </div>
     </section>
 
-    <div class="container-text py-5 text-center">
-        <h2>Notre concept</h2>
-        <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
-        De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
-        </p>
+    <h2 class="container-text py-3 text-center">Notre concept</h2>
+    
+    <div class="container text-center">
+        <div class="w-60">
+            <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
+            De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
+            </p>
+        </div>
 
         <br>
-
-        <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
-        Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
-        </p>
+        
+        <div class="w-60">
+            <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
+            Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
+            </p>
+        </div>
     </div>
 
-    <br>    
+    <br><br>
 
-    <div class="container d-flex justify-content-around ">
+    <div class="container flex-wrap d-flex justify-content-around">
 
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{asset('build/images/solidarité.jpg')}}" alt="solidarité">
+            <img class="card-img-top product-img" src="{{asset('build/images/solidarité.jpg')}}" alt="solidarité">
             <div class="card-body">
                 <h3>Solidarité </h3>
             <p class="card-text">Notre approche se base sur le partage et la communauté.<br>Nous pouvons tous collaborer et nous entraider en effectuant un geste simple, comme le don.</p>
@@ -45,7 +50,7 @@
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" style="height: 12rem;" src="{{asset('build/images/écologie.jpg')}}" alt="écologie">
+            <img class="card-img-top product-img" src="{{asset('build/images/écologie.jpg')}}" alt="écologie">
             <div class="card-body">
                 <h3>Ecologie</h3>
             <p class="card-text">Dans un souci de préservation de notre environnement, ne jetons plus ce qui peut encore être utlisé.<br>La protection de notre patrimoine naturel n'exclut personne. Agissons responsablement.</p>
@@ -53,7 +58,7 @@
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{asset('build/images/simplicité.jpeg')}}" alt="simplicité">
+            <img class="card-img-top product-img" src="{{asset('build/images/simplicité.jpeg')}}" alt="simplicité">
             <div class="card-body">
                 <h3>Simplicité</h3>
             <p class="card-text">La Recyclotte vous simplifie les choses en proposant une plate-forme simple d'accès et d'utilisation. </p>
@@ -75,7 +80,13 @@
                 
                 <ul class="list-unstyled">
                     <li class="media">
-                        <img class="mr-3" src="{{asset('build/images/register-concept.png')}}" alt="Créez un compte">
+                        <div class="picto">
+                            <img class="mr-3" src="{{asset('build/images/register-concept.png')}}" alt="Créez un compte">
+                            <div class="process">1</div>
+                        </div>
+
+                        <br><br><br>    
+
                         <div class="media-body">
                             <h5 class="mt-0 mb-1">Créez votre compte</h5>
                             <br>
@@ -83,12 +94,19 @@
                         </div>
                     </li>
 
+                    <hr>
+
                     <li class="media my-4">
-                        <img class="mr-3" src="{{asset('build/images/post-concept.png')}}" alt="Déposez une annonce ou réservez un objet">
+                        <div class="picto">
+                            <img class="mr-3" src="{{asset('build/images/post-concept.png')}}" alt="Déposez une annonce ou réservez un objet">
+                            <div class="process">2</div>
+                        </div>
+
+                        <br><br><br>    
 
                         <div class="media-body">
                             <h5 class="mt-0 mb-1">Annoncez/réservez votre objet</h5>
-                            <br>
+                            <br><br>
                             <div class="container">
                                 <div class="row">
                                   <div class="col">
@@ -104,9 +122,18 @@
                         
                         </div>
                     </li>
+
+                    <hr>
+
                     
                     <li class="media">
-                        <img class="mr-3" src="{{asset('build/images/give-concept.png')}}" alt="Donnez ou récupérez un objet">
+                        <div class="picto">
+                            <img class="mr-3" src="{{asset('build/images/give-concept.png')}}" alt="Donnez ou récupérez un objet">
+                            <div class="process">3</div>
+                        </div>
+
+                        <br><br><br>    
+
                         <div class="media-body">
                             <h5 class="mt-0 mb-1">Donnez/récupérez votre objet</h5>
                             <br>

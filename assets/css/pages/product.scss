@@ -30,7 +30,7 @@ body{
 
 .product-card .fa-map-marker-alt {
    font-size: 16px;
-   padding: 0 0 0 0.2;
+   padding: 0;
 }
 
 .blue {
@@ -45,6 +45,10 @@ body{
 
 .card hr:not([size]) {
    height: 1px;
+}
+
+.baseligne{
+   align-items: baseline;
 }
 
 /*form ajout produit */
@@ -80,3 +84,9 @@ body{
     color: var(--darkGrey);
  }
 
+ @media (max-width: 1200px){
+   .nav-wrap {
+       flex-wrap: wrap;
+       
+   }
+}
