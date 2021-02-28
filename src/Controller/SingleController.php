@@ -3,19 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
-use App\Entity\User;
 use App\Form\ContactType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
 class SingleController extends AbstractController
 {
+   
     /**
      * @Route("/concept", name="concept")
      */
@@ -72,52 +72,44 @@ class SingleController extends AbstractController
 
     public function contact(Request $request, MailerInterface $mailer)
     {
-
-        $user = new User();
         $contact = new Contact();
-        $form = $this->createForm(ContactType::class);
-
+        $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()) {
 
             //envoi du mail
-            $mail = (new Email())
-            ->from('larecyclotte@gmail.com')
-            ->to($user->getEmail())
-            ->subject('envoi de mail de confirmation');
+            $mail = new Email();
+            $mail->from('larecyclotte@gmail.com');
+            $mail->to($contact->getEmail());
+            $mail->subject('Réception de votre message');
 
             //affichage de la vue dédié dans le corps du mail
-            $view = $this->renderView('mail/exemple.html.twig', array(
-                'user' => $user,
+            $view = $this->renderView('mail/contact-confirm.html.twig', array(
+                'contact' => $contact,
             ));
             $mail->html($view);
-
             $mailer->send($mail);
 
-            $contactFormData = $form->getData();
+            
+            //envoi de la notification
+            $notification = new Email();
+            $notification->from($contact->getEmail());
+            $notification->to('larecyclotte@gmail.com');
+            $notification->subject("Réception d'un nouveau message");
 
-            $message = (new Email())
-                ->from($contactFormData['email'])
-                ->to('larecyclotte@gmail.com')
-                ->subject('Mail recu')
-                ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
-                    $contactFormData['message'],
-                    'text/plain');
-            $mailer->send($message);
+            $viewNotification = $this->renderView('mail/contact-notification.html.twig', array(
+            'contact' => $contact,
+                ));
 
+            $notification->html($viewNotification);
+            $mailer->send($notification);
+            
+            $this->addFlash('success', 'Félicitations ! Votre message a bien été envoyé. Vous allez recevoir un mail de confirmation.');
+            return $this->redirectToRoute('main_home');
 
-
-
-
-
-            $this->addFlash('success', 'Votre message est envoyé;nous vous repondons rapidement');
-
-            return $this->redirectToRoute('contact');
         }
-
-
 
         return $this->render('single/contact.html.twig', [
             'our_form' => $form->createView()

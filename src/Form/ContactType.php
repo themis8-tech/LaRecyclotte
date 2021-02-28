@@ -18,27 +18,27 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,array(
-            'label'=> "Nom",
+            'label'=> "Nom*",
             'attr'=>array(
             'placeholder'=>'Entrez votre Nom'
             )
             ))
             ->add('phone',TelType::class,array(
-                'label'=> "Telephone",
+                'label'=> "Téléphone",
                 'attr'=>array(
-                    'placeholder'=>'Votre numero de téléphone'
+                    'placeholder'=>'Entrez votre numéro de téléphone'
                 )
             ))
             ->add('email',EmailType::class,array(
-                'label'=> "Email",
+                'label'=> "Email*",
                 'attr'=>array(
                     'placeholder'=>'Entrez votre Email'
                 )
             ))
             ->add('message',TextareaType::class,array(
-                'label'=> "Message",
+                'label'=> "Message*",
                 'attr'=>array(
-                    'placeholder'=>'Entrez votre Message'
+                    'placeholder'=>'Entrez votre message: minimum 30 caractères'
                 )
             ))
 
@@ -48,8 +48,10 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-
-
+            'data_class' => Contact::class,
+            'attr'=> array(
+                'novalidate' => 'novalidate',
+            ),
         ]);
     }
 }
