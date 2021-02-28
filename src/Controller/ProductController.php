@@ -54,7 +54,7 @@ class ProductController extends AbstractController
      CategoryRepository $category, StateRepository $state ): Response
     {
         // Nombre d'éléments par page
-        $limit = 15;
+        $limit = 10;
         $page= $request->query->get("page", 1);
 
         // Moteur de recherche interne
@@ -150,7 +150,7 @@ class ProductController extends AbstractController
 
     /**
     * @IsGranted("ROLE_USER")
-    * @Route("/create", name="create")
+    * @Route( "/create", name="create")
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
@@ -159,9 +159,7 @@ class ProductController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        //$entity->setEndAt(new DateTime('now'));
-      
-
+     
         if($form->isSubmitted() && $form->isValid()  )
         {
             $picture = $form->get('picture')->getData();
@@ -172,19 +170,20 @@ class ProductController extends AbstractController
 
                 $this->em->persist($product);
                 $this->em->flush();
+
                  //envoi du mail de confirmation d'enregistrement de l'objet
-                 $mailR = new Email();
-                 $mailR->from('larecyclotte@gmail.com');
-                 $mailR->to($product->getUser()->getEmail());
-                 $mailR->subject('Enregistrement de votre annonce');
+                 $mail = new Email();
+                 $mail->from('larecyclotte@gmail.com');
+                 $mail->to($product->getUser()->getEmail());
+                 $mail->subject('Enregistrement de votre annonce');
 
                 //affichage de la vue dédié dans le corps du mail
                 $view = $this->renderView('mail/confirm-register-product.html.twig', array(
                    "product" => $product
                 ));
-                $mailR->html($view);
+                $mail->html($view);
 
-                $mailer->send($mailR);
+                $mailer->send($mail);
 
                 $this->addFlash(
                 'success',
@@ -193,9 +192,9 @@ class ProductController extends AbstractController
             );
             }
             
-            return $this->redirectToroute('main_home');
-               
-           
+            return $this->redirectToroute('product_display', array(
+                'id' => $product->getId()
+            ));
             
         }
 
