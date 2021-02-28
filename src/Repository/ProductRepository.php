@@ -42,7 +42,7 @@ class ProductRepository extends ServiceEntityRepository
         {
             $stmt->leftJoin('p.category', 'c');
             $stmt->andWhere('c.name LIKE :sort1');
-           $stmt->setParameter('sort1', '%' . $sortCat . '%');
+            $stmt->setParameter('sort1', '%' . $sortCat . '%');
         }
          if(!empty($sortState))
         {
@@ -51,12 +51,19 @@ class ProductRepository extends ServiceEntityRepository
             $stmt->setParameter('sort', '%' . $sortState . '%');
         }
         
-        $stmt->orderby('p.createdAt', $sortDate);
+        // $stmt->orderby('p.createdAt', $sortDate);
         $stmt->setFirstResult(($page * $limit) - $limit);
         $stmt->setMaxResults($limit);
         //dd($stmt->getQuery());
         
-        
+        switch ($sortDate){
+            case 'ASC':
+                $stmt->orderBy('p.createdAt', 'ASC');
+                break;
+            case 'DESC':
+            default:
+                $stmt->orderBy('p.createdAt', 'DESC');
+        }
         return $stmt->getQuery()->getResult();
     }
 
@@ -64,6 +71,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         $stmt = $this->createQueryBuilder('p');
         $stmt->select('COUNT(p)');
+        $stmt->where('p.endAt > CURRENT_TIMESTAMP()');
+        $stmt->andwhere('p.enabled = 1');
     
          return $stmt->getQuery()->getSingleScalarResult();   
     }

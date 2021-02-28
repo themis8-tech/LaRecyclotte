@@ -1,0 +1,32 @@
+<!-- Start HEADER -->
+{% include "mail/components/header.html.twig" %}
+<!-- End HEADER-->
+
+
+<!-- Start BLOC-->
+{% include "mail/components/start-bloc.html.twig" %}
+
+    <!-- ///////////// Start CONTENT ///////////// -->
+    <p>Bonjour <b style="color:#22AF9D">{{ product.user.username }}</b> !</p>
+
+    <p>Vous venez d'enregistrer l'annonce <b>{{ product.title}}</b> 
+    
+    <p>Nous vous remercions pour ce dépot !</p>
+
+    <p>Votre annonce sera publiée sous 24h, vous pourrez verifier son état dans votre espace personnel</p>
+
+     <a href = "http://localhost:1234/profil">cliquez ici</a>  pour accéder à votre éspace personnel
+
+    <p>Vous serez directement contacté par les personnes intéressées</p>
+    
+    <p>Bien cordialement,</p>
+
+    <p>L'équipe de La Recyclotte.</p>
+    <!-- ///////////// End CONTENT ///////////// -->
+
+{% include "mail/components/end-bloc.html.twig" %}
+<!-- End BLOC -->
+
+<!-- Start FOOTER -->
+{% include "mail/components/footer.html.twig" %}
+<!-- End FOOTER-->
