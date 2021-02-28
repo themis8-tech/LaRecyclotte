@@ -51,12 +51,19 @@ class ProductRepository extends ServiceEntityRepository
             $stmt->setParameter('sort', '%' . $sortState . '%');
         }
         
-        $stmt->orderby('p.createdAt', 'ASC');
+        // $stmt->orderby('p.createdAt', $sortDate);
         $stmt->setFirstResult(($page * $limit) - $limit);
         $stmt->setMaxResults($limit);
         //dd($stmt->getQuery());
         
-        
+        switch ($sortDate){
+            case 'ASC':
+                $stmt->orderBy('p.createdAt', 'ASC');
+                break;
+            case 'DESC':
+            default:
+                $stmt->orderBy('p.createdAt', 'DESC');
+        }
         return $stmt->getQuery()->getResult();
     }
 
