@@ -91,7 +91,7 @@ class ProductController extends AbstractController
         // Annonce de l'ID correspondant
         $product = $this->productService->getOne($id);
 
-        if (empty($product) || $product->getEnabled() == false) {
+        if (empty($product) || ($product->getUser() != $this->getUser() && $product->getEnabled() == false)) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
         }
 

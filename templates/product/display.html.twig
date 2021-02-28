@@ -12,6 +12,14 @@
 <section class="product">
     <div class="container py-5">
 
+        {# Start Preview #}
+        {% if app.user is not empty and app.user == product.user and product.enabled == false %}
+            <div class="d-flex justify-content-center mb-5 preview">
+                <p class="text-center mb-0 py-2"> Aperçu de votre annonce en cours de validation.</p>
+            </div>
+        {% endif %}
+        {# End Preview #}
+
         {# Start Title #}
         <div class="title text-center">
             <div class="d-flex justify-content-center align-items-center">
@@ -56,7 +64,7 @@
                 {# End Product #}
 
             </div>
-            <div class="col-md-6 py-5">
+            <div class="col-md-6 py-md-5">
 
                 {# Start User #}
                 <div class="d-flex justify-content-center">
@@ -74,15 +82,15 @@
 
                 {# Start Form #}
                 {% if product.endAt < date() %}
-                    <div class="d-flex justify-content-center mt-4 end">
+                    <div class="d-flex justify-content-center mt-4">
                         <div class="card product-card margin-cards">
                             <div class="card-body">
-                                <p class="text-center"> Cette annonce n'est plus disponible.</p>
+                                <p class="text-center mb-0 text-danger"> Cette annonce n'est plus disponible.</p>
                             </div>
                         </div>
                     </div>
                 {% else %}
-                    {% if app.user is not empty and app.user.email == product.user.email %}
+                    {% if app.user is not empty and app.user == product.user %}
                         <div class="d-flex justify-content-center mt-4">
                             <div class="card product-card margin-cards">
                                 <div class="card-body">
