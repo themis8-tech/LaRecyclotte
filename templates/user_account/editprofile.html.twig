@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
    
-{% block title %}Modification du profil de {{ app.user.firstname }} {{ app.user.lastname }}{{ parent() }}{% endblock %}
+{% block title %}Modification du profil - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     	{{ encore_entry_link_tags('page_profile') }}

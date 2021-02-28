@@ -20,7 +20,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     */
+     */ 
     private $id;
 
     /**
@@ -40,7 +40,7 @@ class Product
      * @Assert\File(
      *     maxSize = "2024k",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/bmp"},
-     *     mimeTypesMessage = "La phot doit être au format : png, jpeg, webp, bmp, webp")
+     *     mimeTypesMessage = "La photo doit être au format : png, jpeg, webp, bmp, webp")
      *
      * @Assert\NotBlank(message="Vous devez joindre une photos !")
      * @ORM\Column(type="string", length=255)
@@ -84,7 +84,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, cascade={"remove"})
      */
     private $user;
 
