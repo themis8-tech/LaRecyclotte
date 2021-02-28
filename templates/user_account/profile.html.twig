@@ -13,22 +13,24 @@
         <h1 class="text-center">Mon compte</h1>
         <div class="row d-flex justify-content-center py-5">
 
-            <div class="col-md-4">
-                {# Start Nav #}
-                {% include "components/profil-nav.html.twig" %}
-                {# End Nav #}
+            <div class="col-md-3 mb-4">
+                <div class="min-nav">
+                    {# Start Nav #}
+                    {% include "components/profil-nav.html.twig" %}
+                    {# End Nav #}
+                </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-7">
 
                     {# Start Profile #}
-                        <div class="card product-card">
+                        <div class="card product-card product-profile">
                             <div class="card-body">
-                                <div class="row pb-3">
-                                    <div class="col-2">
+                                <div class="d-flex pb-3">
+                                    <div>
                                         <img src="{{ asset('build/images/default-avatar.jpg') }}" alt="" class="avatar">
                                     </div>
-                                    <div class="col-10 align-self-center">
+                                    <div class="align-self-center">
                                         <div class="username">{{ app.user.username }}</div>
                                     </div>
                                 </div>
@@ -37,13 +39,13 @@
                                 <p class="grey pt-1">{{ app.user.firstname }} {{ app.user.lastname }}<br>{{ app.user.email }}
                                 </p>
                                 <h2 class="pt-3">Informations sur le compte</h2>
-                                <p class="grey pt-1">Date d'inscription : {{ app.user.createdAt|date("j F Y \à G:i") }}</p>
+                                <p class="grey pt-1">Compte créé le {{ app.user.createdAt|date("j F Y \à G:i") }}</p>
                                 <div class="pt-3">
                                     <a href="#">Supprimer mon compte</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-4">
+                        <div class="d-flex justify-content-end mt-2">
                             <a href="{{ path('user_account_editprofile')}}" class="btn btn-action">Modifier</a>
                         </div>
                     {# End Profile #}                    

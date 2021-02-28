@@ -7,33 +7,35 @@
     {{ encore_entry_link_tags('page_profile') }}
 {% endblock %}
 
-   {% block body %}
-   <section class="profile">
-        <div class="container py-5">
-            <h1 class="text-center">Mon compte</h1>
-            <div class="row d-flex justify-content-center py-5">
+{% block body %}
+<section class="profile">
+    <div class="container py-5">
+        <h1 class="text-center">Mon compte</h1>
+        <div class="row d-flex justify-content-center py-5">
 
-                <div class="col-12 col-lg-4">
+            <div class="col-md-3 mb-4">
+                <div class="min-nav">
                     {# Start Nav #}
                     {% include "components/profil-nav.html.twig" %}
                     {# End Nav #}
                 </div>
-
-                <div class="col-12 col-lg-8">
+            </div>
+            
+                <div class="col-lg-7">
 
                     {# Start Products #}
                     {% for product in app.user.products %}
-                        <div class="card product-card product-profil">
+                        <div class="card product-card product-product">
                             <div class="row">
-                                <div class="col-5">
+                                <div class="col-sm-5">
                                     <figure>
                                         <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
                                     </figure>
                                 </div>
-                                <div class="col-7">
+                                <div class="col-sm-7">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
-                                            <h4 class="card-title bold">{{ product.title }}</h4>
+                                            <div class="card-title bold">{{ product.title }}</div>
                                             <p class="blue bold">{{ product.state.name }}</p>   
                                         </div>
                                         <div class="card-text">
@@ -50,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-4 mb-5">
+                        <div class="d-flex justify-content-end mt-2 mb-5">
                             <a href="#" class="btn btn-action">Afficher</a>
                         </div>
                     {% endfor %}
