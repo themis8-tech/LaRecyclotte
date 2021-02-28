@@ -36,6 +36,7 @@ class ProductController extends AbstractController
     private $productService;
     private $categoryService;
     private $stateService;
+    private $em;
     
     public function __construct(ProductService $productService, EntityManagerInterface $em,
      CategoryService $categoryService, StateService $stateService)
@@ -202,5 +203,23 @@ class ProductController extends AbstractController
         return $this->render('product/create.html.twig', array(
             'form' => $form ->createView(),
         ));
+    }
+
+    /**
+    * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
+    */
+    public function delete($id)
+    {
+        $product = $this->em->getRepository(Product::class)->find($id);
+        //dd($product);
+        $this->em->remove($product);
+        $this->em->flush();
+
+        $this->addFlash(
+            'success',
+            "Votre annonce a bien été supprimée."          
+        );
+
+        return $this->redirectToRoute('product_list');
     }
 }
