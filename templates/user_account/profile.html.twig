@@ -1,116 +1,62 @@
 {% extends 'base.html.twig' %}
-   
+
 {% block title %}Mon compte - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-    	{{ encore_entry_link_tags('page_profile') }}
+    {{ encore_entry_link_tags('page_product-display') }}
+    {{ encore_entry_link_tags('page_profile') }}
 {% endblock %}
 
-   {% block body %}
-  <div class="bg-light">
-
-    <h2 class="text-center title-form">Mon compte</h2>
-      
+{% block body %}
+<section class="profile">
     <div class="container py-5">
-      <div class="row h-100 justify-content-center">
-          <aside class="col-12 col-md-3">
-            <nav class="navbar navbar-expand navbar-light bg-white flex-md-column flex-row align-items-start border rounded">
-              <div class="collapse navbar-collapse">
-                <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                    <li class="nav-item">
-                        <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
-                    </li>
+        <h1 class="text-center">Mon compte</h1>
+        <div class="row d-flex justify-content-center py-5">
 
-                    <li class="nav-item">
-                        <a class="nav-link pl-0" href="{{ path('user_account_myproducts')}}">Mes annonces</a>
-                    </li>
-                            
-                </ul>
-              </div>
-            </nav>
-          </aside>
+            <div class="col-md-4">
+                {# Start Nav #}
+                {% include "components/profil-nav.html.twig" %}
+                {# End Nav #}
+            </div>
 
+            <div class="col-md-8">
 
-          <main class="col-6 border rounded bg-white">
-            <div class="container">
-
-              {% for message in app.flashes('message') %}
-                <div class="col-xs4">
-                  <div class="alert alert-success" role="alert">{{message}}</div>
-                </div>
-              {% endfor %}                    
-              
-
-                <div class="py-5">
-                  <div class="row">
-                      <div class="col-6">
-                        <img src="https://cdn.ter.sncf.com/medias/Images/centre_val_de_loire/%28image%20article%29%20objet%20perdu_tcm56-13042_tcm56-182410_272x194.png" alt="..." class="rounded-circle">
-                      </div>
-
-                      <div class="col-6 d-flex align-items-center justify-content-center"><h3>{{ app.user.username }}</h3></div>                 
-
-                  </div>
-
-                  <hr>
-
-                  <div>
-                    
-                      <div class="row">                        
-                          <h4 class="col-6"><strong>A propos de moi</strong></h4>
-                      </div>      
-    
-                      <div class="row"> 
-                        <div class="col-6">Nom : </div>                        
-                        <div class="col-1">{{ app.user.lastname }}</div>
-                      </div>                      
-    
-                      <div class="row">
-                        <div class="col-6">Prénom : </div>                    
-                        <div class="col-1">{{ app.user.firstname }}</div>
-                      </div>                    
-    
-                      <div class="row">
-                        <div class="col-6">E- mail : </div>                        
-                        <div class="col-6">{{ app.user.email }}</div>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <br>
-
-                  <div>
-                    
-                    <div class="row">                        
-                        <h4 class="col-6"><strong>informations sur le compte</strong></h4>
-                    </div>
-                    
-                    Date d'inscription :
-  
-                  </div>
-
-                  <br>
-
-                      
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ path('user_account_editprofile')}}" class="btn btn-action mb-3 p-1">Modifier</a>                       
-                    </div>
-
-                  <br>
-                  
-            </div>        
-
+                    {# Start Profile #}
+                        <div class="card product-card">
+                            <div class="card-body">
+                                <div class="row pb-3">
+                                    <div class="col-2">
+                                        <img src="{{ asset('build/images/default-avatar.jpg') }}" alt="" class="avatar">
+                                    </div>
+                                    <div class="col-10 align-self-center">
+                                        <div class="username">{{ app.user.username }}</div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h2 class="pt-3">A propos de moi</h2>
+                                <p class="grey pt-1">{{ app.user.firstname }} {{ app.user.lastname }}<br>{{ app.user.email }}
+                                </p>
+                                <h2 class="pt-3">Informations sur le compte</h2>
+                                <p class="grey pt-1">Date d'inscription : {{ app.user.createdAt|date("j F Y \à G:i") }}</p>
+                                <div class="pt-3">
+                                    <a href="#">Supprimer mon compte</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <a href="{{ path('user_account_editprofile')}}" class="btn btn-action">Modifier</a>
+                        </div>
+                    {# End Profile #}                    
+                        
+            </div>
             
-          </main>
-
-      </div>
+        </div>
     </div>
-  </div>
+</section>
 
-    {% endblock %}
-
-
+{% endblock %}
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('page_product-display') }}
     {{ encore_entry_script_tags('page_profile') }}
 {% endblock %}
