@@ -24,38 +24,53 @@
                 <div class="col-lg-7">
 
                     {# Start Products #}
-                    {% for product in app.user.products %}
-                        <div class="card product-card product-product">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <figure>
-                                        <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
-                                    </figure>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="card-title bold">{{ product.title }}</div>
-                                            <p class="blue bold">{{ product.state.name }}</p>   
-                                        </div>
-                                        <div class="card-text">
-                                            <i class="fas fa-map-marker-alt orange"></i> {{product.city}} ({{ product.zipcode.code}})
-                                        </div>     
-                                        <div>
-                                            <p class="card-text grey bold pt-3">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
-                                            <hr>
+                    {% if app.user.products is not empty %}
+
+                        {% for product in app.user.products %}
+                            <div class="card product-card product-product">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <figure>
+                                            <img src="{{ asset ('uploads/' ~ product.picture ) }}" class="card-img-top product-img" alt="{{product.title}}">
+                                        </figure>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="card-title bold">{{ product.title }}</div>
+                                                <p class="blue bold">{{ product.state.name }}</p>   
+                                            </div>
+                                            <div class="card-text">
+                                                <i class="fas fa-map-marker-alt orange"></i> {{product.city}} ({{ product.zipcode.code}})
+                                            </div>     
                                             <div>
-                                                <a href="#">Supprimer mon annonce</a>
-                                            </div>            
-                                        </div>                                   
+                                                <p class="card-text grey bold pt-3">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
+                                                <hr>
+                                                <div>
+                                                    <a href="#">Supprimer mon annonce</a>
+                                                </div>            
+                                            </div>                                   
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-end mt-2 mb-5">
+                                <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-action">Afficher</a>
+                            </div>
+                        {% endfor %}
+
+                    {% else %}
+                    
+                        <div class="card product-card">
+                            <div class="card-body text-center">
+                                <h3 class="card-title">Vous n'avez aucune annonce.</h3>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-end mt-2 mb-5">
-                            <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-action">Afficher</a>
+                            <a href="{{ path('product_create') }}" class="btn btn-action">Créer</a>
                         </div>
-                    {% endfor %}
+
+                    {% endif %}
                     {# End Products #}
             </div>
             
