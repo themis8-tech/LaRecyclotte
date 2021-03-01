@@ -86,7 +86,6 @@ class User implements UserInterface
      *     minMessage="Votre mot de passe doit contenir au minimum {{ limit }} caractères",
      *     maxMessage="Votre mot de passe doit contenir au maximum {{ limit }} caractères",
      * )
-     * @Assert\NotCompromisedPassword(message="Ce mot de passe a déjà été compromis")
      */
     private $plainPassword;
 
