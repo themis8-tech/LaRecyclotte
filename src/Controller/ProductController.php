@@ -29,7 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
-* @Route("/product", name="product_")
+* @Route("/produit", name="product_")
 */
 class ProductController extends AbstractController
 {
@@ -49,7 +49,7 @@ class ProductController extends AbstractController
     }
 
     /**
-    * @Route("/list", name="list")
+    * @Route("/liste", name="list")
     */
     public function list(Request $request, ProductRepository $repo,
      CategoryRepository $category, StateRepository $state ): Response
@@ -152,7 +152,7 @@ class ProductController extends AbstractController
 
     /**
     * @IsGranted("ROLE_USER")
-    * @Route( "/create", name="create")
+    * @Route("/donner", name="create")
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
@@ -210,18 +210,35 @@ class ProductController extends AbstractController
     /**
     * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
     */
-    public function delete($id)
+    public function delete($id, MailerInterface $mailer)
     {
-        $product = $this->em->getRepository(Product::class)->find($id);
+        $product = $this->productService->getOne($id);
         //dd($product);
         $this->em->remove($product);
         $this->em->flush();
 
+        // Send notification
+        $notification = new Email();
+        $notification->from("larecyclotte@gmail.com")
+            ->to($product->getUser()->getEmail())
+            ->replyTo("larecyclotte@gmail.com")
+            ->subject('La Recyclotte - Notification de supression de votre annonce : '.$product->getTitle());
+
+        $viewNotification = $this->renderView('mail/delete-product.html.twig', array(
+            'product' => $product,
+        ));
+
+        $notification->html($viewNotification);
+        $mailer->send($notification);
+
+        // Add Modal Message
         $this->addFlash(
             'success',
             "Votre annonce a bien été supprimée."          
         );
 
-        return $this->redirectToRoute('product_list');
+        return $this->redirectToRoute('product_list', array(
+            'product' => $product,
+        ));
     }
 }

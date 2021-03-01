@@ -110,7 +110,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/reset/ask", name="reset_ask")
+     * @Route("/reinitialisation", name="reset_ask")
      */
     public function resetAsk(Request $request, MailerInterface $mailer): Response
     {
@@ -161,7 +161,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/reset/confirm", name="reset_confirm")
+     * @Route("/confirmation", name="reset_confirm")
      */
     public function resetConfirm(Request $request, UserPasswordEncoderInterface $encoder): Response
     {

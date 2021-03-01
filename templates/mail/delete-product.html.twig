@@ -1,0 +1,24 @@
+<!-- Start HEADER -->
+{% include "mail/components/header.html.twig" %}
+<!-- End HEADER-->
+
+
+<!-- Start BLOC-->
+{% include "mail/components/start-bloc.html.twig" %}
+
+    <!-- ///////////// Start CONTENT ///////////// -->
+    <p>Bonjour <b style="color:#22AF9D">{{ product.user.username }}</b> !</p>
+
+    <p>Vous venez de supprimer votre son annonce : {{ product.title }}</a>.
+    
+    <p>Bien cordialement,</p>
+
+    <p>L'équipe de La Recyclotte.</p>
+    <!-- ///////////// End CONTENT ///////////// -->
+
+{% include "mail/components/end-bloc.html.twig" %}
+<!-- End BLOC -->
+
+<!-- Start FOOTER -->
+{% include "mail/components/footer.html.twig" %}
+<!-- End FOOTER-->
