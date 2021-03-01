@@ -14,6 +14,10 @@ hr:not([size]) {
     max-width: 1140px;
 }
 
+.modal .btn-action {
+    font-size: 18px;
+}
+
 /* ------------ PRODUCTS ------------ */
 .product {
     background-color: var(--lightGrey);
