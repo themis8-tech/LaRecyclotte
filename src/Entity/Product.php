@@ -30,17 +30,16 @@ class Product
      *     max=60,
      *     minMessage="Le titre doit contenir au moins {{ limit }} caractères !")
      *     
-     * 
-     * @Assert\Regex("/^[0-9]+$/", match=false, message="Le titre doit contenir des lettres !")
+     * @Assert\Regex("/^[0-9]+$/", match=false, message="Le titre doit contenir au moins une lettres !")
      * @ORM\Column(type="string", length=60)
      */
     private $title;
 
     /**
      * @Assert\File(
-     *     maxSize = "2024k",
+     *     maxSize = "4024k",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/bmp"},
-     *     mimeTypesMessage = "La photo doit être au format : png, jpeg, webp, bmp, webp")
+     *     mimeTypesMessage = "La photo doit être au format : png, jpeg, bmp, webp, jpg")
      *
      * @Assert\NotBlank(message="Vous devez joindre une photo !")
      * @ORM\Column(type="string", length=255)
@@ -49,6 +48,11 @@ class Product
 
     /**
      * @Assert\NotBlank(message=" Vous devez indiquer la ville !")
+     * @Assert\Length(
+     *     min=3,
+     *     max=100,
+     *     minMessage="La ville doit contenir au moins {{ limit }} caractères !")
+     * 
      * @Assert\Regex("/[^a-z]+$/", match=false, message="La ville doit contenir uniquement des lettres  !")
      * @ORM\Column(type="string", length=100)
      */
@@ -96,7 +100,7 @@ class Product
     private $category;
 
     /**
-     * @Assert\NotBlank(message=" Vous devez indiquer l'état !")
+     * @Assert\NotBlank(message=" Indiquez l'état de l'objet !")
      * @ORM\ManyToOne(targetEntity=State::class)
      * @ORM\JoinColumn(nullable=false)
      */

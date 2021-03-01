@@ -10,6 +10,10 @@ body{
    background-color: var(--lightGrey);
 }
 
+.search p{
+   margin-left: 1em;
+}
+
 .margin-cards {
    margin-right: 1em;
    margin-left: 1em;
@@ -51,6 +55,10 @@ body{
    align-items: baseline;
 }
 
+.form-error-icon{
+   display: none;
+}
+
 /*form ajout produit */
 .form-product{
    border: 1px solid var(-darkGrey);
@@ -79,14 +87,40 @@ body{
  .lightGrey{
     color: var(--lightGrey);
  }
- 
+
+
+
  .darkGrey{
     color: var(--darkGrey);
  }
+
+
+
+/* Responsive **/
 
  @media (max-width: 1200px){
    .nav-wrap {
        flex-wrap: wrap;
        
    }
+
+ h1{
+      font-size: 40px;
+      margin-top: none!important;
+   }
+
+ h2{
+      font-size: 15px;
+      
+   }
+
+   
+}
+
+@media (max-width: 768px){
+
+.search{
+   flex-direction: column;
+}
+
 }
