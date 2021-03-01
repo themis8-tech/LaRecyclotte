@@ -60,6 +60,7 @@ class ProductController extends AbstractController
 
         // Moteur de recherche interne
         $query = $request->query->get('q');
+
         // Tri select
         $sortDate   = $request->query->get('sortDate');
         $sortCat = $request->query->get('sortCat');
@@ -162,7 +163,8 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
      
         if($form->isSubmitted() && $form->isValid()  )
-        {
+        {   
+            // inté
             $picture = $form->get('picture')->getData();
             $product->setUser($this->getUser());
             if ($picture) {
@@ -193,9 +195,9 @@ class ProductController extends AbstractController
             );
             }
             
-            // return $this->redirectToroute('product_display', array(
-            //     'id' => $product->getId()
-            // ));
+            return $this->redirectToroute('product_display', array(
+                'id' => $product->getId()
+            ));
             
         }
 

@@ -17,7 +17,8 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('title', null, array(
-                 'label'=> "Titre*",
+                  'label'=> "Titre*",
+                  'help' => '* Entre 3 et 60 caractères ',
                   'attr' =>array(
                   'Placeholder'=>'Ex: Fauteuil',
                   ) 
@@ -39,6 +40,7 @@ class ProductType extends AbstractType
 
             ->add('description', null, array(
                 'label' => "Déscription",
+                'help' => '* 20 caractères minimum ',
                 'attr' => array(
                 'rows'=>5,
                 'placeholder' => 'Couleur, dimension, matériaux...',
