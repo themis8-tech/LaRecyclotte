@@ -47,7 +47,7 @@
                                                 <p class="card-text grey bold pt-3">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                                                 <hr>
                                                 <div>
-                                                    <a href="#">Supprimer mon annonce</a>
+                                                    <a href="{{ path('user_account_deleteproduct', { id: product.id }) }}">Supprimer mon annonce</a>
                                                 </div>            
                                             </div>                                   
                                         </div>

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\User;
+use App\Entity\Product;
 
 /**
  * @Route("", name="user_account_")
@@ -76,6 +77,24 @@ class UserAccountController extends AbstractController
     {
         return $this->render('user_account/deleteuser.html.twig');
 
+    }
+
+    /**
+     * @Route("/suppression_annonce/{id}", name="deleteproduct")
+     * @method({"DELETE"})
+     */
+    public function deleteProduct($id)
+    {
+
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
+                
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre annonce a bien été supprimé !');
+
+        return $this->redirectToRoute('user_account_myproducts');
     }
 
     /**
