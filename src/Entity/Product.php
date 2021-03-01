@@ -84,7 +84,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false, cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 

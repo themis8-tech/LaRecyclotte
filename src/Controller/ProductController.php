@@ -193,9 +193,9 @@ class ProductController extends AbstractController
             );
             }
             
-            return $this->redirectToroute('product_display', array(
-                'id' => $product->getId()
-            ));
+            // return $this->redirectToroute('product_display', array(
+            //     'id' => $product->getId()
+            // ));
             
         }
 

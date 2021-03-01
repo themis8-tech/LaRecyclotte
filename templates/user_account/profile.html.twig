@@ -41,7 +41,7 @@
                                 <h2 class="pt-3">Informations sur le compte</h2>
                                 <p class="grey pt-1">Compte créé le {{ app.user.createdAt|date("j F Y \à G:i") }}</p>
                                 <div class="pt-3">
-                                    <a href="#">Supprimer mon compte</a>
+                                    <a href="{{ path('user_account_deleteuserPage')}}">Supprimer mon compte</a>
                                 </div>
                             </div>
                         </div>

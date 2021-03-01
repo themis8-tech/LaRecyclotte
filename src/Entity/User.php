@@ -111,7 +111,7 @@ class User implements UserInterface
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user", cascade={"remove"})
      */
     private $products;
 

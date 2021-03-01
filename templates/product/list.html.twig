@@ -130,7 +130,7 @@
                         <a class="page-link "  href="?page={{ item }}">{{ item }}</a>
                     </li>
                 {% endfor %}
-                    <li class="page-item">
+                    <li class="page-item {{ ( page == 1 ) ? 'disabled' : ''}}">
                         <a class="btn-next page-link" href="{{ (page < pages ) ? '?page=' ~ ( page + 1 ) :'' }}"  aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
