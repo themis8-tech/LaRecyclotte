@@ -4,13 +4,21 @@
 
 
 {% block stylesheets %}
-{{ encore_entry_link_tags('page_product') }}
+    {{ encore_entry_link_tags('page_product') }}
 {% endblock %}
 
 {% block body %}
+
+{# Résultat de le recherche #}
 {% set result = (products|length)  %}
-{% set resultSortPage = (result / limit)|round(0,'ceil') %}
+
+{# Résultat de la recherche par moteur de recherche #}
+{% set search =  app.request.query.get('q') %}
+
+{# Calcul du nombre de page pour pagination boucle #}
 {% set pages = (total / limit)|round(0,'ceil') %}
+
+{# Résultat filtre de recherche #}
 {% set sortDate = app.request.query.get('sortDate') %}
 {% set sortCat = app.request.query.get('sortCat') %}
 {% set sortState = app.request.query.get('sortState') %}
@@ -61,13 +69,32 @@
             </div>
             <input id="page" name="page" type="hidden" value="1">
     </form>
-    
-    {# infos resultat #}
-    <div class="row text-center mt-2 ">
-        <div class="col-sm-12">
-            <p>Objets disponibles: <span class="blue"> {% if sortState or sortCat  is not empty %} {{result}} {% else %}{{total}} {% endif %} </span>
-                - Objets par pages :<span class="blue"> {{ result }}</span>
-                - Nombre de pages :<span class="blue"> {% if sortState or sortCat  is not empty %} {{ (result / limit)|round(0,'ceil')}} {% else %}{{ pages }} {% endif %}</span></p>
+   
+    {# infos resultat recherche #}
+    <div class="row text-center mt-2">
+        <div class="col-sm-12 d-flex justify-content-center search">
+            <p> - Objets disponibles: 
+                <span class="blue">    {# Cas de recherche des prod dispo par filtre #}
+                    {% if sortState or sortCat or search is not empty %}
+                        {{result}}
+                    {% else %} 
+                        {{total}} {# Cas affichage de tout les produits disponibles #}
+                    {% endif %}
+                </span>
+                <p> - Objets par pages :
+                    <span class="blue"> 
+                        {{ result }}
+                    </span>
+                </p>
+            <p>- Nombre de pages :
+                <span class="blue"> {# Cas de recherche des prod dispo par filtre #}
+                    {% if sortState or sortCat or search  is not empty %} 
+                        {{ (result / limit)|round(0,'ceil')}} 
+                    {% else %}
+                        {{ pages }} {# Cas affichage de tout les produits #}
+                    {% endif %}
+                </span>
+            </p>
         </div>
         <div>
             {% if products is empty %}
@@ -84,11 +111,10 @@
 
     {# liste des objets #}
     {% for product in products %}
-        <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-5">
             <div class="card product-card margin-cards">
                 <figure>
-                    <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img"
-                        alt="{{ product.title }}">
+                    <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">        
                 </figure>
                 <div class="card-body">
                     <div class="d-flex justify-content-between baseligne">
@@ -104,7 +130,7 @@
                         ({{ product.zipcode.code }})</p>
                     <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                     <hr>
-                    <div class="text-center">
+                    <div class=" d-flex justify-content-center ">
                         <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">
                         Voir l'objet en détail</a>
                     </div>
@@ -113,32 +139,34 @@
         </div>
     {% endfor %}
 
+    {# pagination #}
+    <div class=" d-flex justify-content-center mt-3">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">      
+                {% if (sortState or sortCat or search ) is empty %}
+                        <li class="page-item {{ ( page == 1 ) ? 'disabled' : ''}}">
+                            <a class="page-link" href="{{ (page >  1 ) ? '?page=' ~ ( page - 1 ) :'' }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% for item in 1..pages %}
+                        <li class="page-item {{ ( page == item) ? 'active' : ''}}">
+                            <a class="page-link "  href="?page={{ item }}">{{ item }}</a>
+                        </li>
+                    {% endfor %}
+                        <li class="page-item {{ ( page == pages ) ? 'disabled' : ''}}">
+                            <a class="btn-next page-link" href="{{ (page < pages ) ? '?page=' ~ ( page + 1 ) :'' }}"  aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
 </div> {#  fin container #}
 
-{# pagination #}
-<div class=" d-flex justify-content-center mt-3">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">      
-            {% if (sortState or sortCat ) is empty %}
-                    <li class="page-item {{ ( page == 1 ) ? 'disabled' : ''}}">
-                        <a class="page-link" href="{{ (page >  1 ) ? '?page=' ~ ( page - 1 ) :'' }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                {% for item in 1..pages %}
-                    <li class="page-item {{ ( page == item) ? 'active' : ''}}">
-                        <a class="page-link "  href="?page={{ item }}">{{ item }}</a>
-                    </li>
-                {% endfor %}
-                    <li class="page-item {{ ( page == 1 ) ? 'disabled' : ''}}">
-                        <a class="btn-next page-link" href="{{ (page < pages ) ? '?page=' ~ ( page + 1 ) :'' }}"  aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-            {% endif %}
-        </ul>
-    </nav>
-</div>
+
 
 {% endblock %}
 

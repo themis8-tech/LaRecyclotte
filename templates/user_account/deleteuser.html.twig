@@ -1,72 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Suppression de compte{{ parent() }}{% endblock %}
+{% block title %}Mon compte - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-    	{{ encore_entry_link_tags('page_profile') }}
+    {{ encore_entry_link_tags('page_product-display') }}
+    {{ encore_entry_link_tags('page_profile') }}
 {% endblock %}
 
-
-    {% block body %}
+{% block body %}
+<section class="profile">
     <div class="container py-5">
-        <div class="row h-100 justify-content-center">
-            <div class="container py-5">
-                <div class="row h-100 justify-content-center">
-                    <aside class="col-12 col-md-3">
-                        <nav class="navbar navbar-expand navbar-light bg-white flex-md-column flex-row align-items-start border rounded">
-                            <div class="collapse navbar-collapse">
-                                <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                                    <li class="nav-item">
-                                        <a class="nav-link pl-0" href="{{ path('user_account_profile')}}">Mon profil</a>
-                                    </li>
-                
-                                    <li class="nav-item">
-                                        <a class="nav-link pl-0" href="{{ path('user_account_myproducts')}}">Mes annonces</a>
-                                    </li>
-                                            
-                                </ul>
-                            </div>
-                        </nav>
-                    </aside>
+        <h1 class="text-center">Mon compte</h1>
+        <div class="row d-flex justify-content-center py-5">
 
-                
-                <main class="col-6 border rounded bg-white">
-                    <div class="container">
-            
-               
-                        <div class="modal-dialog">
-                            
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" id="myModalLabel">Êtes-vous sûr(e)?</h3>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <p>Voulez-vous vraiment supprimer votre compte?</p>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button class="btn" data-dismiss="modal">
-                                        <a href="{{ path('user_account_profile')}}">Retour</a> 
-                                    </button>
-                                    <button type="button" class="btn btn-secondary">
-                                        <a href="{{ path('user_account_deleteuser', { 'id': app.user.id }) }}">Confirmer</a>
-                                    </button>
-                                </div>
-                        
-                    </div>
-
-                </main>
+            <div class="col-md-3 mb-4">
+                <div class="min-nav">
+                    {# Start Nav #}
+                    {% include "components/profil-nav.html.twig" %}
+                    {# End Nav #}
                 </div>
-
             </div>
+
+            <div class="col-md-7">
+                    {# Start Profile #}
+                        <div class="card product-card product-profile">
+                            <div class="card-body">
+                                <h2 class="pt-3">Êtes-vous sûr(e) ?</h2>
+                                <hr>
+                                <p>Voulez vous vraiment supprimer votre compte ?</p>
+
+                            </div>
+                        </div>
+                      
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal">
+                                <a href="{{ path('user_account_profile')}}">Retour</a> 
+                            </button>
+                            
+                            <button type="button" class="btn btn-secondary">
+                                <a href="{{ path('user_account_deleteuser', { 'id': app.user.id }) }}">Confirmer</a>
+                            </button>
+                        </div>
+                    {# End Profile #}                    
+                        
+            </div>
+            
         </div>
     </div>
-        
-    <hr>
-    {% endblock %}
+</section>
 
+{% endblock %}
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('page_product-display') }}
     {{ encore_entry_script_tags('page_profile') }}
 {% endblock %}
