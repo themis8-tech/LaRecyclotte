@@ -28,7 +28,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
-* @Route("/product", name="product_")
+* @Route("/produit", name="product_")
 */
 class ProductController extends AbstractController
 {
@@ -47,7 +47,7 @@ class ProductController extends AbstractController
     }
 
     /**
-    * @Route("/list", name="list")
+    * @Route("/liste", name="list")
     */
     public function list(Request $request, ProductRepository $repo,
      CategoryRepository $category, StateRepository $state ): Response
@@ -149,7 +149,7 @@ class ProductController extends AbstractController
 
     /**
     * @IsGranted("ROLE_USER")
-    * @Route("/create", name="create")
+    * @Route("/donner", name="create")
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
