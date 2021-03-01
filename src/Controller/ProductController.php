@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Service\FileUploader;
@@ -22,10 +23,10 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
 * @Route("/produit", name="product_")
@@ -35,6 +36,7 @@ class ProductController extends AbstractController
     private $productService;
     private $categoryService;
     private $stateService;
+    private $em;
     
     public function __construct(ProductService $productService, EntityManagerInterface $em,
      CategoryService $categoryService, StateService $stateService)
@@ -53,7 +55,7 @@ class ProductController extends AbstractController
      CategoryRepository $category, StateRepository $state ): Response
     {
         // Nombre d'éléments par page
-        $limit = 15;
+        $limit = 12;
         $page= $request->query->get("page", 1);
 
         // Moteur de recherche interne
@@ -64,8 +66,8 @@ class ProductController extends AbstractController
         $sortState = $request->query->get('sortState');
 
         $products = $this->productService->buildResult($query, $sortDate, $sortCat, $sortState, $page, $limit);
-        $total = $this->productService->getTotalProducts();                                               
-       
+        $total = $this->productService->getTotalProducts(); 
+
         $category = $this->categoryService->getAll();
         $state = $this->stateService->getAll();
         
@@ -90,7 +92,7 @@ class ProductController extends AbstractController
         // Annonce de l'ID correspondant
         $product = $this->productService->getOne($id);
 
-        if (empty($product) || $product->getEnabled() == false) {
+        if (empty($product) || ($product->getUser() != $this->getUser() && $product->getEnabled() == false)) {
             throw new NotFoundHttpException("L'annonce n'est plus active ou n'existe pas");
         }
 
@@ -153,12 +155,12 @@ class ProductController extends AbstractController
     * 
     */
     public function create(Request $request, SluggerInterface $slugger,
-     FileUploader $fileUploader, UserRepository $userRepo): Response
+     FileUploader $fileUploader, UserRepository $userRepo, MailerInterface $mailer ): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-
+     
         if($form->isSubmitted() && $form->isValid()  )
         {
             $picture = $form->get('picture')->getData();
@@ -169,6 +171,21 @@ class ProductController extends AbstractController
 
                 $this->em->persist($product);
                 $this->em->flush();
+
+                 //envoi du mail de confirmation d'enregistrement de l'objet
+                 $mail = new Email();
+                 $mail->from('larecyclotte@gmail.com');
+                 $mail->to($product->getUser()->getEmail());
+                 $mail->subject('Enregistrement de votre annonce');
+
+                //affichage de la vue dédié dans le corps du mail
+                $view = $this->renderView('mail/confirm-register-product.html.twig', array(
+                   "product" => $product
+                ));
+                $mail->html($view);
+
+                $mailer->send($mail);
+
                 $this->addFlash(
                 'success',
                 "Félicitations ! Votre annonce est enregistrée
@@ -176,9 +193,9 @@ class ProductController extends AbstractController
             );
             }
             
-            return $this->redirectToroute('product_display', array(
-                'id' =>$product->getId(),
-            ));
+            // return $this->redirectToroute('product_display', array(
+            //     'id' => $product->getId()
+            // ));
             
         }
 
@@ -186,5 +203,23 @@ class ProductController extends AbstractController
         return $this->render('product/create.html.twig', array(
             'form' => $form ->createView(),
         ));
+    }
+
+    /**
+    * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
+    */
+    public function delete($id)
+    {
+        $product = $this->em->getRepository(Product::class)->find($id);
+        //dd($product);
+        $this->em->remove($product);
+        $this->em->flush();
+
+        $this->addFlash(
+            'success',
+            "Votre annonce a bien été supprimée."          
+        );
+
+        return $this->redirectToRoute('product_list');
     }
 }

@@ -20,13 +20,13 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     */
+     */ 
     private $id;
 
     /**
      * @Assert\NotBlank(message="Vous devez saisir un nom !")
      * @Assert\Length(
-     *     min=5,
+     *     min=3,
      *     max=60,
      *     minMessage="Le titre doit contenir au moins {{ limit }} caractères !")
      *     
@@ -40,7 +40,7 @@ class Product
      * @Assert\File(
      *     maxSize = "2024k",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/bmp"},
-     *     mimeTypesMessage = "La phot doit être au format : png, jpeg, webp, bmp, webp")
+     *     mimeTypesMessage = "La photo doit être au format : png, jpeg, webp, bmp, webp")
      *
      * @Assert\NotBlank(message="Vous devez joindre une photo !")
      * @ORM\Column(type="string", length=255)
@@ -71,7 +71,7 @@ class Product
 
     /**
      * @Assert\NotBlank(message="Vous devez saisir une date de début")
-     * @Assert\GreaterThan( "today", message="Vous ne pouvez pas choisir une date antérieur")
+     * @Assert\GreaterThan( "today", message="La date doit être supérieure à celle d'aujourd'hui !")
      * @ORM\Column(type="date")
      */
     private $endAt;
@@ -113,7 +113,7 @@ class Product
     {
   
         $this->enabled = false;
-        
+        $this->endAt = new \DateTime('now');
        
     }
 

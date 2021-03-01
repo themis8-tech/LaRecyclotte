@@ -4,10 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+
 
 class ProductCrudController extends AbstractCrudController
 {
+
+     /**
+     * @IsGranted("ROLE_MODERATOR")
+     */
     public static function getEntityFqcn(): string
     {
         return Product::class;

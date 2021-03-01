@@ -48,7 +48,7 @@ class User implements UserInterface
      *     min=3,
      *     max=45,
      *     minMessage="Votre nom doit contenir au minimum {{ limit }} caractères",
-     *     maxMessage="VVotre nom doit contenir au maximum {{ limit }} caractères",
+     *     maxMessage="Votre nom doit contenir au maximum {{ limit }} caractères",
      * )
      * @ORM\Column(type="string", length=45)
      */
@@ -111,7 +111,7 @@ class User implements UserInterface
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user", cascade={"remove"})
      */
     private $products;
 

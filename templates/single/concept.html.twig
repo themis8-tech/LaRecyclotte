@@ -3,126 +3,110 @@
 {% block title %}Le concept - {{ parent() }}{% endblock %}
 
 {% block stylesheets %}
-    	{{ encore_entry_link_tags('page_concept') }}
+    {{ encore_entry_link_tags('page_home') }}
+    {{ encore_entry_link_tags('page_concept') }}
 {% endblock %}
 
 {% block body %}
 
-    <section class="banner">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6 text-center align-v">
-                    <h2>La Recyclotte, pour une <strong>consommation responsable</strong>.</h2>
+    <section class="header-concept">
+        <div class="container">
+            <h1 class="align-v text-center">La Recyclotte, pour une consommation responsable</h1>
+        </div>
+    </section>
 
+    <section class="concept">
+        <div class="container py-5">
+            <h2 class="container-text py-3 text-center">Notre concept</h2>
+            <div class="content pt-4">
+                <p>La Recyclotte est un service destiné aux particuliers qui souhaitent <strong> se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité</strong>. Notre volonté est avant tout de répondre aux besoins de chacun. De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à <strong>consommer de manière utile et économe</strong>.</p>
+                <p>Nous souhaitons, aussi et surtout, développer un esprit de <strong>solidarité et de partage</strong>. Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous <strong>donnez une seconde vie à votre objet</strong> et allez sûrement faire un heureux ou une heureuse.</p>      
+            </div>
+        </div>
+    </section>
+    
+    <section class="img-concept">
+        <div class="container py-5">
+            <div class="row text-center">
+                <div class="col-md-4 px-5 py-4">
+                    <figure>
+                        <img src="{{asset('build/images/solidarite-concept.jpg')}}" alt="Solidarité - Concept">
+                    </figure>
+                    <br>
+                    <h3 class="pb-3">Solidarité</h3>
+                    <p class="grey">Notre approche se base sur le partage et la communauté. Nous pouvons tous collaborer et nous entraider en effectuant un geste simple, comme le don.</p>
+                </div>
+                <div class="col-md-4 px-5 py-4">
+                    <figure>
+                        <img src="{{asset('build/images/ecologie-concept.jpg')}}" alt="Ecologie - Concept">
+                    </figure>
+                    <br>
+                    <h3 class="pb-3 px-5">Ecologie</h3>
+                    <p class="grey">Dans un souci de préservation de notre environnement, ne jetons plus ce qui peut encore être utilisé. La protection de notre patrimoine naturel n'exclut personne. Agissons responsablement.</p>
+                </div>
+                <div class="col-md-4 px-5 py-4">
+                    <figure>
+                        <img src="{{asset('build/images/simplicite-concept.jpg')}}" alt="Simplicité - Concept">
+                    </figure>
+                    <br>
+                    <h3 class="pb-3">Simplicité</h3>
+                    <p class="grey">La Recyclotte vous simplifie les choses en proposant une plate-forme simple d'accès et d'utilisation.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="container-text py-5 text-center">
-        <h2>Notre concept</h2>
-        <p>La Recyclotte est un service destiné aux particuliers qui souhaitent se débarasser d'un ou plusieurs objets dont ils n'ont plus l'utilité. Notre volonté est avant tout de répondre aux besoins de chacun.
-        De plus, l'environnement dans lequel nous vivons actuellement, nous pousse à envisager le futur autrement, et à responsabiliser le plus grand nombre en incitant à consommer de manière utile et économe.
-        </p>
-
-        <br>
-
-        <p>Nous souhaitons, aussi et surtout, développer un esprit de solidarité et de partage.
-        Nous avons tous dans notre garage, à la cave ou dans un fond de placard des objets qui traînent et sont encore en réutilisables. Cependant, une autre personne peut y trouver un intérêt. En pensant ainsi, vous donnez une seconde vie à votre objet et allez sûrement faire un heureux ou une heureuse.
-        </p>
-    </div>
-
-    <br>    
-
-    <div class="container d-flex justify-content-around ">
-
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{asset('build/images/solidarité.jpg')}}" alt="solidarité">
-            <div class="card-body">
-                <h3>Solidarité </h3>
-            <p class="card-text">Notre approche se base sur le partage et la communauté.<br>Nous pouvons tous collaborer et nous entraider en effectuant un geste simple, comme le don.</p>
+    <section class="concept">
+        <div class="container py-5 text-center">
+            <div class="title">
+                <h2>Comment ça marche ?</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 px-5 py-4">
+                    <div class="picto">
+                        <img src="{{asset('build/images/register-concept.png')}}" alt="Etape 1 sur 3 : Création de compte">
+                        <div class="process">1</div>
+                    </div>
+                    <br>
+                    <h4 class="pb-3 pt-5">Créez votre compte</h4>
+                    <p class="grey">Créez votre compte en ligne sur <a href="{{path('main_home')}}" class="link" title="La Recyclotte - Site internet de dons d'objets sur la métropole lilloise">la-recyclotte.fr</a> en renseignant votre nom, prénom et adresse email.</p>
+                </div>
+                <div class="col-md-4 px-5 py-4">
+                    <div class="picto">
+                        <img src="{{asset('build/images/post-concept.png')}}" alt="Etape 2 sur 3 : Poster ou réserver un objet">
+                        <div class="process">2</div>
+                    </div>
+                    <br>
+                    <h4 class="pb-3 pt-5">Annoncez/réservez votre objet</h4>
+                    <p class="grey">Déposez votre annonce en indiquant les informations nécessaires au dépôt ou réservez votre objet en prenant contact avec le donneur.</p>
+                </div>
+                <div class="col-md-4 px-5 py-4">
+                    <div class="picto">
+                        <img src="{{asset('build/images/give-concept.png')}}" alt="Etape 3 sur 3 : Donner ou récupérer un objet">
+                        <div class="process">3</div>
+                    </div>
+                    <br>
+                    <h4 class="pb-3 pt-5">Donnez/récupérez votre objet</h4>
+                    <p class="grey">Convenez d'un rendez-vous et enfin, donnez ou récupérez l'objet qui bénéficiera d'une seconde vie.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" style="height: 12rem;" src="{{asset('build/images/écologie.jpg')}}" alt="écologie">
-            <div class="card-body">
-                <h3>Ecologie</h3>
-            <p class="card-text">Dans un souci de préservation de notre environnement, ne jetons plus ce qui peut encore être utlisé.<br>La protection de notre patrimoine naturel n'exclut personne. Agissons responsablement.</p>
+    <section class="next">
+        <div class="container py-5">
+            <h3 class="container-text py-3 text-center">Votre objet n'a pas trouvé preneur ?</h3>
+            <div class="content pt-4">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et sapien laoreet, gravida turpis nec, laoreet mauris. Phasellus vel neque aliquam, sagittis velit at, tristique mauris. Nulla et iaculis ante. Nullam tristique mi dolor, ac vestibulum risus interdum a. Maecenas non sapien at risus semper pharetra. Cras euismod luctus massa vel imperdiet. Nulla pretium ex ante, in ultrices justo faucibus vel.</p>
+                <p>Donec viverra feugiat justo, sed consequat justo. Morbi in nisi tincidunt massa placerat feugiat sit amet quis ipsum. Nulla nec semper dui. Donec accumsan tempor risus, id cursus purus rutrum quis. Vestibulum nec sapien lacinia, faucibus diam in, molestie ex. In hac habitasse platea dictumst. Morbi ut lorem eget lectus hendrerit accumsan et luctus ante. </p>      
             </div>
         </div>
-
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{asset('build/images/simplicité.jpeg')}}" alt="simplicité">
-            <div class="card-body">
-                <h3>Simplicité</h3>
-            <p class="card-text">La Recyclotte vous simplifie les choses en proposant une plate-forme simple d'accès et d'utilisation. </p>
-            </div>
-        </div>        
-        <br>
-    </div>
-
-    <br>
-    <br>
-    <br>
-
-    <div class="products">
-        <div class="container-text py-5 text-center">
-            
-            <h2>Comment ça marche ?</h2>
-            
-            <br>
-                
-                <ul class="list-unstyled">
-                    <li class="media">
-                        <img class="mr-3" src="{{asset('build/images/register-concept.png')}}" alt="Créez un compte">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1">Créez votre compte</h5>
-                            <br>
-                            <p>Je crée un compte en ligne en renseignant mes infomations personnelles(nom, prénom, adresse...).</p>
-                        </div>
-                    </li>
-
-                    <li class="media my-4">
-                        <img class="mr-3" src="{{asset('build/images/post-concept.png')}}" alt="Déposez une annonce ou réservez un objet">
-
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1">Annoncez/réservez votre objet</h5>
-                            <br>
-                            <div class="container">
-                                <div class="row">
-                                  <div class="col">
-                                        <h5>Je dépose une annonce</h5>
-                                        <p>J'indique les informations nécessaires au dépôt (état de l'objet, ma situation géographique...)</p>
-                                  </div>
-                                  <div class="col">
-                                        <h5>Je réserve un objet</h5>
-                                        <p>Je contacte le donneur de l'objet, pour avoir de plus amples informations et convenir d'un rendez-vous si nous nous sommes mis d'accord  .</p>
-                                  </div>
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </li>
-                    
-                    <li class="media">
-                        <img class="mr-3" src="{{asset('build/images/give-concept.png')}}" alt="Donnez ou récupérez un objet">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1">Donnez/récupérez votre objet</h5>
-                            <br>
-                            <p>Convenez d'un rendez-vous et enfin, donnez ou récupérez l'objet.</p>
-                        </div>
-                    </li>
-                </ul> 
-                
-        </div>
-    </div>
-
-
+    </section>
 
 {% endblock %}
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('page_home') }}
     {{ encore_entry_script_tags('page_concept') }}
 {% endblock %}
  

@@ -1,126 +1,64 @@
-/* TITLE STYLE */
-h1 {
-    position: absolute;
-    top: -500px;
-}
-
-h2 {
-    font-family: "LT Emphasis Bold", sans-serif;
-    color: var(--blue);
-    font-size: 60px;
-}
-
-h3 {
-    font-family: "Sansation Regular", sans-serif;
-    color: var(--darkGrey);
-    font-size: 22px;
-}
-
-h4 {
-    font-family: "Sansation Regular", sans-serif;
-    color: var(--darkGrey);
-    font-size: 18px;
-}
-
-/* TEXT STYLE */
-.grey {
-    color: var(--grey);
-}
-
+/* ------------ CONCEPT ------------ */
 .container {
     max-width: 1140px;
 }
 
-/* BANNER */
-.banner {
-    background-image: url("../../images/don.jpg");
-    height: calc(100vh - 160px);
-    min-height: 400px;
-    background-position: center 80%;
-    background-attachment: fixed;
-    position : relative;
-    border-bottom-right-radius: 25%;
-    background-size: cover;
+.header-concept h1 {
+    font-family: "LT Emphasis Bold", sans-serif;
+    color: var(--darkGrey);
+    font-size: 60px;
 }
 
-.banner .align-v {
+.header-concept {
+    background-image: url("../../images/banniere-concept.jpg");
+    height: 450px;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+}
+
+.header-concept .align-v {
     position: absolute;
     top: 50%;
-    transform: translate(0%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.banner h2, .banner h3, .banner p, .banner span {
-    color: #fff;
+.concept .content, .next .content {
+    font-size: 18px;
+    margin: 0 2.5em;
 }
 
-.banner h2 {
-    margin-bottom: 0.5em;
+strong {
+    font-family: "Sansation Bold";
+    color: var(--blue);
+    font-weight: normal;
 }
 
-.banner h3 {
-    margin-bottom: 2em;
-    padding: 0 2em;
-}
-
-.banner .text-bigger {
-    font-size: 22px;
-}
-
-/* CONCEPT */
-.concept .container {
-    padding: 3em 0;
-}
-
-.title {
-    margin-top: 3em;
-    margin-bottom: 4em;
-}
-
-hr {
-    width: 13em;
-    margin: 4em auto 2.5em auto;
-    color: var(--grey);
-    border: transparent;
-}
-
-hr:not([size]) {
-    height: 3px;
-}
-
-.picto {
-    position: relative;
-    display: inline-block;
-}
-
-.process {
-    background-color: var(--blue);
-    width: 1.6em;
-    height: 1.6em;
-    color: #fff;
-    border-radius: 50%;
-    font-family: "LT Emphasis Bold", sans-serif;
-    font-size: 2.4em;
-    position : absolute;
-    bottom: -20px;
-    left: -30px;
-}
-
-/* PRODUCTS */
-.products {
+.img-concept, .next {
     background-color: var(--lightGrey);
 }
 
-/* ------------------------------------------ */
+.img-concept img {
+    border-radius: 15px;
+}
 
-@media (min-width: 1200px) {
 
-    /* BANNER */
-    .banner {
-        background-position: left 80%;
+.img-concept img {
+    border-radius: 15px;
+}
+
+/* ------------ RESPONSIVE ------------ */
+
+@media (min-width: 768px) {
+
+    .img-concept img {
+        width: 170px;
+        height: 170px;
     }
 
-    .banner .align-v {
-        padding: 0 5em;
+    .concept .content, .next .content {
+        margin: 0 10em;
     }
 
 }

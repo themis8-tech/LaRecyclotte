@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Session\Session;
+use App\Entity\User;
 
 /**
  * @Route("", name="user_account_")
@@ -66,4 +67,33 @@ class UserAccountController extends AbstractController
         return $this->render('user_account/myproducts.html.twig');
 
     }
+
+    /**
+     * @Route("/suppression_compte", name="deleteuserPage")
+     * @return Response
+     */
+    public function deleteuserPage()
+    {
+        return $this->render('user_account/deleteuser.html.twig');
+
+    }
+
+    /**
+     * @Route("/suppression_compte/{id}", name="deleteuser")
+     * @method({"DELETE"})
+     */
+    public function deleteUser($id)
+    {
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+                
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre compte a bien été supprimé !');
+
+        return $this->redirectToRoute('main_home');
+    }
+
 }

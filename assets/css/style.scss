@@ -98,7 +98,7 @@ h3 {
 .btn-secondary {
     font-size: 18px;
     color: var(--blue);
-    background-color: #fff;
+    background-color: transparent;
     border: 3px solid var(--blue);
 }
 
@@ -174,7 +174,7 @@ body {
 }
 
 .footer-hr{
-    width: 60em;
+    width: 90%;
     margin: 1em auto 1em auto;
     color: var(--grey);
     border: transparent;
@@ -277,3 +277,8 @@ width:20em;
 
 }
 
+@media all and (min-width: 768px) and (max-width: 1024px){
+    .footer-hr{
+    width: 40em;
+    }
+}
