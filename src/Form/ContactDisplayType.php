@@ -20,7 +20,8 @@ class ContactDisplayType extends AbstractType
                     'class' => 'blue',
                 ),
                 'attr' => array(
-                    'class' => 'form-control'                    )
+                    'class' => 'form-control'
+                    )
             ))
             ->add('email', TextType::class, array(
                 'label'=> "Email*",
