@@ -111,11 +111,10 @@
 
     {# liste des objets #}
     {% for product in products %}
-        <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 d-flex justify-content-center my-5">
             <div class="card product-card margin-cards">
                 <figure>
-                    <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img"
-                        alt="{{ product.title }}">
+                    <img src="{{ asset ('uploads/' ~ product.picture) }}" class="card-img-top product-img" alt="{{ product.title }}">        
                 </figure>
                 <div class="card-body">
                     <div class="d-flex justify-content-between baseligne">
@@ -131,7 +130,7 @@
                         ({{ product.zipcode.code }})</p>
                     <p class="card-text grey bold">Posté le {{ product.createdAt|date("j M Y \à G:i") }}</p>
                     <hr>
-                    <div class="d-flex  ">
+                    <div class=" d-flex justify-content-center ">
                         <a href="{{ path('product_display', {id: product.id}) }}" class="btn btn-secondary">
                         Voir l'objet en détail</a>
                     </div>
